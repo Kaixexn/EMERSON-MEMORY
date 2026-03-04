@@ -505,16 +505,27 @@ async function uploadToImgBB(dataURL){
 
 // Save metadata only (URLs + captions + settings) to Firebase — stays tiny
 async function saveAll(){
-  // Strip src blobs from payload — only save imgbb URLs (already strings, not base64)
+  // Only save slots that actually have data — never overwrite with nulls
   const cleanSlots = {};
   Object.entries(slots).forEach(([id, d]) => {
-    cleanSlots[id] = {
-      src     : d.src     || null,   // ImgBB URL (short string) or null
-      caption : d.caption || '',
-      filter  : d.filter  || 'normal'
-    };
+    if(d && d.src){
+      cleanSlots[id] = {
+        src     : d.src,
+        caption : d.caption || '',
+        filter  : d.filter  || 'normal'
+      };
+    }
   });
-  const payload = {cfg, slots: cleanSlots, slotCount};
+
+  // Merge with existing Firebase data so we never wipe other slots
+  let existing = {};
+  try{
+    const r = await fetch(FB_PATH);
+    if(r.ok){ const d = await r.json(); if(d && d.slots) existing = d.slots; }
+  } catch(e){}
+  const merged = Object.assign({}, existing, cleanSlots);
+
+  const payload = {cfg, slots: merged, slotCount};
   try{
     const r = await fetch(FB_PATH, {
       method  : 'PUT',
