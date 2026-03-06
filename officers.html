@@ -307,7 +307,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
         <div class="crop-handle se" data-dir="se"></div>
       </div>
     </div>
-    <div class="crop-hint">Drag to reposition · Handles to resize</div>
+    <div class="crop-hint">Drag to reposition · Handles to resize (locked to portrait ratio)</div>
     <div class="modal-btns">
       <button class="mbtn ok" id="cropApply">Apply & Upload</button>
       <button class="mbtn cancel" id="cropCancel">Cancel</button>
@@ -619,12 +619,15 @@ function loadForCrop(file){
 function $ca(){ return document.getElementById('cropArea'); }
 function $cb(){ return document.getElementById('cropBox'); }
 
+const FRAME_AR = 320/420; // photo frame aspect ratio ~0.762 (portrait)
+
 function initCropBox(){
   const area=$ca(), w=area.clientWidth, h=area.clientHeight;
-  const size=Math.min(w,h)*.72;
+  let bw=Math.round(w*.8), bh=Math.round(bw/FRAME_AR);
+  if(bh>h*.9){bh=Math.round(h*.9);bw=Math.round(bh*FRAME_AR);}
   const box=$cb();
-  box.style.left=((w-size)/2)+'px'; box.style.top=((h-size)/2)+'px';
-  box.style.width=size+'px'; box.style.height=size+'px';
+  box.style.left=((w-bw)/2)+'px'; box.style.top=((h-bh)/2)+'px';
+  box.style.width=bw+'px'; box.style.height=bh+'px';
 }
 
 function readBox(){
@@ -632,23 +635,40 @@ function readBox(){
   return{x:parseInt(box.style.left),y:parseInt(box.style.top),w:box.offsetWidth,h:box.offsetHeight};
 }
 
+function writeBoxAR(x,y,w){
+  // Always derive height from width to lock AR
+  const area=$ca();
+  const aw=area.clientWidth,ah=area.clientHeight;
+  const MIN=60;
+  w=Math.max(MIN,Math.min(w,aw));
+  let h=Math.round(w/FRAME_AR);
+  h=Math.min(h,ah);
+  w=Math.round(h*FRAME_AR); // re-clamp width if height was clamped
+  x=Math.max(0,Math.min(aw-w,x));
+  y=Math.max(0,Math.min(ah-h,y));
+  const box=$cb();
+  box.style.left=x+'px';box.style.top=y+'px';box.style.width=w+'px';box.style.height=h+'px';
+}
+
 let dragStart=null,boxStart=null,resizeDir=null;
 function cropDown(dir,cx,cy){cropActive=true;resizeDir=dir;dragStart={x:cx,y:cy};const b=readBox();boxStart={...b};}
 function cropMove(cx,cy){
   if(!cropActive) return;
   const dx=cx-dragStart.x,dy=cy-dragStart.y;
-  const area=$ca(),box=$cb();
-  const aw=area.clientWidth,ah=area.clientHeight;
-  let{x,y,w,h}=boxStart;const MIN=60;
-  if(resizeDir==='move'){x=Math.max(0,Math.min(aw-w,x+dx));y=Math.max(0,Math.min(ah-h,y+dy));}
-  else{
-    if(resizeDir.includes('e')){w=Math.max(MIN,Math.min(aw-x,w+dx));}
-    if(resizeDir.includes('s')){h=Math.max(MIN,Math.min(ah-y,h+dy));}
-    if(resizeDir.includes('w')){const nw=Math.max(MIN,w-dx);x=Math.min(x+w-MIN,x+dx);w=nw;}
-    if(resizeDir.includes('n')){const nh=Math.max(MIN,h-dy);y=Math.min(y+h-MIN,y+dy);h=nh;}
-    x=Math.max(0,x);y=Math.max(0,y);w=Math.min(w,aw-x);h=Math.min(h,ah-y);
+  let{x,y,w}=boxStart;
+  if(resizeDir==='move'){
+    const area=$ca(),h=Math.round(w/FRAME_AR);
+    x=Math.max(0,Math.min(area.clientWidth-w,x+dx));
+    y=Math.max(0,Math.min(area.clientHeight-h,y+dy));
+    writeBoxAR(x,y,w);
+  } else {
+    // Width drives AR — use horizontal drag for all corners
+    if(resizeDir.includes('e')){w=boxStart.w+dx;}
+    if(resizeDir.includes('w')){w=boxStart.w-dx;x=boxStart.x+dx;}
+    if(resizeDir.includes('n')){w=boxStart.w-dy;y=boxStart.y+dy;} // drag up = grow
+    if(resizeDir.includes('s')){w=boxStart.w+dy;} // drag down = grow
+    writeBoxAR(x,y,w);
   }
-  box.style.left=x+'px';box.style.top=y+'px';box.style.width=w+'px';box.style.height=h+'px';
 }
 
 $cb().addEventListener('mousedown',e=>{e.preventDefault();cropDown('move',e.clientX,e.clientY);});
