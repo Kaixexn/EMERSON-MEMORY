@@ -101,6 +101,14 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .sctrl{width:24px;height:24px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .2s;}
 .sctrl.del{background:rgba(200,40,40,.9);color:#fff;}.sctrl.del:hover{background:rgb(230,40,40);}
 .sctrl.filt{background:rgba(201,151,58,.9);color:var(--navy);}.sctrl.filt:hover{background:var(--goldB);}
+.sctrl.repos{background:rgba(60,120,200,.9);color:#fff;}.sctrl.repos:hover{background:rgb(80,150,255);}
+/* REPOSITION MODAL */
+.repos-area{position:relative;overflow:hidden;width:100%;height:260px;background:#000;border-radius:6px;cursor:grab;touch-action:none;}
+.repos-area:active{cursor:grabbing;}
+.repos-area img{position:absolute;transform-origin:0 0;pointer-events:none;user-select:none;-webkit-user-drag:none;}
+.repos-zoom{display:flex;align-items:center;gap:10px;margin-top:10px;}
+.repos-zoom input{flex:1;}
+.repos-zoom span{font-size:11px;color:var(--silver);min-width:38px;text-align:center;}
 .photo-slot.drag-over{border-color:var(--goldB);box-shadow:0 0 20px rgba(232,184,75,.35);}
 
 /* BANNER */
@@ -128,6 +136,9 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .edit-toggle{position:fixed;bottom:22px;right:22px;z-index:500;width:44px;height:44px;border-radius:50%;border:1px solid rgba(201,151,58,.4);background:rgba(9,22,40,.92);color:var(--gold);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.4);transition:all .25s;}
 .edit-toggle:hover{background:rgba(201,151,58,.18);border-color:var(--gold);}
 .edit-toggle.active{background:rgba(201,151,58,.22);border-color:var(--goldB);color:var(--goldB);}
+.home-btn{position:fixed;bottom:22px;left:22px;z-index:500;padding:0 16px;height:44px;border-radius:22px;border:1px solid rgba(201,151,58,.4);background:rgba(9,22,40,.92);color:var(--gold);font-size:12px;font-weight:600;letter-spacing:.06em;cursor:pointer;display:flex;align-items:center;gap:6px;box-shadow:0 4px 16px rgba(0,0,0,.4);transition:all .25s;text-decoration:none;}
+.home-btn:hover{background:rgba(201,151,58,.18);border-color:var(--gold);}
+@media print{.home-btn{display:none!important;}}
 
 /* OVERLAYS */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:1000;display:none;align-items:center;justify-content:center;padding:16px;}
@@ -277,6 +288,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 </div>
 
 <button class="edit-toggle" id="editToggle" title="Edit mode">🔒</button>
+<a class="home-btn" href="index.html" title="Back to Home">🏠 Home</a>
 
 <!-- PASSWORD -->
 <div class="overlay" id="pwOverlay">
@@ -288,6 +300,37 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     <div class="modal-btns">
       <button class="mbtn ok" id="pwOK">Unlock</button>
       <button class="mbtn cancel" id="pwCancel">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE CONFIRM -->
+<div class="overlay" id="delOverlay">
+  <div class="modal" style="max-width:360px;text-align:center;">
+    <div style="font-size:36px;margin-bottom:10px;">🗑️</div>
+    <div class="modal-title" style="margin-bottom:8px;">Remove Photo?</div>
+    <p style="font-size:12px;color:var(--silver);margin-bottom:18px;">This will permanently delete the photo and its caption. This cannot be undone.</p>
+    <div class="modal-btns">
+      <button class="mbtn ok" id="delConfirm" style="background:rgba(200,40,40,.85);border-color:rgba(200,40,40,.6);">🗑 Remove</button>
+      <button class="mbtn cancel" id="delCancel">Keep It</button>
+    </div>
+  </div>
+</div>
+
+<!-- REPOSITION -->
+<div class="overlay" id="reposOverlay">
+  <div class="modal" style="max-width:480px;">
+    <div class="modal-title">⤢ Reposition Photo</div>
+    <p style="font-size:11px;color:var(--silver);margin-bottom:10px;">Drag the photo to reposition · Use the slider to zoom in/out</p>
+    <div class="repos-area" id="reposArea"><img id="reposImg" alt=""/></div>
+    <div class="repos-zoom">
+      <span style="font-size:13px;">🔍</span>
+      <input type="range" id="reposZoom" min="100" max="300" value="100" style="flex:1;accent-color:var(--gold)"/>
+      <span id="reposZoomVal">100%</span>
+    </div>
+    <div class="modal-btns" style="margin-top:14px;">
+      <button class="mbtn ok" id="reposApply">Apply</button>
+      <button class="mbtn cancel" id="reposCancel">Cancel</button>
     </div>
   </div>
 </div>
@@ -601,6 +644,7 @@ function makeSlot(id){
        <span class="slot-caption" contenteditable="false">${cap}</span>
      </div>` +
     `<div class="slot-controls">
+       <button class="sctrl repos" title="Reposition photo">⤢</button>
        <button class="sctrl filt" title="Filter">◐</button>
        <button class="sctrl del"  title="Remove">✕</button>
      </div>`;
@@ -631,17 +675,21 @@ function makeSlot(id){
   // Delete button
   el.querySelector('.sctrl.del').addEventListener('click', async e => {
     e.stopPropagation();
-    delete slots[id];
-    const ok = await saveAll();
-    toast(ok ? '🗑 Photo removed' : '⚠ Remove failed — check connection', !ok);
-    renderCollage();
-    if(isEditing) enableEditOnSlots();
+    pendingDelete = id;
+    document.getElementById('delOverlay').classList.add('open');
   });
 
   // Filter button
   el.querySelector('.sctrl.filt').addEventListener('click', e => {
     e.stopPropagation();
     if(slots[id] && slots[id].src) openFilterModal(id);
+    else toast('Upload a photo to this slot first!', true);
+  });
+
+  // Reposition button
+  el.querySelector('.sctrl.repos').addEventListener('click', e => {
+    e.stopPropagation();
+    if(slots[id] && slots[id].src) openReposModal(id);
     else toast('Upload a photo to this slot first!', true);
   });
 
@@ -1000,6 +1048,111 @@ document.getElementById('filterApply').addEventListener('click', async () => {
 });
 document.getElementById('filterCancel').addEventListener('click', () =>
   document.getElementById('filterOverlay').classList.remove('open'));
+
+// ═══════════════════════════════════════════════════════════════
+//  DELETE CONFIRM MODAL
+// ═══════════════════════════════════════════════════════════════
+let pendingDelete = null;
+
+document.getElementById('delConfirm').addEventListener('click', async () => {
+  if(pendingDelete === null) return;
+  const id = pendingDelete;
+  pendingDelete = null;
+  document.getElementById('delOverlay').classList.remove('open');
+  delete slots[id];
+  try{
+    await fetch(`${FB_URL}/emerson11/slots/${id}.json`, {method:'DELETE'});
+  } catch(e){ console.error('Delete slot error:', e); }
+  const ok = await saveAll();
+  toast(ok ? '🗑 Photo removed' : '⚠ Remove failed — check connection', !ok);
+  renderCollage();
+  if(isEditing) enableEditOnSlots();
+});
+
+document.getElementById('delCancel').addEventListener('click', () => {
+  pendingDelete = null;
+  document.getElementById('delOverlay').classList.remove('open');
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  REPOSITION MODAL
+// ═══════════════════════════════════════════════════════════════
+let reposSlot = null, reposDrag = false, reposStartX = 0, reposStartY = 0;
+let reposPanX = 0, reposPanY = 0, reposTempX = 0, reposTempY = 0, reposScale = 1;
+
+function openReposModal(id){
+  reposSlot = id;
+  const d = slots[id];
+  const img = document.getElementById('reposImg');
+  img.src = d.src;
+  const zoom = document.getElementById('reposZoom');
+  const saved = d.reposPan || {x:0,y:0,scale:1};
+  reposPanX = saved.x; reposPanY = saved.y; reposScale = saved.scale;
+  zoom.value = Math.round(reposScale * 100);
+  document.getElementById('reposZoomVal').textContent = zoom.value + '%';
+  img.onload = () => applyReposTransform();
+  if(img.complete) applyReposTransform();
+  document.getElementById('reposOverlay').classList.add('open');
+}
+
+function applyReposTransform(){
+  const img = document.getElementById('reposImg');
+  img.style.transform = `translate(${reposPanX}px,${reposPanY}px) scale(${reposScale})`;
+}
+
+const reposArea = document.getElementById('reposArea');
+reposArea.addEventListener('mousedown', e => {
+  reposDrag = true; reposStartX = e.clientX - reposPanX; reposStartY = e.clientY - reposPanY;
+  e.preventDefault();
+});
+reposArea.addEventListener('mousemove', e => {
+  if(!reposDrag) return;
+  reposPanX = e.clientX - reposStartX; reposPanY = e.clientY - reposStartY;
+  applyReposTransform();
+});
+reposArea.addEventListener('mouseup', () => reposDrag = false);
+reposArea.addEventListener('mouseleave', () => reposDrag = false);
+// Touch support
+reposArea.addEventListener('touchstart', e => {
+  reposDrag = true;
+  reposStartX = e.touches[0].clientX - reposPanX;
+  reposStartY = e.touches[0].clientY - reposPanY;
+  e.preventDefault();
+},{passive:false});
+reposArea.addEventListener('touchmove', e => {
+  if(!reposDrag) return;
+  reposPanX = e.touches[0].clientX - reposStartX;
+  reposPanY = e.touches[0].clientY - reposStartY;
+  applyReposTransform(); e.preventDefault();
+},{passive:false});
+reposArea.addEventListener('touchend', () => reposDrag = false);
+
+document.getElementById('reposZoom').addEventListener('input', function(){
+  reposScale = this.value / 100;
+  document.getElementById('reposZoomVal').textContent = this.value + '%';
+  applyReposTransform();
+});
+
+document.getElementById('reposApply').addEventListener('click', async () => {
+  if(!reposSlot) return;
+  slots[reposSlot].reposPan = {x: reposPanX, y: reposPanY, scale: reposScale};
+  document.getElementById('reposOverlay').classList.remove('open');
+  // Apply to the actual slot image immediately
+  const slotEl = document.querySelector(`.photo-slot[data-id="${reposSlot}"]`);
+  if(slotEl){
+    const img = slotEl.querySelector('img');
+    if(img) img.style.transform = `translate(${reposPanX}px,${reposPanY}px) scale(${reposScale})`;
+  }
+  const ok = await saveAll();
+  toast(ok ? '✅ Position saved!' : '⚠ Save failed', !ok);
+  renderCollage(); if(isEditing) enableEditOnSlots();
+  reposSlot = null;
+});
+
+document.getElementById('reposCancel').addEventListener('click', () => {
+  document.getElementById('reposOverlay').classList.remove('open');
+  reposSlot = null;
+});
 
 // ═══════════════════════════════════════════════════════════════
 //  BOOT
