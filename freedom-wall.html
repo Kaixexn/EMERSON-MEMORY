@@ -199,6 +199,8 @@ textarea#postContent{resize:vertical;min-height:90px;font-size:0.92rem;line-heig
   cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;
 }
 .btn-delete:hover{background:rgba(255,60,60,.15);border-color:rgba(255,80,80,.6);color:#ff6060;}
+/* NEW: Hide delete button when admin mode is off */
+.btn-delete.hidden{display:none !important;}
 
 /* EMPTY STATE */
 .fw-empty{text-align:center;padding:60px 20px;color:var(--silver);}
@@ -305,12 +307,17 @@ textarea#postContent{resize:vertical;min-height:90px;font-size:0.92rem;line-heig
       isAdmin = false;
       showToast("Admin mode off");
       renderAdminBtn();
+      // NEW: Hide all delete buttons instantly
+      document.querySelectorAll('.btn-delete').forEach(btn => btn.classList.add('hidden'));
       return;
     }
     const pw = prompt("Enter admin password:");
     if (pw === ADMIN_PW) {
       isAdmin = true;
       showToast("Admin mode on 🔑");
+      renderAdminBtn();
+      // NEW: Show all delete buttons instantly
+      document.querySelectorAll('.btn-delete').forEach(btn => btn.classList.remove('hidden'));
     } else if (pw !== null) {
       showToast("Wrong password ✦");
     }
@@ -355,7 +362,7 @@ textarea#postContent{resize:vertical;min-height:90px;font-size:0.92rem;line-heig
       await push(wallRef, {
         nickname, avatar: avatarDataURL || null, content,
         timestamp: serverTimestamp(),
-        reactions: { "❤️": 0, "🔥": 0, "💯": 0, "😂": 0, "👏": 0,"😭": 0 }
+        reactions: { "❤️": 0, "🔥": 0, "💯": 0, "😂": 0, "👏": 0, "😭": 0 }
       });
       document.getElementById("postContent").value = "";
       document.getElementById("charCount").textContent = "0 / 500";
@@ -422,9 +429,8 @@ textarea#postContent{resize:vertical;min-height:90px;font-size:0.92rem;line-heig
         const done = reacted.includes(e);
         return `<button class="react-btn${done ? " reacted" : ""}" onclick="reactToPost('${post.id}','${e}')">${e} <span>${reactions[e] || 0}</span></button>`;
       }).join("");
-      const deleteBtn = isAdmin
-        ? `<button class="btn-delete" onclick="deletePost('${post.id}')">🗑 delete</button>`
-        : "";
+      // NEW: Always render delete button, but add 'hidden' class if not admin
+      const deleteBtn = `<button class="btn-delete${isAdmin ? '' : ' hidden'}" onclick="deletePost('${post.id}')">🗑 delete</button>`;
       return `<div class="fw-post">
         <div class="post-header">${avatarHTML}
           <div class="post-meta">
