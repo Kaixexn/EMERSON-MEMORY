@@ -355,7 +355,7 @@ textarea#postContent{resize:vertical;min-height:90px;font-size:0.92rem;line-heig
       await push(wallRef, {
         nickname, avatar: avatarDataURL || null, content,
         timestamp: serverTimestamp(),
-        reactions: { "❤️": 0, "🔥": 0, "💯": 0, "😂": 0, "👏": 0 }
+        reactions: { "❤️": 0, "🔥": 0, "💯": 0, "😂": 0, "👏": 0, "😭" 0 }
       });
       document.getElementById("postContent").value = "";
       document.getElementById("charCount").textContent = "0 / 500";
@@ -418,7 +418,7 @@ textarea#postContent{resize:vertical;min-height:90px;font-size:0.92rem;line-heig
       const timeStr = post.timestamp ? timeAgo(post.timestamp) : "just now";
       const reactions = post.reactions || {};
       const reacted = getReacted(post.id);
-      const reactionBtns = ["❤️","🔥","💯","😂","👏"].map(e => {
+      const reactionBtns = ["❤️","🔥","💯","😂","👏","😭"].map(e => {
         const done = reacted.includes(e);
         return `<button class="react-btn${done ? " reacted" : ""}" onclick="reactToPost('${post.id}','${e}')">${e} <span>${reactions[e] || 0}</span></button>`;
       }).join("");
