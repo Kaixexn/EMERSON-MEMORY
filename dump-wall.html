@@ -257,9 +257,11 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
   const firebaseConfig = { databaseURL: "https://emerson-11-memories-default-rtdb.firebaseio.com" };
-  const ADMIN_PW   = "BNSHI2026";
-  const MAX_PHOTOS = 10;
+  const ADMIN_PW    = "BNSHI2026";
+  const MAX_PHOTOS  = 10;
   const STORAGE_KEY = "dumpwall_uploaded";
+  const TIME_KEY    = "dumpwall_reset_time";
+  const RESET_MS    = 24 * 60 * 60 * 1000; // 24 hours
 
   const app = initializeApp(firebaseConfig);
   const db  = getDatabase(app);
@@ -269,7 +271,23 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   let selectedFile = null;
   let latestSnapshot = null;
 
-  // ── LIMIT TRACKING ──
+  // ── LIMIT TRACKING (24hr reset) ──
+  function checkReset() {
+    try {
+      const lastReset = parseInt(localStorage.getItem(TIME_KEY) || "0");
+      if (!lastReset) {
+        // first time — set the clock now
+        localStorage.setItem(TIME_KEY, String(Date.now()));
+        localStorage.setItem(STORAGE_KEY, "0");
+        return;
+      }
+      if (Date.now() - lastReset >= RESET_MS) {
+        // 24hrs passed — reset!
+        localStorage.setItem(STORAGE_KEY, "0");
+        localStorage.setItem(TIME_KEY, String(Date.now()));
+      }
+    } catch(e) {}
+  }
   function getUploaded() {
     try { return parseInt(localStorage.getItem(STORAGE_KEY) || "0"); }
     catch { return 0; }
@@ -277,7 +295,19 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   function incrementUploaded() {
     const n = getUploaded() + 1;
     localStorage.setItem(STORAGE_KEY, String(n));
+    if (!localStorage.getItem(TIME_KEY)) localStorage.setItem(TIME_KEY, String(Date.now()));
     updateLimitUI();
+  }
+  function getTimeUntilReset() {
+    try {
+      const lastReset = parseInt(localStorage.getItem(TIME_KEY) || "0");
+      if (!lastReset) return "";
+      const ms = RESET_MS - (Date.now() - lastReset);
+      if (ms <= 0) return "";
+      const h = Math.floor(ms / 3600000);
+      const m = Math.floor((ms % 3600000) / 60000);
+      return `Resets in ${h}h ${m}m`;
+    } catch { return ""; }
   }
   function updateLimitUI() {
     const n = getUploaded();
@@ -286,13 +316,15 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     document.getElementById("limitFill").style.width = `${Math.min(100, (n / MAX_PHOTOS) * 100)}%`;
 
     if (n >= MAX_PHOTOS) {
+      const timer = getTimeUntilReset();
       document.getElementById("uploadCard").innerHTML = `
         <div class="locked-msg">
           🔒 You've used all <strong>10</strong> of your uploads.<br/>
-          <span style="font-size:0.78rem;opacity:.7;margin-top:6px;display:block;">Thanks for dumping your memories here! ✦</span>
+          <span style="font-size:0.78rem;opacity:.7;margin-top:6px;display:block;">${timer || "Come back tomorrow for 10 more!"} ✦</span>
         </div>`;
     } else {
-      document.getElementById("submitBtn").textContent = `Drop it 📸 (${remaining} left)`;
+      const submitBtn = document.getElementById("submitBtn");
+      if (submitBtn) submitBtn.textContent = `Drop it 📸 (${remaining} left)`;
     }
   }
 
@@ -300,7 +332,11 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   const dropZone = document.getElementById("dropZone");
   const fileInput = document.getElementById("photoFileInput");
 
-  dropZone.addEventListener("click", () => fileInput.click());
+  dropZone.addEventListener("click", () => {
+    // reset input value first so cancel doesn't break it
+    fileInput.value = "";
+    fileInput.click();
+  });
   dropZone.addEventListener("dragover", e => { e.preventDefault(); dropZone.classList.add("dragover"); });
   dropZone.addEventListener("dragleave", () => dropZone.classList.remove("dragover"));
   dropZone.addEventListener("drop", e => {
@@ -308,7 +344,15 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     const f = e.dataTransfer.files[0];
     if (f) handleFile(f);
   });
-  fileInput.addEventListener("change", e => { if (e.target.files[0]) handleFile(e.target.files[0]); });
+
+  // fix: use a flag so cancel doesn't lock the drop zone
+  fileInput.addEventListener("click", () => { fileInput.value = ""; });
+  fileInput.addEventListener("change", e => {
+    if (e.target.files && e.target.files[0]) {
+      handleFile(e.target.files[0]);
+    }
+    // if cancelled (no file), drop zone stays open — no action needed
+  });
 
   document.getElementById("removePreview").addEventListener("click", () => {
     selectedFile = null;
@@ -457,6 +501,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   }
 
   // ── INIT ──
+  checkReset();
   updateLimitUI();
 </script>
 
