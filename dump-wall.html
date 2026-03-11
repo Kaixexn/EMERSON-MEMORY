@@ -56,6 +56,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   box-shadow:0 8px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(201,151,58,.1);
   animation:rise .9s .1s ease both;
 }
+@media(max-width:768px){.dw-upload-card{margin:0 10px 30px;padding:20px;}}
 
 /* LIMIT BADGE */
 .limit-badge{
@@ -132,16 +133,17 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .dw-grid{
   max-width:1100px;margin:0 auto;
   columns:4;column-gap:14px;
+  padding:0 20px;
 }
 @media(max-width:1000px){.dw-grid{columns:3;}}
-@media(max-width:768px){.dw-grid{columns:2;column-gap:10px;}}
-@media(max-width:400px){.dw-grid{columns:2;column-gap:8px;}}
-@media(max-width:768px){.page{padding:50px 12px 80px;}}
+@media(max-width:768px){.dw-grid{columns:2;column-gap:10px;padding:0 10px;}}
+@media(max-width:480px){.dw-grid{columns:2;column-gap:8px;padding:0 6px;}}
+@media(max-width:768px){.page{padding:50px 0 80px;}}
 
 /* PHOTO CARD */
 .dw-card{
   break-inside:avoid;
-  margin-bottom:14px;
+  margin-bottom:10px;
   background:rgba(10,24,48,.65);
   border:1px solid rgba(201,151,58,.18);
   border-radius:12px;overflow:hidden;
@@ -149,11 +151,13 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   animation:rise .35s ease both;
   transition:border-color .2s,transform .2s;
   position:relative;
+  display:inline-block;
+  width:100%;
 }
 .dw-card:hover{border-color:rgba(201,151,58,.35);transform:translateY(-3px);}
-.dw-card img{width:100%;height:auto;display:block;object-fit:cover;}
-.dw-card-caption{padding:10px 12px;font-size:0.8rem;color:var(--silver);font-style:italic;line-height:1.4;}
-.dw-card-time{padding:0 12px 10px;font-size:0.7rem;color:var(--silver);opacity:.45;}
+.dw-card img{width:100%;height:auto;display:block;}
+.dw-card-caption{padding:8px 10px;font-size:0.78rem;color:var(--silver);font-style:italic;line-height:1.4;}
+.dw-card-time{padding:0 10px 8px;font-size:0.68rem;color:var(--silver);opacity:.45;}
 
 /* ADMIN DELETE */
 .dw-del-btn{
