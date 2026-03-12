@@ -54,15 +54,14 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 /* PHOTO FRAME */
 .photo-stage{
   position:relative;
-  width:min(300px, 38vw);
-  height:min(520px, 65vw);
+  width:min(300px, 40vw);
   flex-shrink:0;
 }
 @media(max-width:640px){
-  .photo-stage{width:min(220px,68vw);height:min(380px,105vw);}
+  .photo-stage{width:min(220px,72vw);}
 }
 .photo-frame{
-  width:100%;height:100%;
+  width:100%;height:auto;
   border-radius:8px;
   border:2px solid rgba(201,151,58,.4);
   overflow:hidden;
@@ -71,12 +70,12 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 40px rgba(201,151,58,.1);
   animation:borderPulse 4s ease-in-out infinite;
 }
-.photo-frame img{width:100%;height:100%;object-fit:contain;display:block;position:absolute;inset:0;transform-origin:center center;transition:transform .08s ease;cursor:default;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;}
+.photo-frame img{width:100%;height:auto;display:block;position:relative;object-fit:contain;transform-origin:center center;transition:transform .08s ease;cursor:default;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;}
 .photo-frame img.dragging{cursor:grabbing;transition:none;}
 .photo-pos-hint{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);z-index:15;background:rgba(5,13,31,.82);border:1px solid rgba(201,151,58,.4);border-radius:20px;padding:3px 12px;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--goldP);pointer-events:none;opacity:0;transition:opacity .3s;white-space:nowrap;}
 .edit-mode .photo-pos-hint{opacity:1;}
-.photo-frame::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(5,13,31,.65) 100%);pointer-events:none;}
-.photo-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;}
+.photo-frame::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to bottom,transparent,rgba(5,13,31,.65));pointer-events:none;}
+.photo-placeholder{position:relative;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;}
 .photo-placeholder-icon{font-size:48px;opacity:.25;}
 .photo-placeholder-text{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(184,204,224,.3);}
 .photo-shimmer{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
@@ -258,7 +257,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
           <span>📷 Upload Photo</span>
         </div>
         <button class="del-photo-btn" id="delPhotoBtn">✕</button>
-        <div class="photo-pos-hint">drag to reposition · scroll to zoom in/out</div>
+        
       </div>
       <button class="del-card-btn" id="delCardBtn">✕ Remove this person</button>
     </div>
@@ -552,7 +551,7 @@ function initPhotoDrag(imgEl, id){
     e.preventDefault();
     if(!photoPos[id]) photoPos[id] = {x:0,y:0,zoom:1};
     const delta = e.deltaY > 0 ? -0.05 : 0.05;
-    photoPos[id].zoom = Math.min(3, Math.max(0.3, photoPos[id].zoom + delta));
+    photoPos[id].zoom = Math.min(3, Math.max(0.5, photoPos[id].zoom + delta));
     applyPos(imgEl, id);
     savePhotoPos(id);
   }, {passive:false});
@@ -757,9 +756,6 @@ document.getElementById('cropApply').addEventListener('click',async()=>{
   const o=slots[current];
   if(!data[o.id]) data[o.id]={};
   data[o.id].src=url;
-  // reset position so new photo starts fully fitted
-  delete photoPos[o.id];
-  data[o.id].photoPos = null;
   const ok=await saveAll();
   toast(ok?'✅ Photo saved!':'⚠ Save failed',!ok);
   showOfficer(current,false);
