@@ -14,26 +14,22 @@
 }
 html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
 
-/* STARS */
 .stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 .star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) var(--delay,0s) infinite ease-in-out;}
 @keyframes twinkle{0%,100%{opacity:var(--min,.2);}50%{opacity:var(--max,.9);}}
 
-/* GLOW */
 .glow-bg{position:fixed;inset:0;pointer-events:none;z-index:0;
   background:
     radial-gradient(ellipse 70% 50% at 50% 0%,rgba(20,60,120,.6) 0%,transparent 70%),
     radial-gradient(ellipse 40% 30% at 20% 100%,rgba(201,151,58,.12) 0%,transparent 60%),
     radial-gradient(ellipse 40% 30% at 80% 100%,rgba(201,151,58,.1) 0%,transparent 60%);}
 
-/* ANIMATIONS */
 @keyframes rise{from{opacity:0;transform:translateY(32px);}to{opacity:1;transform:translateY(0);}}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
 @keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(200%);}}
 @keyframes pulse-gold{0%,100%{text-shadow:0 0 20px rgba(201,151,58,.3);}50%{text-shadow:0 0 40px rgba(201,151,58,.7),0 0 80px rgba(201,151,58,.2);}}
 
-/* PAGE */
 .page{
   position:relative;z-index:1;
   min-height:100vh;
@@ -41,19 +37,16 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   padding:60px 20px 80px;
 }
 
-/* EYEBROW */
 .eyebrow{
   font-size:0.7rem;letter-spacing:.5em;text-transform:uppercase;
   color:var(--gold);opacity:.8;margin-bottom:20px;
   animation:fadeIn 1s ease both;
 }
 
-/* DECORATIVE RULE */
 .gold-rule{display:flex;align-items:center;gap:14px;width:100%;max-width:500px;margin:0 auto 36px;}
 .gold-rule::before,.gold-rule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,151,58,.5),transparent);}
 .gem{width:8px;height:8px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;box-shadow:0 0 10px var(--gold);}
 
-/* MAIN CARD */
 .card{
   max-width:680px;width:100%;
   background:rgba(10,24,48,.6);
@@ -66,7 +59,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 }
 @media(max-width:600px){.card{padding:32px 22px;}}
 
-/* ICON */
 .page-icon{
   font-size:2.8rem;display:block;text-align:center;
   margin-bottom:18px;
@@ -74,7 +66,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   filter:drop-shadow(0 0 16px rgba(201,151,58,.5));
 }
 
-/* TITLE */
 .card h1{
   font-family:'Playfair Display',serif;
   font-size:clamp(1.8rem,5vw,2.8rem);
@@ -93,12 +84,10 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   margin-bottom:32px;
 }
 
-/* DIVIDER */
 .inner-divider{display:flex;align-items:center;gap:10px;margin:28px 0;}
 .inner-divider::before,.inner-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,151,58,.25),transparent);}
 .inner-gem{width:5px;height:5px;background:var(--goldB);transform:rotate(45deg);flex-shrink:0;}
 
-/* BODY TEXT */
 .card p{
   font-size:0.97rem;
   line-height:1.85;
@@ -125,7 +114,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   margin:28px 0;
 }
 
-/* RULES SECTION */
 .rules{
   background:rgba(201,151,58,.05);
   border:1px solid rgba(201,151,58,.15);
@@ -144,7 +132,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 }
 .rules ul li::before{content:'✦';color:var(--gold);font-size:0.7rem;margin-top:3px;flex-shrink:0;}
 
-/* CREDITS */
 .credits{
   margin-top:32px;
   padding-top:24px;
@@ -166,7 +153,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   margin-bottom:0;
 }
 
-/* ENTER BUTTON */
 .enter-wrap{text-align:center;margin-top:40px;animation:rise 1s .6s ease both;opacity:0;animation-fill-mode:forwards;}
 .enter-btn{
   position:relative;overflow:hidden;
@@ -259,7 +245,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 
 </div>
 
-<!-- STARS -->
 <script>
 (function(){
   const c = document.getElementById('starsContainer');
