@@ -544,15 +544,22 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     const addBtn = e.target.closest(".react-add-btn");
     if (addBtn) {
       e.stopPropagation();
-      const picker = document.getElementById('ep-' + addBtn.dataset.postid);
-      const wasOpen = picker && picker.classList.contains('open');
-      document.querySelectorAll('.emoji-picker.open').forEach(p => p.classList.remove('open'));
+      const picker = document.getElementById('emojiPickerSheet');
       const backdrop = document.getElementById('emojiBackdrop');
-      if (picker && !wasOpen) {
+      const currentPost = picker.dataset.postid;
+      const isSamePost = currentPost === addBtn.dataset.postid;
+      const isOpen = picker.classList.contains('open');
+      if (isOpen && isSamePost) {
+        picker.classList.remove('open');
+        if (backdrop) backdrop.classList.remove('open');
+      } else {
+        picker.dataset.postid = addBtn.dataset.postid;
+        const myReacts = getMyReactions(addBtn.dataset.postid);
+        picker.querySelectorAll('.ep-emoji').forEach(el => {
+          el.classList.toggle('mine', myReacts.includes(el.dataset.emoji));
+        });
         picker.classList.add('open');
         if (backdrop) backdrop.classList.add('open');
-      } else {
-        if (backdrop) backdrop.classList.remove('open');
       }
       return;
     }
@@ -561,8 +568,10 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     const epEmoji = e.target.closest(".ep-emoji");
     if (epEmoji) {
       e.stopPropagation();
-      const { postid, emoji } = epEmoji.dataset;
-      document.querySelectorAll('.emoji-picker.open').forEach(p => p.classList.remove('open'));
+      const picker = document.getElementById('emojiPickerSheet');
+      const postid = picker.dataset.postid;
+      const emoji = epEmoji.dataset.emoji;
+      picker.classList.remove('open');
       const bd2 = document.getElementById('emojiBackdrop');
       if (bd2) bd2.classList.remove('open');
       await toggleReaction(postid, emoji);
@@ -753,6 +762,18 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   
   const ALL_EMOJIS = ['❤️','🔥','😂','😭','💯','👏','😍','🤣','😮','💀','🤔','👀','🥲','✨','🎉','😤'];
 
+  (function populatePicker() {
+    const sheet = document.getElementById('emojiPickerSheet');
+    if (!sheet) return;
+    ALL_EMOJIS.forEach(e => {
+      const span = document.createElement('span');
+      span.className = 'ep-emoji';
+      span.dataset.emoji = e;
+      span.textContent = e;
+      sheet.appendChild(span);
+    });
+  })();
+
   function getMyReactions(postId) {
     try { return JSON.parse(localStorage.getItem('dwr_' + postId) || '[]'); }
     catch { return []; }
@@ -787,7 +808,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 
   
   document.getElementById('emojiBackdrop').addEventListener('click', () => {
-    document.querySelectorAll('.emoji-picker.open').forEach(p => p.classList.remove('open'));
+    document.getElementById('emojiPickerSheet').classList.remove('open');
     document.getElementById('emojiBackdrop').classList.remove('open');
   });
 
@@ -848,10 +869,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
         </button>`;
       }).join('');
 
-      const pickerEmojis = ALL_EMOJIS.map(e =>
-        `<span class="ep-emoji" data-postid="${post.id}" data-emoji="${e}">${e}</span>`
-      ).join('');
-
       return `<div class="dw-card">
         ${delBtn}
         <div class="dw-card-img-wrap">
@@ -867,9 +884,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
           ${reactionChips}
           <div class="react-add-wrap">
             <button class="react-add-btn" data-postid="${post.id}" title="Add reaction">＋</button>
-            <div class="emoji-picker" id="ep-${post.id}"><span class="emoji-picker-handle"></span>
-              ${pickerEmojis}
-            </div>
           </div>
         </div>
       </div>`;
@@ -927,5 +941,9 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   }
 })();
 </script>
+
+<div id="emojiPickerSheet" class="emoji-picker">
+  <span class="emoji-picker-handle"></span>
+</div>
 </body>
 </html>
