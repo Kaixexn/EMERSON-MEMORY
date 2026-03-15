@@ -221,24 +221,37 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .react-add-btn:hover{background:rgba(201,151,58,.1);border-color:var(--gold);color:var(--goldP);}
 
 .emoji-picker{
-  position:absolute;bottom:calc(100% + 8px);left:0;
-  background:rgba(8,20,50,.97);
-  border:1px solid rgba(201,151,58,.3);
-  border-radius:12px;padding:10px;
-  display:flex;flex-wrap:wrap;gap:4px;
-  width:220px;z-index:100;
-  box-shadow:0 8px 32px rgba(0,0,0,.5);
+  position:fixed;
+  bottom:0;left:0;right:0;
+  background:rgba(8,20,50,.98);
+  border-top:1px solid rgba(201,151,58,.3);
+  border-radius:16px 16px 0 0;
+  padding:14px 12px 28px;
+  display:flex;flex-wrap:wrap;gap:8px;
+  justify-content:center;
+  width:100%;z-index:2000;
+  box-shadow:0 -8px 40px rgba(0,0,0,.6);
   opacity:0;pointer-events:none;
-  transform:translateY(6px);
-  transition:opacity .18s,transform .18s;
+  transform:translateY(100%);
+  transition:opacity .22s,transform .22s cubic-bezier(.25,.46,.45,.94);
 }
 .emoji-picker.open{opacity:1;pointer-events:all;transform:translateY(0);}
+.emoji-picker-handle{
+  width:36px;height:4px;background:rgba(201,151,58,.3);
+  border-radius:2px;margin:0 auto 12px;display:block;
+}
 .ep-emoji{
-  font-size:1.2rem;cursor:pointer;padding:4px 5px;border-radius:6px;
+  font-size:1.6rem;cursor:pointer;padding:7px 9px;border-radius:8px;
   transition:background .12s,transform .1s;
 }
-.ep-emoji:hover{background:rgba(201,151,58,.15);transform:scale(1.2);}
+.ep-emoji:hover,.ep-emoji:active{background:rgba(201,151,58,.18);transform:scale(1.15);}
 .react-add-wrap{position:relative;display:inline-flex;}
+.emoji-picker-backdrop{
+  position:fixed;inset:0;z-index:1999;
+  background:rgba(0,0,0,.5);
+  display:none;backdrop-filter:blur(2px);
+}
+.emoji-picker-backdrop.open{display:block;}
 
 .dw-del-btn{
   position:absolute;top:8px;right:8px;
@@ -269,11 +282,13 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 </head>
 <body>
 
+<div id="emojiBackdrop" class="emoji-picker-backdrop"></div>
 <div class="stars"><div id="starsContainer"></div></div>
 <div class="glow-bg"></div>
 
 <div class="page">
 
+  <!-- HEADER -->
   <div class="dw-header">
     <a href="index.html" class="back-link">← Back to Memory Palace</a>
     <span class="crown">📸</span>
@@ -283,6 +298,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 
   <div class="divider"><div class="gem"></div></div>
 
+  <!-- UPLOAD CARD -->
   <div class="dw-upload-card" id="uploadCard">
 
     <div class="limit-badge">
@@ -291,6 +307,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     </div>
     <div class="limit-bar"><div class="limit-fill" id="limitFill" style="width:0%"></div></div>
 
+    <!-- Drop Zone -->
     <div class="drop-zone" id="dropZone">
       <span class="dz-icon">🖼️</span>
       <div class="dz-text">Tap or drag a photo here</div>
@@ -305,11 +322,14 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
       <button class="remove-preview" id="removePreview">✕ Remove</button>
     </div>
 
+    <!-- Caption -->
     <input type="text" class="caption-input" id="captionInput" placeholder="Add a caption... (optional)" maxlength="120"/>
 
+    <!-- Submit -->
     <button class="btn-dump" id="submitBtn">Drop it 📸</button>
   </div>
 
+  <!-- FEED — skeletons inserted here immediately by JS -->
   <div class="dw-grid" id="dumpGrid">
     <div class="dw-grid-inner" id="dumpGridInner"></div>
   </div>
@@ -527,7 +547,13 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
       const picker = document.getElementById('ep-' + addBtn.dataset.postid);
       const wasOpen = picker && picker.classList.contains('open');
       document.querySelectorAll('.emoji-picker.open').forEach(p => p.classList.remove('open'));
-      if (picker && !wasOpen) picker.classList.add('open');
+      const backdrop = document.getElementById('emojiBackdrop');
+      if (picker && !wasOpen) {
+        picker.classList.add('open');
+        if (backdrop) backdrop.classList.add('open');
+      } else {
+        if (backdrop) backdrop.classList.remove('open');
+      }
       return;
     }
 
@@ -537,6 +563,8 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
       e.stopPropagation();
       const { postid, emoji } = epEmoji.dataset;
       document.querySelectorAll('.emoji-picker.open').forEach(p => p.classList.remove('open'));
+      const bd2 = document.getElementById('emojiBackdrop');
+      if (bd2) bd2.classList.remove('open');
       await toggleReaction(postid, emoji);
       return;
     }
@@ -758,9 +786,16 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   function decodeEmoji(k) { try { return decodeURIComponent(k.replace(/_/g,'%')); } catch { return k; } }
 
   
+  document.getElementById('emojiBackdrop').addEventListener('click', () => {
+    document.querySelectorAll('.emoji-picker.open').forEach(p => p.classList.remove('open'));
+    document.getElementById('emojiBackdrop').classList.remove('open');
+  });
+
   document.addEventListener('click', e => {
-    if (!e.target.closest('.react-add-wrap')) {
+    if (!e.target.closest('.react-add-wrap') && !e.target.closest('.emoji-picker')) {
       document.querySelectorAll('.emoji-picker.open').forEach(p => p.classList.remove('open'));
+      const bd = document.getElementById('emojiBackdrop');
+      if (bd) bd.classList.remove('open');
     }
   });
 
@@ -832,7 +867,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
           ${reactionChips}
           <div class="react-add-wrap">
             <button class="react-add-btn" data-postid="${post.id}" title="Add reaction">＋</button>
-            <div class="emoji-picker" id="ep-${post.id}">
+            <div class="emoji-picker" id="ep-${post.id}"><span class="emoji-picker-handle"></span>
               ${pickerEmojis}
             </div>
           </div>
@@ -878,6 +913,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   showSkeletons(); 
 </script>
 
+<!-- STARS -->
 <script>
 (function(){
   const c = document.getElementById('starsContainer');
