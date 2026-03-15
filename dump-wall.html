@@ -15,7 +15,6 @@
 }
 html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
 
-/* STARS */
 .stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 .star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) var(--delay,0s) infinite ease-in-out;}
 @keyframes twinkle{0%,100%{opacity:var(--min,.2);}50%{opacity:var(--max,.8);}}
@@ -25,16 +24,13 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     radial-gradient(ellipse 35% 28% at 20% 100%,rgba(201,151,58,.1) 0%,transparent 60%),
     radial-gradient(ellipse 35% 28% at 80% 100%,rgba(201,151,58,.08) 0%,transparent 60%);}
 
-/* ANIMATIONS */
 @keyframes rise{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
 @keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(200%);}}
 @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
 @keyframes skeletonPulse{0%,100%{opacity:.5;}50%{opacity:1;}}
 
-/* PAGE */
 .page{position:relative;z-index:1;min-height:100vh;padding:50px 20px 80px;}
 
-/* HEADER */
 .dw-header{text-align:center;padding:20px 0 40px;animation:rise .8s ease both;}
 .back-link{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:0.82rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;margin-bottom:32px;opacity:.8;transition:opacity .2s;}
 .back-link:hover{opacity:1;}
@@ -42,12 +38,10 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .dw-header h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,6vw,3.4rem);font-weight:900;background:linear-gradient(135deg,var(--goldP) 0%,var(--gold) 50%,var(--goldD) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.5px;line-height:1.1;}
 .dw-header p{margin-top:10px;color:var(--silver);font-size:0.9rem;font-style:italic;letter-spacing:.04em;}
 
-/* DIVIDER */
 .divider{display:flex;align-items:center;gap:14px;margin:0 auto 40px;max-width:500px;}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--goldD),transparent);}
 .gem{width:8px;height:8px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;box-shadow:0 0 8px var(--gold);}
 
-/* UPLOAD CARD */
 .dw-upload-card{
   max-width:700px;margin:0 auto 40px;
   background:rgba(10,24,48,.7);
@@ -59,14 +53,12 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 }
 @media(max-width:768px){.dw-upload-card{margin:0 10px 30px;padding:20px;}}
 
-/* LIMIT BADGE */
 .limit-badge{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
 .limit-text{font-size:0.78rem;color:var(--silver);opacity:.7;}
 .limit-count{font-size:0.78rem;color:var(--goldP);font-weight:600;letter-spacing:.04em;}
 .limit-bar{height:3px;background:rgba(255,255,255,.08);border-radius:10px;margin-bottom:20px;overflow:hidden;}
 .limit-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--goldB));border-radius:10px;transition:width .4s ease;}
 
-/* DROP ZONE */
 .drop-zone{
   border:2px dashed rgba(201,151,58,.3);border-radius:10px;padding:32px 20px;
   text-align:center;cursor:pointer;transition:all .2s;margin-bottom:14px;
@@ -78,13 +70,11 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .drop-zone .dz-sub{font-size:0.75rem;color:var(--silver);opacity:.5;margin-top:4px;}
 #photoFileInput{display:none;}
 
-/* PREVIEW */
 #imgPreviewWrap{display:none;margin-bottom:14px;text-align:center;}
 #imgPreview{max-width:100%;max-height:260px;border-radius:10px;border:1px solid rgba(201,151,58,.3);object-fit:contain;}
 .remove-preview{background:transparent;border:1px solid rgba(255,80,80,.3);border-radius:20px;color:#ff9090;font-size:0.75rem;padding:4px 12px;cursor:pointer;margin-top:8px;font-family:'DM Sans',sans-serif;transition:all .2s;}
 .remove-preview:hover{background:rgba(255,60,60,.15);}
 
-/* CAPTION INPUT */
 .caption-input{
   width:100%;background:rgba(255,255,255,.04);
   border:1px solid rgba(201,151,58,.2);border-radius:8px;
@@ -95,7 +85,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .caption-input:focus{border-color:var(--gold);}
 .caption-input::placeholder{color:rgba(184,204,224,.35);}
 
-/* SUBMIT BTN */
 .btn-dump{
   position:relative;overflow:hidden;width:100%;
   background:linear-gradient(135deg,var(--gold),var(--goldD));
@@ -110,49 +99,43 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .btn-dump:active{transform:scale(0.98);}
 .btn-dump:disabled{opacity:.4;cursor:not-allowed;}
 
-/* LOCKED STATE */
 .locked-msg{
   text-align:center;padding:20px;
   background:rgba(201,151,58,.06);border:1px solid rgba(201,151,58,.2);
   border-radius:10px;color:var(--goldP);font-size:0.88rem;font-style:italic;
 }
 
-/* ─── MASONRY GRID ─── */
-/* JS masonry using CSS transforms — no top/left thrash */
 .dw-grid{position:relative;max-width:1100px;margin:0 auto;padding:0 16px;}
 .dw-grid-inner{position:relative;width:100%;}
 
-/* ─── PHOTO CARD ─── */
 .dw-card{
   position:absolute;
-  top:0;left:0;          /* anchor; transform handles actual xy */
-  width:200px;           /* overridden by JS */
+  top:0;left:0;          
+  width:200px;           
   opacity:0;
   will-change:transform;
   background:rgba(10,24,48,.65);
   border:1px solid rgba(201,151,58,.18);
   border-radius:12px;overflow:hidden;
   box-shadow:0 4px 20px rgba(0,0,0,.3);
-  transition:border-color .2s,box-shadow .2s;  /* no transform here—JS owns it */
+  transition:border-color .2s,box-shadow .2s;  
 }
 .dw-card:hover{
   border-color:rgba(201,151,58,.38);
   box-shadow:0 10px 36px rgba(0,0,0,.55),0 0 0 1px rgba(201,151,58,.15);
 }
 .dw-card.is-laid-out{
-  /* After first layout: allow transform animation on subsequent relayouts */
+  
   transition:border-color .2s,box-shadow .2s,transform .28s cubic-bezier(.25,.46,.45,.94),opacity .32s ease;
 }
 
-/* ─── IMAGE WRAPPER ─── */
-/* Reserves space via aspect-ratio before the image loads */
 .dw-card-img-wrap{
   position:relative;
   overflow:hidden;
-  aspect-ratio:4/3;   /* default placeholder ratio; overridden by JS once image loads */
+  aspect-ratio:4/3;   
   background:linear-gradient(135deg,rgba(8,20,55,.8) 0%,rgba(15,35,80,.5) 100%);
 }
-/* Shimmer sweep on placeholder */
+
 .dw-card-img-wrap::after{
   content:'';
   position:absolute;inset:0;
@@ -162,7 +145,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 }
 .dw-card-img-wrap.img-loaded::after{display:none;}
 
-/* ─── LAZY IMAGE ─── */
 .lazy-img{
   width:100%;height:100%;
   object-fit:cover;display:block;
@@ -173,8 +155,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   opacity:1;
 }
 
-/* ─── SKELETON CARDS ─── */
-/* Shown before Firebase responds — gives immediate visual feedback */
 .dw-card.skeleton{pointer-events:none;}
 .skeleton-slab{
   position:relative;overflow:hidden;
@@ -199,7 +179,67 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .dw-card-caption{padding:8px 10px;font-size:0.78rem;color:var(--silver);font-style:italic;line-height:1.4;}
 .dw-card-time{padding:0 10px 8px;font-size:0.68rem;color:var(--silver);opacity:.45;}
 
-/* ADMIN DELETE */
+.dw-reactions{
+  padding:6px 10px 10px;
+  display:flex;flex-wrap:wrap;gap:5px;align-items:center;
+  min-height:36px;
+}
+.react-chip{
+  display:inline-flex;align-items:center;gap:3px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(201,151,58,.18);
+  border-radius:20px;padding:4px 9px;
+  font-size:0.78rem;cursor:pointer;
+  transition:background .15s,border-color .15s,transform .1s;
+  user-select:none;position:relative;
+}
+.react-chip:hover{background:rgba(201,151,58,.12);border-color:rgba(201,151,58,.4);}
+.react-chip:active{transform:scale(0.93);}
+.react-chip.mine{background:rgba(201,151,58,.18);border-color:var(--gold);color:var(--goldP);}
+.react-chip .rc-emoji{font-size:0.9rem;}
+.react-chip .rc-count{font-size:0.72rem;color:var(--silver);font-weight:600;min-width:8px;}
+.react-chip.mine .rc-count{color:var(--goldP);}
+
+.react-chip .rc-tip{
+  position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);
+  background:rgba(5,13,31,.97);border:1px solid rgba(201,151,58,.3);
+  border-radius:6px;padding:5px 10px;font-size:0.7rem;
+  color:var(--cream);white-space:nowrap;pointer-events:none;
+  opacity:0;transition:opacity .15s;z-index:50;
+}
+.react-chip:hover .rc-tip{opacity:1;}
+
+.react-add-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;
+  background:rgba(255,255,255,.04);
+  border:1px dashed rgba(201,151,58,.25);
+  border-radius:50%;font-size:0.8rem;cursor:pointer;
+  transition:background .15s,border-color .15s;
+  color:var(--silver);flex-shrink:0;
+}
+.react-add-btn:hover{background:rgba(201,151,58,.1);border-color:var(--gold);color:var(--goldP);}
+
+.emoji-picker{
+  position:absolute;bottom:calc(100% + 8px);left:0;
+  background:rgba(8,20,50,.97);
+  border:1px solid rgba(201,151,58,.3);
+  border-radius:12px;padding:10px;
+  display:flex;flex-wrap:wrap;gap:4px;
+  width:220px;z-index:100;
+  box-shadow:0 8px 32px rgba(0,0,0,.5);
+  opacity:0;pointer-events:none;
+  transform:translateY(6px);
+  transition:opacity .18s,transform .18s;
+}
+.emoji-picker.open{opacity:1;pointer-events:all;transform:translateY(0);}
+.ep-emoji{
+  font-size:1.2rem;cursor:pointer;padding:4px 5px;border-radius:6px;
+  transition:background .12s,transform .1s;
+}
+.ep-emoji:hover{background:rgba(201,151,58,.15);transform:scale(1.2);}
+.react-add-wrap{position:relative;display:inline-flex;}
+
 .dw-del-btn{
   position:absolute;top:8px;right:8px;
   background:rgba(200,40,40,.85);border:none;border-radius:50%;
@@ -210,7 +250,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .dw-del-btn:hover{background:rgb(230,40,40);}
 .admin-on .dw-card .dw-del-btn{display:flex;}
 
-/* ADMIN BTN */
 #adminBtn{
   position:fixed;bottom:30px;right:24px;z-index:500;
   background:rgba(10,24,48,.92);border:1px solid rgba(201,151,58,.25);
@@ -220,12 +259,10 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 }
 #adminBtn:hover{border-color:var(--gold);color:var(--goldP);}
 
-/* EMPTY */
 .dw-empty{text-align:center;padding:60px 20px;color:var(--silver);}
 .dw-empty .big-icon{font-size:2.8rem;margin-bottom:14px;opacity:.5;}
 .dw-empty p{font-size:0.9rem;font-style:italic;opacity:.5;}
 
-/* TOAST */
 #dw-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(10,24,48,.95);border:1px solid rgba(201,151,58,.4);color:var(--goldP);padding:10px 24px;border-radius:30px;font-size:0.85rem;letter-spacing:.03em;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:999;backdrop-filter:blur(10px);}
 #dw-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
@@ -237,7 +274,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 
 <div class="page">
 
-  <!-- HEADER -->
   <div class="dw-header">
     <a href="index.html" class="back-link">← Back to Memory Palace</a>
     <span class="crown">📸</span>
@@ -247,7 +283,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 
   <div class="divider"><div class="gem"></div></div>
 
-  <!-- UPLOAD CARD -->
   <div class="dw-upload-card" id="uploadCard">
 
     <div class="limit-badge">
@@ -256,7 +291,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     </div>
     <div class="limit-bar"><div class="limit-fill" id="limitFill" style="width:0%"></div></div>
 
-    <!-- Drop Zone -->
     <div class="drop-zone" id="dropZone">
       <span class="dz-icon">🖼️</span>
       <div class="dz-text">Tap or drag a photo here</div>
@@ -271,14 +305,11 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
       <button class="remove-preview" id="removePreview">✕ Remove</button>
     </div>
 
-    <!-- Caption -->
     <input type="text" class="caption-input" id="captionInput" placeholder="Add a caption... (optional)" maxlength="120"/>
 
-    <!-- Submit -->
     <button class="btn-dump" id="submitBtn">Drop it 📸</button>
   </div>
 
-  <!-- FEED — skeletons inserted here immediately by JS -->
   <div class="dw-grid" id="dumpGrid">
     <div class="dw-grid-inner" id="dumpGridInner"></div>
   </div>
@@ -290,7 +321,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getDatabase, ref, push, remove, onValue, serverTimestamp }
+  import { getDatabase, ref, push, remove, onValue, serverTimestamp, runTransaction, get }
     from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
   const firebaseConfig = { databaseURL: "https://emerson-11-memories-default-rtdb.firebaseio.com" };
@@ -308,7 +339,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   let selectedFile = null;
   let latestSnapshot = null;
 
-  // ── LIMIT TRACKING (24hr reset) ──
+  
   function checkReset() {
     try {
       const lastReset = parseInt(localStorage.getItem(TIME_KEY) || "0");
@@ -363,7 +394,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     }
   }
 
-  // ── DROP ZONE ──
+  
   const dropZone = document.getElementById("dropZone");
   const fileInput = document.getElementById("photoFileInput");
 
@@ -399,7 +430,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     reader.readAsDataURL(file);
   }
 
-  // ── CLOUDINARY UPLOAD ──
+  
   async function uploadToCloudinary(file) {
     const form = new FormData();
     form.append("file", file);
@@ -410,7 +441,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     return json.secure_url || null;
   }
 
-  // ── SUBMIT ──
+  
   document.getElementById("submitBtn").addEventListener("click", async () => {
     if (getUploaded() >= MAX_PHOTOS) { showToast("You've hit your 10 photo limit 🔒"); return; }
     if (!selectedFile) { showToast("Pick a photo first! 🖼️"); return; }
@@ -447,7 +478,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     }
   });
 
-  // ── ADMIN ──
+  
   document.getElementById("adminBtn").addEventListener("click", () => {
     if (isAdmin) {
       isAdmin = false;
@@ -468,8 +499,9 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     }
   });
 
-  // ── DELETE ──
-  document.getElementById("dumpGridInner").addEventListener("click", e => {
+  
+  document.getElementById("dumpGridInner").addEventListener("click", async e => {
+    
     const delBtn = e.target.closest(".dw-del-btn");
     if (delBtn && isAdmin) {
       const postId = delBtn.dataset.postid;
@@ -477,27 +509,57 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
       remove(ref(db, `dumpWall/${postId}`))
         .then(() => showToast("Photo deleted ✦"))
         .catch(() => showToast("Failed to delete."));
+      return;
+    }
+
+    
+    const chip = e.target.closest(".react-chip");
+    if (chip) {
+      const { postid, emoji } = chip.dataset;
+      await toggleReaction(postid, emoji);
+      return;
+    }
+
+    
+    const addBtn = e.target.closest(".react-add-btn");
+    if (addBtn) {
+      e.stopPropagation();
+      const picker = document.getElementById('ep-' + addBtn.dataset.postid);
+      const wasOpen = picker && picker.classList.contains('open');
+      document.querySelectorAll('.emoji-picker.open').forEach(p => p.classList.remove('open'));
+      if (picker && !wasOpen) picker.classList.add('open');
+      return;
+    }
+
+    
+    const epEmoji = e.target.closest(".ep-emoji");
+    if (epEmoji) {
+      e.stopPropagation();
+      const { postid, emoji } = epEmoji.dataset;
+      document.querySelectorAll('.emoji-picker.open').forEach(p => p.classList.remove('open'));
+      await toggleReaction(postid, emoji);
+      return;
     }
   });
 
-  // ══════════════════════════════════════════════
-  // FIX 1 — CLOUDINARY URL TRANSFORMATION
-  // Inserts w_{size},c_limit,q_auto,f_auto after /image/upload/
-  // so only appropriately-sized images are fetched.
-  // ══════════════════════════════════════════════
+  
+  
+  
+  
+  
   function getCloudinaryUrl(src, width) {
     if (!src || !src.includes("res.cloudinary.com")) return src;
-    // Guard against double-insertion if URL was already transformed
+    
     if (src.includes("/image/upload/w_")) return src;
     return src.replace("/image/upload/", `/image/upload/w_${width},c_limit,q_auto,f_auto/`);
   }
 
-  // ══════════════════════════════════════════════
-  // FIX 2 — MASONRY: BATCHED READS + CSS TRANSFORMS
-  // Read all heights in one pass → one reflow.
-  // Write all positions as transform:translate() → GPU-composited.
-  // No interleaved read/write loops.
-  // ══════════════════════════════════════════════
+  
+  
+  
+  
+  
+  
   function getColCount() {
     const w = window.innerWidth;
     if (w >= 1000) return 4;
@@ -505,7 +567,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     return 2;
   }
 
-  // Debounce via rAF — multiple calls in the same frame collapse to one.
+  
   let layoutPending = false;
   function scheduleMasonry() {
     if (layoutPending) return;
@@ -519,7 +581,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   function layoutMasonry() {
     const inner = document.getElementById("dumpGridInner");
     if (!inner) return;
-    // Layout all cards (real + skeleton) together
+    
     const cards = Array.from(inner.querySelectorAll(".dw-card"));
     if (!cards.length) return;
 
@@ -529,19 +591,19 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     const colW    = Math.floor((totalW - gap * (cols - 1)) / cols);
     const isFirst = !inner.dataset.laidOut;
 
-    // ── BATCH WRITE 1: set widths (single style property, no geometry read) ──
+    
     for (let i = 0; i < cards.length; i++) {
       cards[i].style.width = colW + "px";
     }
 
-    // ── SINGLE REFLOW: read all bounding rects in one pass ──
-    // getBoundingClientRect() on all cards together = one layout pass.
+    
+    
     const heights = new Array(cards.length);
     for (let i = 0; i < cards.length; i++) {
       heights[i] = cards[i].getBoundingClientRect().height;
     }
 
-    // ── BATCH WRITE 2: position via CSS transforms (compositor layer, no reflow) ──
+    
     const colHeights = new Array(cols).fill(0);
     for (let i = 0; i < cards.length; i++) {
       const card = cards[i];
@@ -553,10 +615,10 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
       card.style.transform = `translate(${x}px,${y}px)`;
 
       if (isFirst) {
-        // First paint: fade in without animating the initial transform
+        
         card.style.transition = "border-color .2s,box-shadow .2s";
         card.style.opacity = "1";
-        // Upgrade to full transitions after this frame so future moves animate
+        
         requestAnimationFrame(() => card.classList.add("is-laid-out"));
       }
 
@@ -567,20 +629,20 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     if (isFirst) inner.dataset.laidOut = "1";
   }
 
-  // Debounced resize listener
+  
   let resizeTimer;
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(scheduleMasonry, 150);
   });
 
-  // ══════════════════════════════════════════════
-  // FIX 3 & 4 — TRUE LAZY LOADING + ASPECT-RATIO PLACEHOLDERS
-  // IntersectionObserver loads images only when they approach the viewport.
-  // Aspect-ratio on .dw-card-img-wrap reserves correct space before load,
-  // then updates to the natural image ratio once loaded — preventing layout
-  // shift AND keeping the masonry grid stable.
-  // ══════════════════════════════════════════════
+  
+  
+  
+  
+  
+  
+  
   let lazyObserver = null;
 
   function setupLazyLoad() {
@@ -596,7 +658,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
         img.src = src;
         if (img.dataset.srcset) {
           img.srcset = img.dataset.srcset;
-          // sizes matches getColCount() breakpoints
+          
           img.sizes =
             "(max-width:640px) calc(50vw - 22px)," +
             "(max-width:1000px) calc(33vw - 16px)," +
@@ -605,7 +667,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
         lazyObserver.unobserve(img);
       }
     }, {
-      rootMargin: "300px 0px",  // start loading 300px before the image enters view
+      rootMargin: "300px 0px",  
       threshold: 0
     });
 
@@ -617,32 +679,32 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
       img.addEventListener("load", function onLoad() {
         const wrap = this.closest(".dw-card-img-wrap");
         if (wrap && this.naturalWidth && this.naturalHeight) {
-          // Update wrapper to the image's actual aspect ratio → no layout shift
+          
           wrap.style.aspectRatio = `${this.naturalWidth} / ${this.naturalHeight}`;
           wrap.classList.add("img-loaded");
         }
         this.classList.add("img-loaded");
-        // Relayout for this one image change — rAF-debounced so many
-        // simultaneous loads collapse into a single layout pass.
+        
+        
         scheduleMasonry();
         this.removeEventListener("load", onLoad);
       });
       img.addEventListener("error", function onErr() {
-        // Keep the default 4/3 fallback ratio, just relayout
+        
         scheduleMasonry();
         this.removeEventListener("error", onErr);
       });
     });
   }
 
-  // ── FIX — SKELETON: show placeholders immediately, before Firebase responds ──
+  
   function showSkeletons() {
     const inner = document.getElementById("dumpGridInner");
     if (!inner) return;
-    // Vary skeleton heights for a realistic masonry preview
+    
     const slabRatios = ["3/4","2/3","1/1","4/5","3/5","2/3","3/4","4/5"];
-    const n = 8; // show 8 skeleton cards
-    inner.dataset.laidOut = ""; // reset so first real layout fades in cleanly
+    const n = 8; 
+    inner.dataset.laidOut = ""; 
     inner.innerHTML = Array.from({ length: n }, (_, i) => `
       <div class="dw-card skeleton">
         <div class="skeleton-slab" style="aspect-ratio:${slabRatios[i % slabRatios.length]}"></div>
@@ -652,7 +714,57 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     scheduleMasonry();
   }
 
-  // ── RENDER GRID ──
+  
+  function getDeviceId() {
+    let id = localStorage.getItem('dw_device_id');
+    if (!id) { id = 'dv_' + Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('dw_device_id', id); }
+    return id;
+  }
+  const DEVICE_ID = getDeviceId();
+
+  
+  const ALL_EMOJIS = ['❤️','🔥','😂','😭','💯','👏','😍','🤣','😮','💀','🤔','👀','🥲','✨','🎉','😤'];
+
+  function getMyReactions(postId) {
+    try { return JSON.parse(localStorage.getItem('dwr_' + postId) || '[]'); }
+    catch { return []; }
+  }
+  function saveMyReaction(postId, emoji, add) {
+    const list = getMyReactions(postId);
+    if (add && !list.includes(emoji)) list.push(emoji);
+    if (!add) { const i = list.indexOf(emoji); if (i > -1) list.splice(i, 1); }
+    localStorage.setItem('dwr_' + postId, JSON.stringify(list));
+  }
+
+  async function toggleReaction(postId, emoji) {
+    const mine = getMyReactions(postId);
+    const already = mine.includes(emoji);
+    const rRef = ref(db, `dumpWall/${postId}/reactions/${encodeEmoji(emoji)}`);
+    if (already) {
+      
+      await runTransaction(rRef, cur => {
+        const next = (cur || 0) - 1;
+        return next <= 0 ? null : next;
+      });
+      saveMyReaction(postId, emoji, false);
+    } else {
+      
+      await runTransaction(rRef, cur => (cur || 0) + 1);
+      saveMyReaction(postId, emoji, true);
+    }
+  }
+
+  function encodeEmoji(e) { return encodeURIComponent(e).replace(/%/g,'_'); }
+  function decodeEmoji(k) { try { return decodeURIComponent(k.replace(/_/g,'%')); } catch { return k; } }
+
+  
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.react-add-wrap')) {
+      document.querySelectorAll('.emoji-picker.open').forEach(p => p.classList.remove('open'));
+    }
+  });
+
+  
   function renderGrid() {
     const inner = document.getElementById("dumpGridInner");
     if (!inner || !latestSnapshot) return;
@@ -673,11 +785,11 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
       .map(([id, v]) => ({ id, ...v }))
       .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
 
-    // Reset laid-out marker so cards fade in fresh
+    
     inner.dataset.laidOut = "";
 
     inner.innerHTML = posts.map(post => {
-      // FIX 1: Cloudinary transformations — 400w thumbnail, srcset for 400w/800w
+      
       const thumb = getCloudinaryUrl(post.src, 400);
       const large = getCloudinaryUrl(post.src, 800);
       const srcset = `${thumb} 400w, ${large} 800w`;
@@ -687,6 +799,23 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
       const timeStr = post.timestamp ? timeAgo(post.timestamp) : "just now";
       const delBtn  = isAdmin
         ? `<button class="dw-del-btn" data-postid="${post.id}" title="Delete photo">✕</button>` : "";
+
+      
+      const reactions = post.reactions || {};
+      const myReacts  = getMyReactions(post.id);
+      const reactionChips = Object.entries(reactions).map(([key, count]) => {
+        const emoji = decodeEmoji(key);
+        const isMine = myReacts.includes(emoji);
+        return `<button class="react-chip${isMine ? ' mine' : ''}" data-postid="${post.id}" data-emoji="${emoji}">
+          <span class="rc-emoji">${emoji}</span>
+          <span class="rc-count">${count}</span>
+          <span class="rc-tip">${count} reaction${count !== 1 ? 's' : ''}</span>
+        </button>`;
+      }).join('');
+
+      const pickerEmojis = ALL_EMOJIS.map(e =>
+        `<span class="ep-emoji" data-postid="${post.id}" data-emoji="${e}">${e}</span>`
+      ).join('');
 
       return `<div class="dw-card">
         ${delBtn}
@@ -699,14 +828,23 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
         </div>
         ${caption}
         <div class="dw-card-time">${timeStr}</div>
+        <div class="dw-reactions" data-postid="${post.id}">
+          ${reactionChips}
+          <div class="react-add-wrap">
+            <button class="react-add-btn" data-postid="${post.id}" title="Add reaction">＋</button>
+            <div class="emoji-picker" id="ep-${post.id}">
+              ${pickerEmojis}
+            </div>
+          </div>
+        </div>
       </div>`;
     }).join("");
 
-    // Wire load/error events, then layout immediately using placeholder aspect-ratios
+    
     wireImageEvents(inner);
     scheduleMasonry();
 
-    // Start lazy observer — images load only as they approach viewport
+    
     setupLazyLoad();
   }
 
@@ -715,7 +853,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     renderGrid();
   });
 
-  // ── HELPERS ──
+  
   function escapeHTML(str) {
     return String(str)
       .replace(/&/g,"&amp;").replace(/</g,"&lt;")
@@ -734,13 +872,12 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     setTimeout(() => t.classList.remove("show"), 2800);
   }
 
-  // ── INIT ──
+  
   checkReset();
   updateLimitUI();
-  showSkeletons(); // Show immediately while Firebase loads
+  showSkeletons(); 
 </script>
 
-<!-- STARS -->
 <script>
 (function(){
   const c = document.getElementById('starsContainer');
