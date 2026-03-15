@@ -812,6 +812,18 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     document.getElementById('emojiBackdrop').classList.remove('open');
   });
 
+  document.getElementById('emojiPickerSheet').addEventListener('click', async e => {
+    const epEmoji = e.target.closest('.ep-emoji');
+    if (!epEmoji) return;
+    const picker = document.getElementById('emojiPickerSheet');
+    const postid = picker.dataset.postid;
+    const emoji  = epEmoji.dataset.emoji;
+    if (!postid || !emoji) return;
+    picker.classList.remove('open');
+    document.getElementById('emojiBackdrop').classList.remove('open');
+    await toggleReaction(postid, emoji);
+  });
+
   document.addEventListener('click', e => {
     if (!e.target.closest('.react-add-wrap') && !e.target.closest('.emoji-picker')) {
       document.querySelectorAll('.emoji-picker.open').forEach(p => p.classList.remove('open'));
