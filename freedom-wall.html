@@ -24,33 +24,70 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 @keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(200%);}}
 @keyframes float{0%,100%{transform:translateY(0px);}50%{transform:translateY(-8px);}}
 @keyframes vinyl-spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+@keyframes badge-pop{0%{transform:scale(0);}60%{transform:scale(1.3);}100%{transform:scale(1);}}
+
 .page{position:relative;z-index:1;min-height:100vh;padding:50px 20px 80px;}
-.fw-header{text-align:center;padding:20px 0 48px;animation:rise .8s ease both;}
+
+/* HEADER */
+.fw-header{text-align:center;padding:20px 0 36px;animation:rise .8s ease both;position:relative;}
 .back-link{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:0.82rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;margin-bottom:32px;opacity:.8;transition:opacity .2s;}
 .back-link:hover{opacity:1;}
 .crown{font-size:2rem;display:block;animation:float 4s ease-in-out infinite;margin-bottom:10px;filter:drop-shadow(0 0 12px rgba(201,151,58,.6));}
 .fw-header h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,6vw,3.4rem);font-weight:900;background:linear-gradient(135deg,var(--goldP) 0%,var(--gold) 50%,var(--goldD) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.5px;line-height:1.1;}
 .fw-header p{margin-top:10px;color:var(--silver);font-size:0.9rem;font-style:italic;letter-spacing:.04em;}
-.divider{display:flex;align-items:center;gap:14px;margin:0 auto 40px;max-width:500px;}
+
+/* NEW POST COUNTER BADGE */
+.new-posts-banner{
+  display:none;position:sticky;top:12px;z-index:50;
+  margin:0 auto 16px;max-width:320px;
+  background:linear-gradient(135deg,var(--gold),var(--goldD));
+  color:var(--navy);border-radius:30px;
+  padding:8px 20px;font-size:0.84rem;font-weight:700;
+  text-align:center;cursor:pointer;
+  box-shadow:0 4px 20px rgba(201,151,58,.4);
+  animation:badge-pop .35s ease both;
+  letter-spacing:.03em;
+}
+.new-posts-banner.visible{display:block;}
+
+/* TOOLBAR */
+.fw-toolbar{
+  max-width:700px;margin:0 auto 14px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.sort-btn{
+  background:rgba(255,255,255,.04);border:1px solid rgba(201,151,58,.2);
+  border-radius:20px;color:var(--silver);padding:5px 14px;
+  font-size:0.78rem;font-family:'DM Sans',sans-serif;cursor:pointer;
+  transition:all .2s;
+}
+.sort-btn.active{background:rgba(201,151,58,.15);border-color:var(--gold);color:var(--goldP);}
+.sort-btn:hover:not(.active){border-color:rgba(201,151,58,.4);color:var(--goldP);}
+.post-count-label{font-size:0.75rem;color:var(--silver);opacity:.5;margin-left:auto;}
+
+/* DIVIDER */
+.divider{display:flex;align-items:center;gap:14px;margin:0 auto 32px;max-width:500px;}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--goldD),transparent);}
 .gem{width:8px;height:8px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;box-shadow:0 0 8px var(--gold);}
-.fw-form-card{max-width:700px;margin:0 auto 40px;background:rgba(10,24,48,.7);border:1px solid rgba(201,151,58,.25);border-radius:16px;padding:28px;backdrop-filter:blur(12px);box-shadow:0 8px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(201,151,58,.1);animation:rise .9s .1s ease both;}
-.fw-form-top{display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;}
+
+/* FORM CARD */
+.fw-form-card{max-width:700px;margin:0 auto 32px;background:rgba(10,24,48,.7);border:1px solid rgba(201,151,58,.25);border-radius:16px;padding:24px;backdrop-filter:blur(12px);box-shadow:0 8px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(201,151,58,.1);animation:rise .9s .1s ease both;}
+.fw-form-top{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;}
 .avatar-picker{flex-shrink:0;}
-.avatar-preview{width:56px;height:56px;border-radius:50%;border:2px solid rgba(201,151,58,.4);background:rgba(201,151,58,.06);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.6rem;overflow:hidden;transition:border-color .2s,box-shadow .2s;}
+.avatar-preview{width:52px;height:52px;border-radius:50%;border:2px solid rgba(201,151,58,.4);background:rgba(201,151,58,.06);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;overflow:hidden;transition:border-color .2s,box-shadow .2s;}
 .avatar-preview:hover{border-color:var(--gold);box-shadow:0 0 16px rgba(201,151,58,.3);}
 .avatar-preview img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
 #avatarInput{display:none;}
 .avatar-hint{font-size:0.6rem;color:var(--silver);text-align:center;margin-top:4px;opacity:.7;}
-.fw-form-fields{flex:1;}
+.fw-form-fields{flex:1;min-width:0;}
 .fw-form-fields input[type="text"],textarea#postContent{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(201,151,58,.2);border-radius:8px;color:var(--cream);padding:10px 14px;font-size:0.9rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s,box-shadow .2s;}
 .fw-form-fields input[type="text"]{margin-bottom:10px;}
 .fw-form-fields input[type="text"]:focus,textarea#postContent:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,151,58,.1);}
 .fw-form-fields input::placeholder,textarea#postContent::placeholder{color:rgba(184,204,224,.4);}
-textarea#postContent{resize:vertical;min-height:90px;font-size:0.92rem;line-height:1.55;}
-.fw-form-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:12px;}
-.char-count{font-size:0.78rem;color:var(--silver);opacity:.6;}
-.btn-post{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--gold),var(--goldD));color:var(--navy);border:none;border-radius:8px;padding:10px 26px;font-size:0.88rem;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;letter-spacing:.04em;transition:opacity .2s,transform .1s;}
+textarea#postContent{resize:vertical;min-height:88px;font-size:0.92rem;line-height:1.55;}
+.fw-form-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:10px;}
+.char-count{font-size:0.78rem;color:var(--silver);opacity:.6;white-space:nowrap;}
+.btn-post{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--gold),var(--goldD));color:var(--navy);border:none;border-radius:8px;padding:10px 22px;font-size:0.88rem;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;letter-spacing:.04em;transition:opacity .2s,transform .1s;white-space:nowrap;}
 .btn-post::after{content:'';position:absolute;top:0;left:0;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transform:translateX(-100%);}
 .btn-post:hover{opacity:.9;}
 .btn-post:hover::after{animation:shimmer .6s ease;}
@@ -59,110 +96,192 @@ textarea#postContent{resize:vertical;min-height:90px;font-size:0.92rem;line-heig
 
 /* MUSIC SECTION */
 .music-attach{margin-top:14px;border-top:1px solid rgba(201,151,58,.12);padding-top:14px;}
-.music-attach-label{font-size:0.78rem;color:var(--silver);opacity:.7;margin-bottom:10px;letter-spacing:.04em;text-transform:uppercase;}
+.music-attach-label{font-size:0.75rem;color:var(--silver);opacity:.7;margin-bottom:10px;letter-spacing:.04em;text-transform:uppercase;}
 .music-tabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
-.music-tab{background:rgba(255,255,255,.04);border:1px solid rgba(201,151,58,.2);border-radius:20px;color:var(--silver);padding:5px 14px;font-size:0.78rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;}
+.music-tab{background:rgba(255,255,255,.04);border:1px solid rgba(201,151,58,.2);border-radius:20px;color:var(--silver);padding:5px 12px;font-size:0.75rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;}
 .music-tab.active{background:rgba(201,151,58,.15);border-color:var(--gold);color:var(--goldP);}
 .music-tab:hover:not(.active){background:rgba(201,151,58,.07);border-color:rgba(201,151,58,.4);}
 .music-search-panel{display:none;}
 .music-search-panel.visible{display:block;}
 .music-search-row{display:flex;gap:8px;}
-.music-search-input{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(201,151,58,.2);border-radius:8px;color:var(--cream);padding:9px 14px;font-size:0.85rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
+.music-search-input{flex:1;min-width:0;background:rgba(255,255,255,.04);border:1px solid rgba(201,151,58,.2);border-radius:8px;color:var(--cream);padding:9px 12px;font-size:0.85rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
 .music-search-input:focus{border-color:var(--gold);}
 .music-search-input::placeholder{color:rgba(184,204,224,.35);}
-.btn-search-music{background:rgba(201,151,58,.15);border:1px solid rgba(201,151,58,.35);border-radius:8px;color:var(--goldP);padding:9px 16px;font-size:0.82rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.btn-search-music{background:rgba(201,151,58,.15);border:1px solid rgba(201,151,58,.35);border-radius:8px;color:var(--goldP);padding:9px 14px;font-size:0.82rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;}
 .btn-search-music:hover{background:rgba(201,151,58,.25);}
 .music-results{margin-top:10px;max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;}
 .music-results::-webkit-scrollbar{width:4px;}
 .music-results::-webkit-scrollbar-thumb{background:rgba(201,151,58,.3);border-radius:2px;}
-.music-result-item{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.03);border:1px solid rgba(201,151,58,.12);border-radius:8px;padding:8px 12px;cursor:pointer;transition:all .2s;}
+.music-result-item{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.03);border:1px solid rgba(201,151,58,.12);border-radius:8px;padding:8px 10px;cursor:pointer;transition:all .2s;}
 .music-result-item:hover{background:rgba(201,151,58,.08);border-color:rgba(201,151,58,.3);}
 .music-result-item.selected{background:rgba(201,151,58,.15);border-color:var(--gold);}
-.music-result-art{width:36px;height:36px;border-radius:5px;object-fit:cover;flex-shrink:0;}
+.music-result-art{width:34px;height:34px;border-radius:5px;object-fit:cover;flex-shrink:0;}
 .music-result-info{flex:1;min-width:0;}
-.music-result-title{font-size:0.82rem;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.music-result-artist{font-size:0.72rem;color:var(--silver);opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.music-result-preview{font-size:0.68rem;color:var(--goldP);opacity:.7;margin-top:2px;}
-.music-preview-btn{background:rgba(201,151,58,.1);border:1px solid rgba(201,151,58,.25);border-radius:50%;width:28px;height:28px;flex-shrink:0;color:var(--goldP);font-size:0.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.music-result-title{font-size:0.8rem;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.music-result-artist{font-size:0.7rem;color:var(--silver);opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.music-result-preview{font-size:0.65rem;color:var(--goldP);opacity:.7;margin-top:1px;}
+.music-preview-btn{background:rgba(201,151,58,.1);border:1px solid rgba(201,151,58,.25);border-radius:50%;width:26px;height:26px;flex-shrink:0;color:var(--goldP);font-size:0.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
 .music-preview-btn:hover{background:rgba(201,151,58,.25);}
 .music-upload-panel{display:none;}
 .music-upload-panel.visible{display:block;}
-.music-upload-area{border:1px dashed rgba(201,151,58,.3);border-radius:8px;padding:16px;text-align:center;cursor:pointer;transition:all .2s;}
+.music-upload-area{border:1px dashed rgba(201,151,58,.3);border-radius:8px;padding:14px;text-align:center;cursor:pointer;transition:all .2s;}
 .music-upload-area:hover{border-color:var(--gold);background:rgba(201,151,58,.04);}
-.music-upload-area p{font-size:0.82rem;color:var(--silver);opacity:.7;}
-.music-upload-area .upload-icon{font-size:1.6rem;margin-bottom:6px;}
+.music-upload-area p{font-size:0.8rem;color:var(--silver);opacity:.7;}
+.music-upload-area .upload-icon{font-size:1.5rem;margin-bottom:5px;}
 #musicFileInput{display:none;}
-.music-selected{display:none;align-items:center;gap:10px;background:rgba(201,151,58,.08);border:1px solid rgba(201,151,58,.25);border-radius:8px;padding:10px 14px;margin-top:10px;}
+.music-selected{display:none;align-items:center;gap:10px;background:rgba(201,151,58,.08);border:1px solid rgba(201,151,58,.25);border-radius:8px;padding:9px 12px;margin-top:10px;}
 .music-selected.visible{display:flex;}
-.music-selected-art{width:40px;height:40px;border-radius:6px;object-fit:cover;flex-shrink:0;background:rgba(201,151,58,.15);display:flex;align-items:center;justify-content:center;font-size:1.4rem;}
-.music-selected-art img{width:40px;height:40px;object-fit:cover;border-radius:6px;}
+.music-selected-art{width:38px;height:38px;border-radius:6px;flex-shrink:0;background:rgba(201,151,58,.15);display:flex;align-items:center;justify-content:center;font-size:1.3rem;overflow:hidden;}
+.music-selected-art img{width:38px;height:38px;object-fit:cover;border-radius:6px;}
 .music-selected-info{flex:1;min-width:0;}
-.music-selected-title{font-size:0.83rem;color:var(--goldP);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.music-selected-artist{font-size:0.73rem;color:var(--silver);opacity:.7;}
+.music-selected-title{font-size:0.82rem;color:var(--goldP);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.music-selected-artist{font-size:0.71rem;color:var(--silver);opacity:.7;}
 .btn-remove-music{background:transparent;border:none;color:rgba(255,100,100,.5);font-size:1rem;cursor:pointer;padding:2px 6px;transition:color .2s;flex-shrink:0;}
 .btn-remove-music:hover{color:#ff6060;}
 
-/* POSTS */
+/* POSTS FEED */
 .fw-posts{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
-.fw-post{background:rgba(10,24,48,.65);border:1px solid rgba(201,151,58,.18);border-radius:14px;padding:20px 22px;backdrop-filter:blur(10px);box-shadow:0 4px 24px rgba(0,0,0,.3);animation:rise .35s ease both;transition:border-color .2s;}
-.fw-post:hover{border-color:rgba(201,151,58,.35);}
-.post-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
-.post-avatar{width:44px;height:44px;border-radius:50%;background:rgba(201,151,58,.08);border:2px solid rgba(201,151,58,.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;overflow:hidden;flex-shrink:0;}
+.fw-post{background:rgba(10,24,48,.65);border:1px solid rgba(201,151,58,.18);border-radius:14px;padding:18px 20px;backdrop-filter:blur(10px);box-shadow:0 4px 24px rgba(0,0,0,.3);animation:rise .35s ease both;transition:border-color .2s;}
+.fw-post:hover{border-color:rgba(201,151,58,.32);}
+.fw-post.pinned{border-color:rgba(201,151,58,.5);background:rgba(15,30,60,.75);}
+.pin-badge{display:inline-flex;align-items:center;gap:5px;font-size:0.68rem;color:var(--goldP);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;opacity:.8;}
+
+.post-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+.post-avatar{width:42px;height:42px;border-radius:50%;background:rgba(201,151,58,.08);border:2px solid rgba(201,151,58,.3);display:flex;align-items:center;justify-content:center;font-size:1.2rem;overflow:hidden;flex-shrink:0;}
 .post-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
-.post-meta{flex:1;}
-.post-name{font-weight:600;font-size:0.92rem;color:var(--goldP);}
-.post-time{font-size:0.75rem;color:var(--silver);opacity:.6;margin-top:2px;}
-.post-body{font-size:0.93rem;line-height:1.65;color:var(--cream);word-break:break-word;white-space:pre-wrap;}
+.post-meta{flex:1;min-width:0;}
+.post-name{font-weight:600;font-size:0.9rem;color:var(--goldP);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.post-time{font-size:0.73rem;color:var(--silver);opacity:.6;margin-top:1px;}
+.post-actions{display:flex;gap:6px;align-items:center;margin-left:auto;flex-shrink:0;}
+
+.post-body{font-size:0.92rem;line-height:1.65;color:var(--cream);word-break:break-word;white-space:pre-wrap;}
 
 /* MUSIC PLAYER ON POST */
-.post-music-player{margin:12px 0 4px;background:rgba(5,13,31,.6);border:1px solid rgba(201,151,58,.22);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;}
+.post-music-player{margin:12px 0 4px;background:rgba(5,13,31,.6);border:1px solid rgba(201,151,58,.22);border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px;position:relative;overflow:hidden;}
 .post-music-player::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,151,58,.04) 0%,transparent 60%);pointer-events:none;}
-.player-art-wrap{position:relative;flex-shrink:0;}
-.player-art{width:42px;height:42px;border-radius:6px;background:rgba(201,151,58,.1);display:flex;align-items:center;justify-content:center;font-size:1.4rem;overflow:hidden;}
-.player-art img{width:42px;height:42px;border-radius:6px;object-fit:cover;display:block;}
+.player-art{width:40px;height:40px;border-radius:6px;background:rgba(201,151,58,.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;overflow:hidden;flex-shrink:0;}
+.player-art img{width:40px;height:40px;border-radius:6px;object-fit:cover;display:block;}
 .player-art.spinning{animation:vinyl-spin 3s linear infinite;}
 .player-info{flex:1;min-width:0;}
-.player-title{font-size:0.82rem;color:var(--goldP);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.player-artist{font-size:0.72rem;color:var(--silver);opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.player-title{font-size:0.8rem;color:var(--goldP);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.player-artist{font-size:0.7rem;color:var(--silver);opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .player-progress{margin-top:5px;}
 .player-progress-bar{width:100%;height:3px;background:rgba(201,151,58,.15);border-radius:2px;overflow:hidden;}
 .player-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--goldB));border-radius:2px;width:0%;transition:width .5s linear;}
-.player-time{font-size:0.65rem;color:var(--silver);opacity:.5;margin-top:3px;text-align:right;}
-.player-play-btn{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--gold),var(--goldD));border:none;color:var(--navy);font-size:0.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s,opacity .2s;box-shadow:0 2px 12px rgba(201,151,58,.3);}
+.player-time{font-size:0.63rem;color:var(--silver);opacity:.5;margin-top:2px;text-align:right;}
+.player-play-btn{width:34px;height:34px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--gold),var(--goldD));border:none;color:var(--navy);font-size:0.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s,opacity .2s;box-shadow:0 2px 12px rgba(201,151,58,.3);}
 .player-play-btn:hover{transform:scale(1.1);}
 .player-play-btn:active{transform:scale(0.95);}
-.player-source-badge{position:absolute;top:6px;right:8px;font-size:0.58rem;color:var(--silver);opacity:.4;letter-spacing:.05em;text-transform:uppercase;}
+.player-source-badge{position:absolute;top:5px;right:7px;font-size:0.56rem;color:var(--silver);opacity:.4;letter-spacing:.05em;text-transform:uppercase;}
 
-.post-footer{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
-.react-btn{background:rgba(255,255,255,.04);border:1px solid rgba(201,151,58,.2);border-radius:20px;color:var(--silver);padding:5px 13px;font-size:0.8rem;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:5px;transition:background .15s,border-color .15s,transform .1s;}
+/* FOOTER */
+.post-footer{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;align-items:center;}
+.react-btn{background:rgba(255,255,255,.04);border:1px solid rgba(201,151,58,.2);border-radius:20px;color:var(--silver);padding:5px 11px;font-size:0.78rem;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:4px;transition:background .15s,border-color .15s,transform .1s;}
 .react-btn:hover{background:rgba(201,151,58,.1);border-color:var(--gold);color:var(--goldP);}
 .react-btn:active{transform:scale(0.94);}
 .react-btn.reacted{background:rgba(201,151,58,.15);border-color:var(--gold);color:var(--goldP);cursor:default;pointer-events:none;}
-.btn-delete{margin-left:auto;background:transparent;border:1px solid rgba(255,80,80,.25);border-radius:20px;color:rgba(255,100,100,.5);padding:4px 12px;font-size:0.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;}
+.btn-reply-toggle{background:rgba(255,255,255,.04);border:1px solid rgba(201,151,58,.15);border-radius:20px;color:var(--silver);padding:5px 11px;font-size:0.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:4px;transition:all .2s;margin-left:auto;}
+.btn-reply-toggle:hover{border-color:rgba(201,151,58,.4);color:var(--goldP);}
+.btn-delete{background:transparent;border:1px solid rgba(255,80,80,.25);border-radius:20px;color:rgba(255,100,100,.5);padding:4px 10px;font-size:0.72rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;}
 .btn-delete:hover{background:rgba(255,60,60,.15);border-color:rgba(255,80,80,.6);color:#ff6060;}
 .btn-delete.hidden{display:none !important;}
+.btn-pin{background:transparent;border:1px solid rgba(201,151,58,.2);border-radius:20px;color:rgba(201,151,58,.5);padding:4px 10px;font-size:0.72rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;}
+.btn-pin:hover{background:rgba(201,151,58,.1);color:var(--goldP);}
+.btn-pin.hidden{display:none !important;}
+
+/* REPLIES */
+.replies-section{margin-top:14px;border-top:1px solid rgba(201,151,58,.1);padding-top:12px;display:none;}
+.replies-section.open{display:block;}
+.replies-list{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;}
+.reply-item{display:flex;gap:10px;align-items:flex-start;}
+.reply-avatar{width:32px;height:32px;border-radius:50%;background:rgba(201,151,58,.08);border:1px solid rgba(201,151,58,.25);display:flex;align-items:center;justify-content:center;font-size:0.95rem;overflow:hidden;flex-shrink:0;}
+.reply-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.reply-bubble{flex:1;min-width:0;background:rgba(255,255,255,.03);border:1px solid rgba(201,151,58,.1);border-radius:10px;padding:9px 12px;}
+.reply-name{font-size:0.78rem;font-weight:600;color:var(--goldP);margin-bottom:3px;}
+.reply-body{font-size:0.85rem;color:var(--cream);line-height:1.55;word-break:break-word;white-space:pre-wrap;}
+.reply-time{font-size:0.68rem;color:var(--silver);opacity:.5;margin-top:4px;}
+.reply-delete{background:transparent;border:none;color:rgba(255,100,100,.4);font-size:0.7rem;cursor:pointer;font-family:'DM Sans',sans-serif;padding:2px 6px;transition:color .2s;}
+.reply-delete:hover{color:#ff6060;}
+.reply-delete.hidden{display:none;}
+/* Reply form */
+.reply-form{display:flex;gap:8px;align-items:flex-end;}
+.reply-form input[type="text"]{flex:1;min-width:0;background:rgba(255,255,255,.04);border:1px solid rgba(201,151,58,.2);border-radius:8px;color:var(--cream);padding:8px 12px;font-size:0.83rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
+.reply-form input[type="text"]:focus{border-color:var(--gold);}
+.reply-form input::placeholder{color:rgba(184,204,224,.35);}
+.reply-textarea{flex:1;min-width:0;background:rgba(255,255,255,.04);border:1px solid rgba(201,151,58,.2);border-radius:8px;color:var(--cream);padding:8px 12px;font-size:0.83rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;resize:none;min-height:60px;line-height:1.5;}
+.reply-textarea:focus{border-color:var(--gold);}
+.reply-textarea::placeholder{color:rgba(184,204,224,.35);}
+.reply-form-inner{flex:1;display:flex;flex-direction:column;gap:6px;}
+.btn-send-reply{background:linear-gradient(135deg,var(--gold),var(--goldD));border:none;border-radius:8px;color:var(--navy);padding:8px 14px;font-size:0.8rem;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;flex-shrink:0;transition:opacity .2s;align-self:flex-end;}
+.btn-send-reply:hover{opacity:.85;}
+.btn-send-reply:disabled{opacity:.4;cursor:not-allowed;}
+
+/* LOAD MORE */
+.load-more-wrap{max-width:700px;margin:20px auto 0;text-align:center;}
+.btn-load-more{background:rgba(201,151,58,.08);border:1px solid rgba(201,151,58,.3);border-radius:30px;color:var(--goldP);padding:11px 32px;font-size:0.86rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;letter-spacing:.04em;}
+.btn-load-more:hover{background:rgba(201,151,58,.18);border-color:var(--gold);}
+
+/* EMPTY / LOADING */
 .fw-empty{text-align:center;padding:60px 20px;color:var(--silver);}
 .fw-empty .big-icon{font-size:2.8rem;margin-bottom:14px;opacity:.6;}
 .fw-empty p{font-size:0.9rem;font-style:italic;opacity:.6;}
 .fw-loading{text-align:center;padding:40px;color:var(--silver);opacity:.5;font-size:0.88rem;font-style:italic;}
-#fw-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(10,24,48,.95);border:1px solid rgba(201,151,58,.4);color:var(--goldP);padding:10px 24px;border-radius:30px;font-size:0.85rem;letter-spacing:.03em;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:999;backdrop-filter:blur(10px);}
+
+/* TOAST */
+#fw-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(10,24,48,.95);border:1px solid rgba(201,151,58,.4);color:var(--goldP);padding:10px 22px;border-radius:30px;font-size:0.84rem;letter-spacing:.03em;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:999;backdrop-filter:blur(10px);white-space:nowrap;}
 #fw-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* MOBILE */
+@media(max-width:500px){
+  .page{padding:36px 14px 70px;}
+  .fw-form-card{padding:16px;}
+  .fw-form-top{gap:10px;}
+  .avatar-preview{width:44px;height:44px;font-size:1.3rem;}
+  .fw-form-bottom{flex-wrap:wrap;gap:8px;}
+  .fw-form-bottom .char-count{order:2;width:100%;text-align:right;}
+  .btn-post{width:100%;order:1;text-align:center;padding:12px;}
+  .music-tabs{gap:6px;}
+  .music-tab{padding:4px 10px;font-size:0.72rem;}
+  .fw-post{padding:14px 14px;}
+  .post-header{gap:8px;}
+  .post-avatar{width:38px;height:38px;font-size:1.1rem;}
+  .post-footer{gap:5px;}
+  .react-btn{padding:4px 9px;font-size:0.74rem;}
+  .btn-reply-toggle{font-size:0.72rem;padding:4px 9px;}
+  .post-actions{gap:5px;}
+  .btn-delete,.btn-pin{padding:3px 8px;font-size:0.68rem;}
+  .reply-form{flex-direction:column;}
+  .btn-send-reply{align-self:flex-end;}
+  .fw-toolbar{gap:7px;}
+  .sort-btn{padding:4px 11px;font-size:0.74rem;}
+  .player-play-btn{width:30px;height:30px;font-size:0.78rem;}
+  .player-art{width:36px;height:36px;}
+  .player-art img{width:36px;height:36px;}
+}
 </style>
 </head>
 <body>
 <div class="stars"><div id="starsContainer"></div></div>
 <div class="glow-bg"></div>
 <div class="page">
+
   <div class="fw-header">
     <a href="index.html" class="back-link">← Back to Memory Palace</a>
     <span class="crown">✦</span>
     <h1>Freedom Wall</h1>
     <p>"Leave your words. Let them echo."</p>
   </div>
-  <div style="text-align:center;margin-top:-24px;margin-bottom:32px;">
+
+  <div style="text-align:center;margin-top:-20px;margin-bottom:24px;">
     <button id="adminToggleBtn" onclick="toggleAdmin()" style="background:transparent;border:1px solid rgba(201,151,58,.2);border-radius:20px;color:var(--silver);padding:5px 16px;font-size:0.78rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;letter-spacing:.04em;">🔑 Admin</button>
   </div>
+
+  <!-- NEW POSTS BANNER -->
+  <div class="new-posts-banner" id="newPostsBanner" onclick="scrollToTop()"></div>
+
   <div class="divider"><div class="gem"></div></div>
+
+  <!-- FORM -->
   <div class="fw-form-card">
     <div class="fw-form-top">
       <div class="avatar-picker">
@@ -175,13 +294,12 @@ textarea#postContent{resize:vertical;min-height:90px;font-size:0.92rem;line-heig
         <textarea id="postContent" placeholder="What's on your mind, Emerson?" maxlength="500" oninput="updateCharCount()"></textarea>
       </div>
     </div>
-    <!-- MUSIC ATTACH -->
     <div class="music-attach">
       <div class="music-attach-label">🎵 Add Music (optional)</div>
       <div class="music-tabs">
         <button class="music-tab active" id="tabSearch" onclick="switchMusicTab('search')">🔍 Search Songs</button>
         <button class="music-tab" id="tabUpload" onclick="switchMusicTab('upload')">📁 Upload Audio</button>
-        <button class="music-tab" id="tabNone" onclick="switchMusicTab('none')" style="margin-left:auto;">✕ No Music</button>
+        <button class="music-tab" id="tabNone" onclick="switchMusicTab('none')" style="margin-left:auto;">✕ None</button>
       </div>
       <div class="music-search-panel visible" id="musicSearchPanel">
         <div class="music-search-row">
@@ -193,8 +311,8 @@ textarea#postContent{resize:vertical;min-height:90px;font-size:0.92rem;line-heig
       <div class="music-upload-panel" id="musicUploadPanel">
         <div class="music-upload-area" onclick="document.getElementById('musicFileInput').click()">
           <div class="upload-icon">🎵</div>
-          <p>Tap to upload audio file (MP3, M4A, AAC)</p>
-          <p style="font-size:0.7rem;margin-top:4px;opacity:.5;">Max 10MB · 30 seconds recommended</p>
+          <p>Tap to upload audio (MP3, M4A, AAC)</p>
+          <p style="font-size:0.68rem;margin-top:4px;opacity:.5;">Max 10MB · 30 seconds recommended</p>
         </div>
         <input type="file" id="musicFileInput" accept="audio/*" onchange="handleMusicFileUpload(event)"/>
       </div>
@@ -204,7 +322,7 @@ textarea#postContent{resize:vertical;min-height:90px;font-size:0.92rem;line-heig
           <div class="music-selected-title" id="musicSelectedTitle">—</div>
           <div class="music-selected-artist" id="musicSelectedArtist">—</div>
         </div>
-        <button class="btn-remove-music" onclick="removeMusic()" title="Remove music">✕</button>
+        <button class="btn-remove-music" onclick="removeMusic()">✕</button>
       </div>
     </div>
     <div class="fw-form-bottom">
@@ -212,23 +330,45 @@ textarea#postContent{resize:vertical;min-height:90px;font-size:0.92rem;line-heig
       <button class="btn-post" onclick="submitPost()">Post it →</button>
     </div>
   </div>
+
+  <!-- TOOLBAR -->
+  <div class="fw-toolbar">
+    <button class="sort-btn active" id="sortNew" onclick="setSort('new')">🕐 Newest</button>
+    <button class="sort-btn" id="sortTop" onclick="setSort('top')">🔥 Top</button>
+    <span class="post-count-label" id="postCountLabel"></span>
+  </div>
+
+  <!-- FEED -->
   <div class="fw-posts" id="postsFeed">
     <div class="fw-loading">Loading the wall...</div>
   </div>
+  <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
+    <button class="btn-load-more" onclick="loadMore()">Load more posts ↓</button>
+  </div>
 </div>
+
 <div id="fw-toast"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, push, remove, onValue, runTransaction, serverTimestamp }
+import { getDatabase, ref, push, remove, set, update, onValue, runTransaction, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const firebaseConfig = { databaseURL: "https://emerson-11-memories-default-rtdb.firebaseio.com" };
 const ADMIN_PW = "BNSHI2026";
+const PAGE_SIZE = 10;
+
 let isAdmin = false;
+let allPosts = [];
+let sortMode = 'new';
+let visibleCount = PAGE_SIZE;
+let lastKnownCount = -1;
+let isFirstLoad = true;
+
 const app = initializeApp(firebaseConfig);
 const db  = getDatabase(app);
 const wallRef = ref(db, "freedomWall");
+
 let avatarDataURL = null;
 const CLOUDINARY_CLOUD  = 'dbtoadpgi';
 const CLOUDINARY_PRESET = 'images memories';
@@ -239,7 +379,29 @@ let previewAudio = null;
 let activePostAudio = null;
 let activePostId = null;
 
-// Music tabs
+// ── SORT ──
+window.setSort = function(mode) {
+  sortMode = mode;
+  visibleCount = PAGE_SIZE;
+  document.getElementById('sortNew').classList.toggle('active', mode==='new');
+  document.getElementById('sortTop').classList.toggle('active', mode==='top');
+  renderFeed();
+};
+
+// ── LOAD MORE ──
+window.loadMore = function() {
+  visibleCount += PAGE_SIZE;
+  renderFeed();
+};
+
+// ── SCROLL TO TOP (new posts banner) ──
+window.scrollToTop = function() {
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('newPostsBanner').classList.remove('visible');
+  lastKnownCount = allPosts.length;
+};
+
+// ── MUSIC TABS ──
 window.switchMusicTab = function(tab) {
   document.getElementById('tabSearch').classList.toggle('active', tab==='search');
   document.getElementById('tabUpload').classList.toggle('active', tab==='upload');
@@ -249,7 +411,7 @@ window.switchMusicTab = function(tab) {
   if(tab==='none') removeMusic();
 };
 
-// iTunes search
+// ── ITUNES SEARCH ──
 window.searchMusic = async function() {
   const q = document.getElementById('musicSearchInput').value.trim();
   if(!q) return;
@@ -258,57 +420,41 @@ window.searchMusic = async function() {
   try {
     const res = await fetch('https://itunes.apple.com/search?term='+encodeURIComponent(q)+'&media=music&limit=8&entity=song');
     const data = await res.json();
-    if(!data.results||data.results.length===0){
-      resultsEl.innerHTML='<div style="text-align:center;font-size:0.78rem;color:var(--silver);opacity:.5;padding:10px;font-style:italic;">No songs found.</div>';
-      return;
-    }
-    // Store results globally for selection
+    if(!data.results||data.results.length===0){ resultsEl.innerHTML='<div style="text-align:center;font-size:0.78rem;color:var(--silver);opacity:.5;padding:10px;font-style:italic;">No songs found.</div>'; return; }
     window._itunesResults = data.results.filter(t=>t.previewUrl);
     resultsEl.innerHTML = window._itunesResults.map((track,i)=>{
       const art=track.artworkUrl60||'';
       return '<div class="music-result-item" id="mri_'+i+'" onclick="selectItunesTrack('+i+')">'+
         (art?'<img class="music-result-art" src="'+art+'" alt="" onerror="this.style.display=\'none\'"/>':'')+
-        '<div class="music-result-info">'+
-          '<div class="music-result-title">'+esc(track.trackName||'Unknown')+'</div>'+
-          '<div class="music-result-artist">'+esc(track.artistName||'')+'</div>'+
-          '<div class="music-result-preview">🎵 30s preview</div>'+
-        '</div>'+
+        '<div class="music-result-info"><div class="music-result-title">'+esc(track.trackName||'Unknown')+'</div><div class="music-result-artist">'+esc(track.artistName||'')+'</div><div class="music-result-preview">🎵 30s preview</div></div>'+
         '<button class="music-preview-btn" id="pbtn_'+i+'" onclick="event.stopPropagation();previewTrack('+i+')">▶</button>'+
       '</div>';
     }).join('');
-  } catch(e) {
-    resultsEl.innerHTML='<div style="text-align:center;font-size:0.78rem;color:var(--silver);opacity:.5;padding:10px;font-style:italic;">Search failed.</div>';
-  }
+  } catch(e){ resultsEl.innerHTML='<div style="text-align:center;font-size:0.78rem;color:var(--silver);opacity:.5;padding:10px;font-style:italic;">Search failed.</div>'; }
 };
 
 window.previewTrack = function(i) {
-  const track = (window._itunesResults||[])[i];
-  if(!track||!track.previewUrl) return;
-  const btn = document.getElementById('pbtn_'+i);
+  const track=(window._itunesResults||[])[i]; if(!track||!track.previewUrl) return;
+  const btn=document.getElementById('pbtn_'+i);
   if(previewAudio){ previewAudio.pause(); previewAudio=null; }
-  // If same track was playing, just stop
   if(btn&&btn.textContent==='⏹'){ if(btn) btn.textContent='▶'; return; }
-  previewAudio = new Audio(track.previewUrl);
-  previewAudio.volume=0.7;
+  previewAudio=new Audio(track.previewUrl); previewAudio.volume=0.7;
   previewAudio.play().catch(()=>{});
   if(btn) btn.textContent='⏹';
   previewAudio.onended=()=>{ if(btn) btn.textContent='▶'; previewAudio=null; };
 };
 
 window.selectItunesTrack = function(i) {
-  const track=(window._itunesResults||[])[i];
-  if(!track) return;
+  const track=(window._itunesResults||[])[i]; if(!track) return;
   if(previewAudio){ previewAudio.pause(); previewAudio=null; }
   document.querySelectorAll('.music-result-item').forEach(el=>el.classList.remove('selected'));
-  const item=document.getElementById('mri_'+i);
-  if(item) item.classList.add('selected');
+  const item=document.getElementById('mri_'+i); if(item) item.classList.add('selected');
   selectedMusic={type:'itunes',previewUrl:track.previewUrl,title:track.trackName||'Unknown',artist:track.artistName||'',artUrl:track.artworkUrl100||track.artworkUrl60||null};
   showSelectedMusic(selectedMusic.title,selectedMusic.artist,selectedMusic.artUrl);
 };
 
 window.handleMusicFileUpload = function(e) {
-  const file=e.target.files[0];
-  if(!file) return;
+  const file=e.target.files[0]; if(!file) return;
   if(file.size>10*1024*1024){ showToast('File too large. Max 10MB.'); return; }
   const url=URL.createObjectURL(file);
   selectedMusic={type:'upload',previewUrl:url,title:file.name.replace(/\.[^.]+$/,''),artist:'My Upload',artUrl:null,uploadFile:file};
@@ -316,193 +462,191 @@ window.handleMusicFileUpload = function(e) {
   showToast('Audio ready ✦');
 };
 
-function showSelectedMusic(title,artist,artUrl) {
-  const el=document.getElementById('musicSelected');
-  el.classList.add('visible');
+function showSelectedMusic(title,artist,artUrl){
+  document.getElementById('musicSelected').classList.add('visible');
   document.getElementById('musicSelectedTitle').textContent=title||'—';
   document.getElementById('musicSelectedArtist').textContent=artist||'—';
-  const artEl=document.getElementById('musicSelectedArt');
-  artEl.innerHTML=artUrl?'<img src="'+artUrl+'" alt=""/>':'🎵';
+  const a=document.getElementById('musicSelectedArt'); a.innerHTML=artUrl?'<img src="'+artUrl+'" alt=""/>':'🎵';
 }
 
-window.removeMusic = function() {
-  selectedMusic=null;
-  if(previewAudio){ previewAudio.pause(); previewAudio=null; }
+window.removeMusic = function(){
+  selectedMusic=null; if(previewAudio){ previewAudio.pause(); previewAudio=null; }
   document.getElementById('musicSelected').classList.remove('visible');
   document.querySelectorAll('.music-result-item').forEach(el=>el.classList.remove('selected'));
   document.getElementById('musicFileInput').value='';
 };
 
-async function uploadAudioToCloudinary(file) {
-  try {
-    const form=new FormData();
-    form.append('file',file);
-    form.append('upload_preset',CLOUDINARY_PRESET);
+async function uploadAudioToCloudinary(file){
+  try{ const form=new FormData(); form.append('file',file); form.append('upload_preset',CLOUDINARY_PRESET);
     const r=await fetch('https://api.cloudinary.com/v1_1/'+CLOUDINARY_CLOUD+'/video/upload',{method:'POST',body:form});
-    if(!r.ok) throw new Error('Cloudinary '+r.status);
-    const json=await r.json();
-    return json.secure_url||null;
-  } catch(e){ console.error(e); return null; }
+    if(!r.ok) throw new Error(); const json=await r.json(); return json.secure_url||null;
+  }catch(e){ return null; }
 }
 
-window.toggleAdmin = function() {
-  if(isAdmin){
-    isAdmin=false; showToast('Admin mode off'); renderAdminBtn();
-    document.querySelectorAll('.btn-delete').forEach(b=>b.classList.add('hidden'));
-    return;
-  }
+// ── ADMIN ──
+window.toggleAdmin = function(){
+  if(isAdmin){ isAdmin=false; showToast('Admin mode off'); renderAdminBtn(); document.querySelectorAll('.btn-delete,.btn-pin').forEach(b=>b.classList.add('hidden')); return; }
   const pw=prompt('Enter admin password:');
-  if(pw===ADMIN_PW){
-    isAdmin=true; showToast('Admin mode on 🔑'); renderAdminBtn();
-    document.querySelectorAll('.btn-delete').forEach(b=>b.classList.remove('hidden'));
-  } else if(pw!==null) showToast('Wrong password ✦');
+  if(pw===ADMIN_PW){ isAdmin=true; showToast('Admin mode on 🔑'); renderAdminBtn(); document.querySelectorAll('.btn-delete,.btn-pin').forEach(b=>b.classList.remove('hidden')); }
+  else if(pw!==null) showToast('Wrong password ✦');
   renderAdminBtn();
 };
+function renderAdminBtn(){ const btn=document.getElementById('adminToggleBtn'); if(!btn) return; btn.textContent=isAdmin?'🔓 Admin On':'🔑 Admin'; btn.style.borderColor=isAdmin?'rgba(201,151,58,.6)':'rgba(201,151,58,.2)'; btn.style.color=isAdmin?'var(--goldP)':'var(--silver)'; }
 
-function renderAdminBtn(){
-  const btn=document.getElementById('adminToggleBtn'); if(!btn) return;
-  btn.textContent=isAdmin?'🔓 Admin On':'🔑 Admin';
-  btn.style.borderColor=isAdmin?'rgba(201,151,58,.6)':'rgba(201,151,58,.2)';
-  btn.style.color=isAdmin?'var(--goldP)':'var(--silver)';
-}
+window.handleAvatarChange = function(e){ const file=e.target.files[0]; if(!file) return; const reader=new FileReader(); reader.onload=ev=>{ avatarDataURL=ev.target.result; document.getElementById('avatarPreview').innerHTML='<img src="'+ev.target.result+'" alt="avatar"/>'; }; reader.readAsDataURL(file); };
+window.updateCharCount = function(){ document.getElementById('charCount').textContent=document.getElementById('postContent').value.length+' / 500'; };
 
-window.handleAvatarChange = function(e){
-  const file=e.target.files[0]; if(!file) return;
-  const reader=new FileReader();
-  reader.onload=ev=>{ avatarDataURL=ev.target.result; document.getElementById('avatarPreview').innerHTML='<img src="'+ev.target.result+'" alt="avatar"/>'; };
-  reader.readAsDataURL(file);
-};
+async function uploadAvatarToCloudinary(dataURL){ try{ const form=new FormData(); form.append('file',dataURL); form.append('upload_preset',CLOUDINARY_PRESET); const r=await fetch('https://api.cloudinary.com/v1_1/'+CLOUDINARY_CLOUD+'/image/upload',{method:'POST',body:form}); if(!r.ok) throw new Error(); const json=await r.json(); return json.secure_url||null; }catch(e){ return null; } }
+function compressAvatar(dataURL){ return new Promise(resolve=>{ const img=new Image(); img.onload=function(){ const MAX=300,scale=Math.min(MAX/Math.max(img.width,img.height),1),W=Math.round(img.width*scale),H=Math.round(img.height*scale),canvas=document.createElement('canvas'); canvas.width=W; canvas.height=H; canvas.getContext('2d').drawImage(img,0,0,W,H); resolve(canvas.toDataURL('image/jpeg',0.75)); }; img.onerror=()=>resolve(dataURL); img.src=dataURL; }); }
 
-window.updateCharCount = function(){
-  const len=document.getElementById('postContent').value.length;
-  document.getElementById('charCount').textContent=len+' / 500';
-};
-
-async function uploadAvatarToCloudinary(dataURL){
-  try {
-    const form=new FormData(); form.append('file',dataURL); form.append('upload_preset',CLOUDINARY_PRESET);
-    const r=await fetch('https://api.cloudinary.com/v1_1/'+CLOUDINARY_CLOUD+'/image/upload',{method:'POST',body:form});
-    if(!r.ok) throw new Error(); const json=await r.json(); return json.secure_url||null;
-  } catch(e){ return null; }
-}
-
-function compressAvatar(dataURL){
-  return new Promise(resolve=>{
-    const img=new Image();
-    img.onload=function(){
-      const MAX=300,scale=Math.min(MAX/Math.max(img.width,img.height),1);
-      const W=Math.round(img.width*scale),H=Math.round(img.height*scale);
-      const canvas=document.createElement('canvas'); canvas.width=W; canvas.height=H;
-      canvas.getContext('2d').drawImage(img,0,0,W,H);
-      resolve(canvas.toDataURL('image/jpeg',0.75));
-    };
-    img.onerror=()=>resolve(dataURL); img.src=dataURL;
-  });
-}
-
+// ── SUBMIT POST ──
 window.submitPost = async function(){
   const content=document.getElementById('postContent').value.trim();
   const nickname=document.getElementById('nicknameInput').value.trim()||'Anonymous';
   if(!content){ showToast('Write something first ✦'); return; }
-  const btn=document.querySelector('.btn-post');
-  btn.disabled=true; btn.textContent='Posting...';
-  try {
+  const btn=document.querySelector('.btn-post'); btn.disabled=true; btn.textContent='Posting...';
+  try{
     let avatarURL=null;
     if(avatarDataURL){ btn.textContent='Uploading avatar...'; const c=await compressAvatar(avatarDataURL); avatarURL=await uploadAvatarToCloudinary(c); if(!avatarURL) showToast('Avatar upload failed.'); }
     let musicData=null;
     if(selectedMusic){
-      if(selectedMusic.type==='itunes'){
-        musicData={type:'itunes',url:selectedMusic.previewUrl,title:selectedMusic.title,artist:selectedMusic.artist,art:selectedMusic.artUrl||null};
-      } else if(selectedMusic.type==='upload'&&selectedMusic.uploadFile){
-        btn.textContent='Uploading music...';
-        const audioUrl=await uploadAudioToCloudinary(selectedMusic.uploadFile);
-        if(audioUrl) musicData={type:'upload',url:audioUrl,title:selectedMusic.title,artist:'My Upload',art:null};
-        else showToast('Music upload failed.');
-      }
+      if(selectedMusic.type==='itunes') musicData={type:'itunes',url:selectedMusic.previewUrl,title:selectedMusic.title,artist:selectedMusic.artist,art:selectedMusic.artUrl||null};
+      else if(selectedMusic.type==='upload'&&selectedMusic.uploadFile){ btn.textContent='Uploading music...'; const audioUrl=await uploadAudioToCloudinary(selectedMusic.uploadFile); if(audioUrl) musicData={type:'upload',url:audioUrl,title:selectedMusic.title,artist:'My Upload',art:null}; else showToast('Music upload failed.'); }
     }
     btn.textContent='Posting...';
-    await push(wallRef,{nickname,avatar:avatarURL||null,content,music:musicData||null,timestamp:serverTimestamp(),reactions:{"❤️":0,"🔥":0,"💯":0,"😂":0,"👏":0,"😭":0}});
-    document.getElementById('postContent').value='';
-    document.getElementById('charCount').textContent='0 / 500';
+    await push(wallRef,{nickname,avatar:avatarURL||null,content,music:musicData||null,pinned:false,timestamp:serverTimestamp(),reactions:{"❤️":0,"🔥":0,"💯":0,"😂":0,"👏":0,"😭":0}});
+    document.getElementById('postContent').value=''; document.getElementById('charCount').textContent='0 / 500';
     avatarDataURL=null; document.getElementById('avatarPreview').innerHTML='😶';
     removeMusic(); showToast('Posted ✦');
-  } catch(err){ console.error(err); showToast('Failed to post. Try again.'); }
+  }catch(err){ console.error(err); showToast('Failed to post. Try again.'); }
   finally{ btn.disabled=false; btn.textContent='Post it →'; }
 };
 
+// ── REACTIONS ──
 function getReacted(id){ try{ return JSON.parse(localStorage.getItem('fw_reacted_'+id)||'[]'); }catch{ return []; } }
 function markReacted(id,e){ const l=getReacted(id); if(!l.includes(e)){ l.push(e); localStorage.setItem('fw_reacted_'+id,JSON.stringify(l)); } }
 window.reactToPost=function(id,e){ const r=getReacted(id); if(r.includes(e)){ showToast('You already reacted with '+e); return; } runTransaction(ref(db,'freedomWall/'+id+'/reactions/'+e),c=>(c||0)+1); markReacted(id,e); };
+
+// ── PIN ──
+window.togglePin=function(id,currentPin){ if(!isAdmin) return; update(ref(db,'freedomWall/'+id),{pinned:!currentPin}).then(()=>showToast(currentPin?'Unpinned ✦':'Pinned ✦')).catch(()=>showToast('Failed.')); };
+
+// ── DELETE ──
 window.deletePost=function(id){ if(!isAdmin) return; if(!confirm('Delete this post?')) return; remove(ref(db,'freedomWall/'+id)).then(()=>showToast('Post deleted ✦')).catch(()=>showToast('Failed to delete.')); };
 
-// Post music player
-window.togglePostMusic=function(postId,audioUrl){
-  const playBtn=document.getElementById('play_'+postId);
-  const artEl=document.getElementById('art_'+postId);
-  const fillEl=document.getElementById('fill_'+postId);
-  const timeEl=document.getElementById('time_'+postId);
-  if(activePostId===postId&&activePostAudio){
-    activePostAudio.pause(); activePostAudio=null; activePostId=null;
-    if(playBtn) playBtn.textContent='▶';
-    if(artEl) artEl.classList.remove('spinning');
-    return;
-  }
-  if(activePostAudio){
-    activePostAudio.pause(); activePostAudio=null;
-    if(activePostId){ const ob=document.getElementById('play_'+activePostId); const oa=document.getElementById('art_'+activePostId); if(ob) ob.textContent='▶'; if(oa) oa.classList.remove('spinning'); }
-  }
-  activePostAudio=new Audio(audioUrl); activePostAudio.volume=0.85; activePostId=postId;
-  if(playBtn) playBtn.textContent='⏸';
-  if(artEl) artEl.classList.add('spinning');
-  activePostAudio.play().catch(()=>{ showToast("Couldn't play audio ✦"); if(playBtn) playBtn.textContent='▶'; if(artEl) artEl.classList.remove('spinning'); });
-  activePostAudio.ontimeupdate=()=>{
-    const dur=activePostAudio.duration||30;
-    const pct=(activePostAudio.currentTime/dur)*100;
-    if(fillEl) fillEl.style.width=pct+'%';
-    if(timeEl){ const c=Math.floor(activePostAudio.currentTime),t=Math.floor(dur); timeEl.textContent=fmt(c)+' / '+fmt(t); }
-  };
-  activePostAudio.onended=()=>{
-    if(playBtn) playBtn.textContent='▶'; if(artEl) artEl.classList.remove('spinning');
-    if(fillEl) fillEl.style.width='0%'; activePostAudio=null; activePostId=null;
-  };
+// ── REPLIES ──
+window.toggleReplies=function(postId){
+  const section=document.getElementById('replies_'+postId);
+  if(!section) return;
+  section.classList.toggle('open');
+  const btn=document.getElementById('replybtn_'+postId);
+  if(btn) btn.textContent=section.classList.contains('open')?'💬 Hide':'💬 Replies';
 };
 
+window.submitReply=async function(postId){
+  const nickEl=document.getElementById('rnick_'+postId);
+  const textEl=document.getElementById('rtext_'+postId);
+  const btn=document.getElementById('rsend_'+postId);
+  const content=(textEl?textEl.value.trim():'');
+  const nickname=(nickEl?nickEl.value.trim():'')||'Anonymous';
+  if(!content){ showToast('Write something first ✦'); return; }
+  btn.disabled=true; btn.textContent='...';
+  try{
+    await push(ref(db,'freedomWall/'+postId+'/replies'),{nickname,content,timestamp:serverTimestamp()});
+    textEl.value=''; showToast('Reply posted ✦');
+  }catch(e){ showToast('Failed to reply.'); }
+  finally{ btn.disabled=false; btn.textContent='Reply'; }
+};
+
+window.deleteReply=function(postId,replyId){ if(!isAdmin) return; if(!confirm('Delete reply?')) return; remove(ref(db,'freedomWall/'+postId+'/replies/'+replyId)).then(()=>showToast('Reply deleted ✦')); };
+
+// ── MUSIC PLAYER ──
+window.togglePostMusic=function(postId,audioUrl){
+  const playBtn=document.getElementById('play_'+postId),artEl=document.getElementById('art_'+postId),fillEl=document.getElementById('fill_'+postId),timeEl=document.getElementById('time_'+postId);
+  if(activePostId===postId&&activePostAudio){ activePostAudio.pause(); activePostAudio=null; activePostId=null; if(playBtn) playBtn.textContent='▶'; if(artEl) artEl.classList.remove('spinning'); return; }
+  if(activePostAudio){ activePostAudio.pause(); activePostAudio=null; if(activePostId){ const ob=document.getElementById('play_'+activePostId),oa=document.getElementById('art_'+activePostId); if(ob) ob.textContent='▶'; if(oa) oa.classList.remove('spinning'); } }
+  activePostAudio=new Audio(audioUrl); activePostAudio.volume=0.85; activePostId=postId;
+  if(playBtn) playBtn.textContent='⏸'; if(artEl) artEl.classList.add('spinning');
+  activePostAudio.play().catch(()=>{ showToast("Couldn't play ✦"); if(playBtn) playBtn.textContent='▶'; if(artEl) artEl.classList.remove('spinning'); });
+  activePostAudio.ontimeupdate=()=>{ const dur=activePostAudio.duration||30,pct=(activePostAudio.currentTime/dur)*100; if(fillEl) fillEl.style.width=pct+'%'; if(timeEl){ const c=Math.floor(activePostAudio.currentTime),t=Math.floor(dur); timeEl.textContent=fmt(c)+' / '+fmt(t); } };
+  activePostAudio.onended=()=>{ if(playBtn) playBtn.textContent='▶'; if(artEl) artEl.classList.remove('spinning'); if(fillEl) fillEl.style.width='0%'; activePostAudio=null; activePostId=null; };
+};
 function fmt(s){ return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
 
-onValue(wallRef,snapshot=>{
+// ── RENDER FEED ──
+function getSortedPosts(){
+  const pinned=allPosts.filter(p=>p.pinned);
+  const rest=allPosts.filter(p=>!p.pinned);
+  if(sortMode==='top') rest.sort((a,b)=>{ const ra=Object.values(a.reactions||{}).reduce((s,v)=>s+v,0),rb=Object.values(b.reactions||{}).reduce((s,v)=>s+v,0); return rb-ra; });
+  else rest.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
+  return [...pinned.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0)),...rest];
+}
+
+function renderFeed(){
   const feed=document.getElementById('postsFeed');
-  const data=snapshot.val();
-  if(!data){ feed.innerHTML='<div class="fw-empty"><div class="big-icon">✦</div><p>The wall is empty. Be the first to leave a mark.</p></div>'; return; }
-  const posts=Object.entries(data).map(([id,v])=>({id,...v})).sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
-  feed.innerHTML=posts.map(post=>{
+  if(!allPosts.length){ feed.innerHTML='<div class="fw-empty"><div class="big-icon">✦</div><p>The wall is empty. Be the first to leave a mark.</p></div>'; document.getElementById('loadMoreWrap').style.display='none'; return; }
+  const sorted=getSortedPosts();
+  const visible=sorted.slice(0,visibleCount);
+  document.getElementById('postCountLabel').textContent=allPosts.length+' post'+(allPosts.length!==1?'s':'');
+  document.getElementById('loadMoreWrap').style.display=sorted.length>visibleCount?'block':'none';
+
+  feed.innerHTML=visible.map(post=>{
     const avatarHTML=post.avatar?'<div class="post-avatar"><img src="'+post.avatar+'" alt="avatar"/></div>':'<div class="post-avatar">'+getInitialEmoji(post.nickname)+'</div>';
     const timeStr=post.timestamp?timeAgo(post.timestamp):'just now';
     const reactions=post.reactions||{};
     const reacted=getReacted(post.id);
-    const reactionBtns=["❤️","🔥","💯","😂","👏","😭"].map(e=>{
-      const done=reacted.includes(e);
-      return '<button class="react-btn'+(done?' reacted':'')+'" onclick="reactToPost(\''+post.id+'\',\''+e+'\')">'+e+' <span>'+(reactions[e]||0)+'</span></button>';
-    }).join('');
-    const deleteBtn='<button class="btn-delete'+(isAdmin?'':' hidden')+'" onclick="deletePost(\''+post.id+'\')">🗑 delete</button>';
+    const totalReactions=Object.values(reactions).reduce((s,v)=>s+v,0);
+    const reactionBtns=["❤️","🔥","💯","😂","👏","😭"].map(e=>{ const done=reacted.includes(e); return '<button class="react-btn'+(done?' reacted':'')+'" onclick="reactToPost(\''+post.id+'\',\''+e+'\')">'+e+' <span>'+(reactions[e]||0)+'</span></button>'; }).join('');
+    const deleteBtn='<button class="btn-delete'+(isAdmin?'':' hidden')+'" onclick="deletePost(\''+post.id+'\')">🗑</button>';
+    const pinBtn='<button class="btn-pin'+(isAdmin?'':' hidden')+'" onclick="togglePin(\''+post.id+'\','+!!post.pinned+')">'+(post.pinned?'📌 Unpin':'📌 Pin')+'</button>';
+    const pinBadge=post.pinned?'<div class="pin-badge">📌 Pinned by admin</div>':'';
+    const repliesData=post.replies||{};
+    const replyList=Object.entries(repliesData).map(([rid,r])=>r?'<div class="reply-item"><div class="reply-avatar">'+getInitialEmoji(r.nickname)+'</div><div class="reply-bubble"><div class="reply-name">'+esc(r.nickname||'Anonymous')+'</div><div class="reply-body">'+esc(r.content||'')+'</div><div class="reply-time" style="display:flex;align-items:center;gap:8px;">'+timeAgo(r.timestamp||0)+(isAdmin?'<button class="reply-delete'+(isAdmin?'':' hidden')+'" onclick="deleteReply(\''+post.id+'\',\''+rid+'\')">🗑</button>':'')+'</div></div></div>':'').filter(Boolean).join('');
+    const replyCount=Object.keys(repliesData).length;
+
+    // Music
     let musicHTML='';
-    if(post.music&&post.music.url){
-      const m=post.music;
-      const safeUrl=m.url.replace(/'/g,"%27");
-      const artHTML=m.art?'<div class="player-art" id="art_'+post.id+'"><img src="'+esc(m.art)+'" alt=""/></div>':'<div class="player-art" id="art_'+post.id+'">🎵</div>';
-      const badge=m.type==='itunes'?'🍎 iTunes':'🎵 Upload';
-      musicHTML='<div class="post-music-player">'+
-        '<div class="player-source-badge">'+badge+'</div>'+
-        '<div class="player-art-wrap">'+artHTML+'</div>'+
-        '<div class="player-info">'+
-          '<div class="player-title">'+esc(m.title||'Unknown')+'</div>'+
-          '<div class="player-artist">'+esc(m.artist||'')+'</div>'+
-          '<div class="player-progress"><div class="player-progress-bar"><div class="player-progress-fill" id="fill_'+post.id+'"></div></div><div class="player-time" id="time_'+post.id+'">0:00 / 0:30</div></div>'+
+    if(post.music&&post.music.url){ const m=post.music,safeUrl=m.url.replace(/'/g,"%27"),artHTML=m.art?'<div class="player-art" id="art_'+post.id+'"><img src="'+esc(m.art)+'" alt=""/></div>':'<div class="player-art" id="art_'+post.id+'">🎵</div>',badge=m.type==='itunes'?'🍎 iTunes':'🎵 Upload'; musicHTML='<div class="post-music-player"><div class="player-source-badge">'+badge+'</div><div class="player-art-wrap">'+artHTML+'</div><div class="player-info"><div class="player-title">'+esc(m.title||'Unknown')+'</div><div class="player-artist">'+esc(m.artist||'')+'</div><div class="player-progress"><div class="player-progress-bar"><div class="player-progress-fill" id="fill_'+post.id+'"></div></div><div class="player-time" id="time_'+post.id+'">0:00 / 0:30</div></div></div><button class="player-play-btn" id="play_'+post.id+'" onclick="togglePostMusic(\''+post.id+'\',\''+safeUrl+'\')">▶</button></div>'; }
+
+    return '<div class="fw-post'+(post.pinned?' pinned':'')+'">'+
+      pinBadge+
+      '<div class="post-header">'+avatarHTML+
+        '<div class="post-meta"><div class="post-name">'+esc(post.nickname||'Anonymous')+'</div><div class="post-time">'+timeStr+(sortMode==='top'&&totalReactions?' · '+totalReactions+' reactions':'')+'</div></div>'+
+        '<div class="post-actions">'+pinBtn+deleteBtn+'</div>'+
+      '</div>'+
+      '<div class="post-body">'+esc(post.content)+'</div>'+
+      musicHTML+
+      '<div class="post-footer">'+reactionBtns+
+        '<button class="btn-reply-toggle" id="replybtn_'+post.id+'" onclick="toggleReplies(\''+post.id+'\')">💬 '+(replyCount>0?replyCount+' Repl'+(replyCount===1?'y':'ies'):'Replies')+'</button>'+
+      '</div>'+
+      '<div class="replies-section" id="replies_'+post.id+'">'+
+        '<div class="replies-list">'+replyList+'</div>'+
+        '<div class="reply-form">'+
+          '<div class="reply-form-inner">'+
+            '<input type="text" id="rnick_'+post.id+'" placeholder="Your name (optional)" maxlength="30"/>'+
+            '<textarea class="reply-textarea" id="rtext_'+post.id+'" placeholder="Write a reply..." maxlength="300"></textarea>'+
+          '</div>'+
+          '<button class="btn-send-reply" id="rsend_'+post.id+'" onclick="submitReply(\''+post.id+'\')">Reply</button>'+
         '</div>'+
-        '<button class="player-play-btn" id="play_'+post.id+'" onclick="togglePostMusic(\''+post.id+'\',\''+safeUrl+'\')">▶</button>'+
-      '</div>';
-    }
-    return '<div class="fw-post"><div class="post-header">'+avatarHTML+'<div class="post-meta"><div class="post-name">'+esc(post.nickname||'Anonymous')+'</div><div class="post-time">'+timeStr+'</div></div>'+deleteBtn+'</div><div class="post-body">'+esc(post.content)+'</div>'+musicHTML+'<div class="post-footer">'+reactionBtns+'</div></div>';
+      '</div>'+
+    '</div>';
   }).join('');
+}
+
+// ── FIREBASE LISTENER ──
+onValue(wallRef, snapshot=>{
+  const data=snapshot.val();
+  if(!data){ allPosts=[]; renderFeed(); isFirstLoad=false; return; }
+  allPosts=Object.entries(data).map(([id,v])=>({id,...v}));
+  // New posts banner
+  if(!isFirstLoad && allPosts.length > lastKnownCount && lastKnownCount >= 0){
+    const newCount=allPosts.length-lastKnownCount;
+    const banner=document.getElementById('newPostsBanner');
+    banner.textContent='↑ '+newCount+' new post'+(newCount>1?'s':'')+' — tap to see';
+    banner.classList.add('visible');
+  }
+  if(isFirstLoad) lastKnownCount=allPosts.length;
+  isFirstLoad=false;
+  renderFeed();
 });
 
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
