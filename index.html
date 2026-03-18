@@ -4,259 +4,471 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Before You Enter — G-11 Emerson</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700;1,900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --navy:#050d1f;--navy2:#0a1830;
-  --gold:#c9973a;--goldB:#e8b84b;--goldP:#f0d080;--goldD:#7a5a1e;
-  --white:#fff;--cream:#f0e6cc;--silver:#b8cce0;
+  --navy:#050d1f;--navy2:#0a1830;--navy3:#071225;
+  --gold:#c9973a;--goldB:#e8b84b;--goldP:#f0d080;--goldD:#7a5a1e;--goldDim:#4a3610;
+  --white:#fff;--cream:#f0e6cc;--creamDim:#c8b898;--silver:#b8cce0;
 }
-html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
+html{scroll-behavior:smooth;}
+html,body{
+  background:var(--navy);color:var(--white);
+  font-family:'DM Sans',sans-serif;
+  min-height:100vh;overflow-x:hidden;
+}
 
-.stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
-.star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) var(--delay,0s) infinite ease-in-out;}
-@keyframes twinkle{0%,100%{opacity:var(--min,.2);}50%{opacity:var(--max,.9);}}
+/* ── CANVAS BG ── */
+#bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
 
-.glow-bg{position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:
-    radial-gradient(ellipse 70% 50% at 50% 0%,rgba(20,60,120,.6) 0%,transparent 70%),
-    radial-gradient(ellipse 40% 30% at 20% 100%,rgba(201,151,58,.12) 0%,transparent 60%),
-    radial-gradient(ellipse 40% 30% at 80% 100%,rgba(201,151,58,.1) 0%,transparent 60%);}
+/* ── GLOW LAYERS ── */
+.glow-top{
+  position:fixed;top:0;left:50%;transform:translateX(-50%);
+  width:900px;height:500px;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(20,55,120,.65) 0%,transparent 70%);
+}
+.glow-gold-l{position:fixed;bottom:0;left:0;width:400px;height:300px;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 0% 100%,rgba(201,151,58,.12) 0%,transparent 65%);}
+.glow-gold-r{position:fixed;bottom:0;right:0;width:400px;height:300px;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 100% 100%,rgba(201,151,58,.09) 0%,transparent 65%);}
 
-@keyframes rise{from{opacity:0;transform:translateY(32px);}to{opacity:1;transform:translateY(0);}}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-@keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(200%);}}
-@keyframes pulse-gold{0%,100%{text-shadow:0 0 20px rgba(201,151,58,.3);}50%{text-shadow:0 0 40px rgba(201,151,58,.7),0 0 80px rgba(201,151,58,.2);}}
+/* ── CURTAIN ── */
+.curtain{
+  position:fixed;inset:0;z-index:100;
+  background:var(--navy3);
+  pointer-events:none;
+  transform-origin:top;
+  animation:curtainLift 1.8s cubic-bezier(.76,0,.24,1) .2s both;
+}
+@keyframes curtainLift{
+  0%{transform:scaleY(1);}
+  100%{transform:scaleY(0);}
+}
 
+/* ── PAGE ── */
 .page{
   position:relative;z-index:1;
   min-height:100vh;
-  display:flex;flex-direction:column;align-items:center;
-  padding:60px 20px 80px;
+  display:grid;
+  grid-template-columns:1fr;
+  grid-template-rows:auto 1fr auto;
+  align-items:center;
+  padding:0 24px;
 }
 
-.eyebrow{
-  font-size:0.7rem;letter-spacing:.5em;text-transform:uppercase;
-  color:var(--gold);opacity:.8;margin-bottom:20px;
-  animation:fadeIn 1s ease both;
+/* ── TOP BADGE ── */
+.top-badge{
+  text-align:center;
+  padding:32px 0 0;
+  opacity:0;
+  animation:riseIn .8s ease 1.8s both;
 }
-
-.gold-rule{display:flex;align-items:center;gap:14px;width:100%;max-width:500px;margin:0 auto 36px;}
-.gold-rule::before,.gold-rule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,151,58,.5),transparent);}
-.gem{width:8px;height:8px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;box-shadow:0 0 10px var(--gold);}
-
-.card{
-  max-width:680px;width:100%;
-  background:rgba(10,24,48,.6);
+.top-badge span{
+  display:inline-block;
+  font-size:0.65rem;letter-spacing:.55em;text-transform:uppercase;
+  color:var(--gold);opacity:.75;
   border:1px solid rgba(201,151,58,.2);
-  border-radius:20px;
-  padding:48px 44px;
-  backdrop-filter:blur(16px);
-  box-shadow:0 20px 80px rgba(0,0,0,.5),inset 0 1px 0 rgba(201,151,58,.08);
-  animation:rise .9s .2s ease both;
-}
-@media(max-width:600px){.card{padding:32px 22px;}}
-
-.page-icon{
-  font-size:2.8rem;display:block;text-align:center;
-  margin-bottom:18px;
-  animation:float 5s ease-in-out infinite;
-  filter:drop-shadow(0 0 16px rgba(201,151,58,.5));
+  border-radius:30px;padding:5px 18px;
+  background:rgba(201,151,58,.04);
 }
 
-.card h1{
+/* ── MAIN CONTENT ── */
+.main{
+  display:flex;flex-direction:column;
+  align-items:center;
+  padding:40px 0 20px;
+  max-width:700px;margin:0 auto;width:100%;
+}
+
+/* ── CANDLE ── */
+.candle-wrap{
+  position:relative;margin-bottom:32px;
+  opacity:0;
+  animation:riseIn .9s ease 2s both;
+}
+.candle-icon{
+  font-size:4rem;display:block;
+  filter:drop-shadow(0 0 20px rgba(232,184,75,.6)) drop-shadow(0 0 60px rgba(201,151,58,.3));
+  animation:candleFlicker 3s ease-in-out 2.9s infinite;
+}
+@keyframes candleFlicker{
+  0%,100%{filter:drop-shadow(0 0 20px rgba(232,184,75,.6)) drop-shadow(0 0 60px rgba(201,151,58,.3));transform:scale(1);}
+  33%{filter:drop-shadow(0 0 28px rgba(232,184,75,.8)) drop-shadow(0 0 80px rgba(201,151,58,.45));transform:scale(1.03) rotate(.5deg);}
+  66%{filter:drop-shadow(0 0 16px rgba(232,184,75,.5)) drop-shadow(0 0 50px rgba(201,151,58,.25));transform:scale(.98) rotate(-.3deg);}
+}
+
+/* ── RULE ── */
+.thin-rule{
+  display:flex;align-items:center;gap:12px;
+  width:100%;max-width:400px;margin:0 auto 28px;
+  opacity:0;animation:riseIn .7s ease 2.2s both;
+}
+.thin-rule::before,.thin-rule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,151,58,.45),transparent);}
+.gem{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);box-shadow:0 0 8px var(--gold);flex-shrink:0;}
+
+/* ── TITLE ── */
+.title-block{text-align:center;margin-bottom:10px;opacity:0;animation:riseIn 1s ease 2.4s both;}
+.eyebrow-label{
+  font-size:0.65rem;letter-spacing:.45em;text-transform:uppercase;
+  color:var(--creamDim);opacity:.55;margin-bottom:14px;
+  font-family:'DM Sans',sans-serif;
+}
+h1{
   font-family:'Playfair Display',serif;
-  font-size:clamp(1.8rem,5vw,2.8rem);
+  font-size:clamp(2.4rem,7vw,4.2rem);
   font-weight:900;
-  text-align:center;
-  background:linear-gradient(135deg,var(--goldP) 0%,var(--goldB) 40%,var(--gold) 70%,#a07020 100%);
+  line-height:1.05;
+  letter-spacing:-.02em;
+  background:linear-gradient(160deg,var(--goldP) 0%,var(--goldB) 35%,var(--gold) 65%,#9a6818 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  line-height:1.15;
-  margin-bottom:8px;
-  animation:pulse-gold 4s ease-in-out infinite;
+  animation:goldGlow 5s ease-in-out 3.4s infinite;
 }
-.card .subtitle{
-  text-align:center;font-size:0.82rem;
-  color:var(--silver);letter-spacing:.12em;
-  text-transform:uppercase;opacity:.6;
-  margin-bottom:32px;
+@keyframes goldGlow{
+  0%,100%{filter:drop-shadow(0 0 0px transparent);}
+  50%{filter:drop-shadow(0 2px 30px rgba(201,151,58,.25));}
 }
-
-.inner-divider{display:flex;align-items:center;gap:10px;margin:28px 0;}
-.inner-divider::before,.inner-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,151,58,.25),transparent);}
-.inner-gem{width:5px;height:5px;background:var(--goldB);transform:rotate(45deg);flex-shrink:0;}
-
-.card p{
-  font-size:0.97rem;
-  line-height:1.85;
-  color:var(--cream);
-  opacity:.9;
-  margin-bottom:18px;
-}
-.card p:last-of-type{margin-bottom:0;}
-
-.highlight{
-  color:var(--goldP);
-  font-style:italic;
-}
-.card .quote{
-  font-family:'Playfair Display',serif;
-  font-size:1.1rem;
-  font-style:italic;
-  color:var(--goldP);
-  text-align:center;
-  line-height:1.7;
-  padding:20px 0;
-  border-top:1px solid rgba(201,151,58,.15);
-  border-bottom:1px solid rgba(201,151,58,.15);
-  margin:28px 0;
+.subtitle-label{
+  margin-top:10px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;font-style:italic;font-weight:300;
+  color:var(--silver);opacity:.65;letter-spacing:.04em;
 }
 
-.rules{
-  background:rgba(201,151,58,.05);
+/* ── SCROLL CONTAINER ── */
+.scroll-card{
+  width:100%;
+  background:rgba(8,18,42,.55);
   border:1px solid rgba(201,151,58,.15);
-  border-radius:12px;
-  padding:20px 24px;
-  margin:24px 0;
+  border-radius:20px;
+  padding:40px 44px;
+  backdrop-filter:blur(20px);
+  box-shadow:0 24px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(201,151,58,.07),inset 0 -1px 0 rgba(201,151,58,.04);
+  opacity:0;
+  animation:riseIn 1s ease 2.8s both;
+  position:relative;
+  overflow:hidden;
+}
+.scroll-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,151,58,.3),rgba(240,208,128,.5),rgba(201,151,58,.3),transparent);
+}
+
+.body-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.08rem;line-height:1.9;
+  color:var(--cream);opacity:.88;
+  margin-bottom:20px;font-weight:300;
+}
+.body-text:last-of-type{margin-bottom:0;}
+em,.highlight{color:var(--goldP);font-style:italic;}
+
+/* ── QUOTE ── */
+.quote-block{
+  margin:28px 0;
+  padding:24px 32px;
+  border-left:2px solid rgba(201,151,58,.4);
+  background:rgba(201,151,58,.04);
+  border-radius:0 10px 10px 0;
+  position:relative;
+}
+.quote-block::before{
+  content:'\201C';
+  position:absolute;top:-10px;left:20px;
+  font-family:'Playfair Display',serif;
+  font-size:4rem;color:var(--goldD);opacity:.4;
+  line-height:1;
+}
+.quote-text{
+  font-family:'Playfair Display',serif;
+  font-size:1.05rem;font-style:italic;font-weight:400;
+  color:var(--goldP);line-height:1.75;
+}
+
+/* ── INNER DIVIDER ── */
+.inner-rule{display:flex;align-items:center;gap:10px;margin:26px 0;}
+.inner-rule::before,.inner-rule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,151,58,.18),transparent);}
+.inner-gem{width:4px;height:4px;background:rgba(201,151,58,.5);transform:rotate(45deg);flex-shrink:0;}
+
+/* ── RULES BOX ── */
+.rules-box{
+  background:rgba(201,151,58,.04);
+  border:1px solid rgba(201,151,58,.14);
+  border-radius:12px;padding:22px 26px;margin:22px 0;
 }
 .rules-title{
-  font-size:0.72rem;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:14px;
+  font-size:0.62rem;letter-spacing:.38em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px;opacity:.85;
 }
-.rules ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
-.rules ul li{
-  font-size:0.88rem;color:var(--silver);
-  display:flex;align-items:flex-start;gap:10px;line-height:1.5;
+.rules-list{display:flex;flex-direction:column;gap:11px;}
+.rules-list li{
+  display:flex;align-items:flex-start;gap:12px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;line-height:1.6;color:var(--silver);font-weight:300;
 }
-.rules ul li::before{content:'✦';color:var(--gold);font-size:0.7rem;margin-top:3px;flex-shrink:0;}
+.rules-list li::before{content:'✦';color:var(--gold);font-size:.6rem;flex-shrink:0;margin-top:5px;}
 
+/* ── CLOSING ── */
+.closing-line{
+  text-align:center;margin-top:24px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;font-style:italic;font-weight:300;
+  color:var(--creamDim);opacity:.65;
+}
+
+/* ── CREDITS ── */
 .credits{
-  margin-top:32px;
-  padding-top:24px;
-  border-top:1px solid rgba(201,151,58,.15);
+  margin-top:28px;padding-top:22px;
+  border-top:1px solid rgba(201,151,58,.1);
   text-align:center;
 }
-.credits .made-by{
-  font-size:0.72rem;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--silver);opacity:.5;margin-bottom:8px;
-}
-.credits .name{
+.credits-label{font-size:0.6rem;letter-spacing:.38em;text-transform:uppercase;color:var(--silver);opacity:.38;margin-bottom:6px;}
+.credits-name{
   font-family:'Playfair Display',serif;
   font-size:1.1rem;font-style:italic;
-  color:var(--goldP);margin-bottom:12px;
-}
-.credits .note{
-  font-size:0.84rem;line-height:1.75;
-  color:var(--silver);opacity:.75;
-  margin-bottom:0;
+  color:var(--goldP);opacity:.75;
 }
 
-.enter-wrap{text-align:center;margin-top:40px;animation:rise 1s .6s ease both;opacity:0;animation-fill-mode:forwards;}
+/* ── ENTER SECTION ── */
+.enter-section{
+  padding:36px 0 52px;
+  text-align:center;
+  opacity:0;animation:riseIn .9s ease 3.2s both;
+}
+
 .enter-btn{
   position:relative;overflow:hidden;
-  display:inline-flex;align-items:center;gap:10px;
-  background:linear-gradient(135deg,var(--gold),var(--goldD));
-  color:var(--navy);
-  border:none;border-radius:10px;
-  padding:14px 36px;
-  font-size:0.9rem;font-weight:700;
+  display:inline-flex;align-items:center;gap:12px;
+  background:linear-gradient(135deg,var(--goldB) 0%,var(--gold) 50%,var(--goldD) 100%);
+  color:var(--navy);border:none;border-radius:50px;
+  padding:16px 48px;
+  font-size:0.82rem;font-weight:700;
   font-family:'DM Sans',sans-serif;
-  cursor:pointer;letter-spacing:.06em;text-transform:uppercase;
+  cursor:pointer;letter-spacing:.15em;text-transform:uppercase;
   text-decoration:none;
-  transition:opacity .2s,transform .15s;
-  box-shadow:0 8px 32px rgba(201,151,58,.3);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease,opacity .2s;
+  box-shadow:0 8px 32px rgba(201,151,58,.35),0 2px 8px rgba(0,0,0,.3);
+  animation:btnPulse 3s ease-in-out 4s infinite;
 }
-.enter-btn::after{
-  content:'';position:absolute;top:0;left:0;width:40%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
-  transform:translateX(-100%);
+@keyframes btnPulse{
+  0%,100%{box-shadow:0 8px 32px rgba(201,151,58,.35),0 2px 8px rgba(0,0,0,.3);}
+  50%{box-shadow:0 12px 48px rgba(201,151,58,.55),0 4px 16px rgba(0,0,0,.4),0 0 0 6px rgba(201,151,58,.08);}
 }
-.enter-btn:hover{opacity:.9;transform:translateY(-2px);}
-.enter-btn:hover::after{animation:shimmer .6s ease;}
-.enter-btn:active{transform:scale(0.97);}
-.enter-note{margin-top:12px;font-size:0.75rem;color:var(--silver);opacity:.4;letter-spacing:.08em;}
+.enter-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.25) 50%,transparent 100%);
+  transform:translateX(-100%);transition:transform 0s;
+}
+.enter-btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 16px 48px rgba(201,151,58,.5),0 4px 16px rgba(0,0,0,.4);}
+.enter-btn:hover::before{transform:translateX(200%);transition:transform .55s ease;}
+.enter-btn:active{transform:scale(.97);}
+
+.btn-icon{font-size:1rem;transition:transform .3s ease;}
+.enter-btn:hover .btn-icon{transform:translateX(4px);}
+
+.enter-note{
+  margin-top:14px;
+  font-size:0.65rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--silver);opacity:.3;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes riseIn{
+  from{opacity:0;transform:translateY(24px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(200%);}}
+
+/* ── MOBILE ── */
+@media(max-width:600px){
+  .page{padding:0 16px;}
+  .top-badge{padding:24px 0 0;}
+  .main{padding:28px 0 16px;}
+  .candle-icon{font-size:3rem;}
+  h1{font-size:clamp(2rem,10vw,3rem);}
+  .scroll-card{padding:26px 20px;}
+  .quote-block{padding:18px 20px;}
+  .rules-box{padding:16px 18px;}
+  .enter-btn{padding:14px 36px;font-size:0.78rem;letter-spacing:.12em;}
+  .enter-section{padding:28px 0 40px;}
+  .body-text{font-size:1rem;}
+  .quote-text{font-size:0.97rem;}
+}
+@media(max-width:380px){
+  .scroll-card{padding:20px 16px;}
+  h1{font-size:1.9rem;}
+}
 </style>
 </head>
 <body>
 
-<div class="stars"><div id="starsContainer"></div></div>
-<div class="glow-bg"></div>
+<!-- CURTAIN -->
+<div class="curtain"></div>
+
+<!-- CANVAS -->
+<canvas id="bgCanvas"></canvas>
+
+<!-- GLOWS -->
+<div class="glow-top"></div>
+<div class="glow-gold-l"></div>
+<div class="glow-gold-r"></div>
 
 <div class="page">
 
-  <div class="eyebrow">G-11 Emerson · 2025–2026</div>
-
-  <div class="gold-rule"><div class="gem"></div></div>
-
-  <div class="card">
-
-    <span class="page-icon">🕯️</span>
-    <h1>Before You Enter</h1>
-    <p class="subtitle">A note to every soul who finds this page</p>
-
-    <p>
-      Whether you're one of us — a student of <span class="highlight">G-11 Emerson</span> — or a curious stranger who somehow stumbled upon this little corner of the internet, you are welcome here. This website was built with nothing but love, late nights, and a whole lot of trial and error.
-    </p>
-
-    <div class="quote">
-      "We were never just a section. We were a chapter —<br/>
-      the kind you re-read just to feel something again."
-    </div>
-
-    <p>
-      What you're about to see is a collection of <span class="highlight">real moments</span> — the kind that don't make it to formal records but live permanently in the hearts of the people who were there. The chaos of a classroom that somehow became a home. The laughter that echoed through hallways. The friendships built between lessons and recess, between hardships and celebrations.
-    </p>
-
-    <p>
-      This isn't a perfect website. It was made by someone who had never written a single line of code before this. But maybe that's exactly what makes it special — it was built by someone who cared enough to try.
-    </p>
-
-    <div class="inner-divider"><div class="inner-gem"></div></div>
-
-    <div class="rules">
-      <div class="rules-title">This is Emerson Exclusive Only</div>
-      <ul>
-        <li>This is a safe space. Be kind, be respectful, and honour the memories shared here.</li>
-        <li>The Freedom Wall and Dump Wall are for everyone — but please, keep it wholesome and fun(Emerson student only).</li>
-        <li>These photos, memories, and moments belong to real people. Treat them with care.</li>
-        <li>If you're an outsider looking in — we hope this gives you a glimpse of something genuine.</li>
-      </ul>
-    </div>
-
-    <p style="text-align:center;font-size:0.9rem;color:var(--silver);opacity:.7;font-style:italic;">
-      Now go ahead. The memory palace is waiting for you. ✦
-    </p>
-
-    <div class="credits">
-      <div class="made-by">Website created by</div>
-      <div class="name">Errald Joshua Buenaflor</div>
-    </div>
-
+  <!-- TOP BADGE -->
+  <div class="top-badge">
+    <span>G-11 Emerson &nbsp;·&nbsp; 2025–2026</span>
   </div>
 
-  <div class="enter-wrap">
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- CANDLE -->
+    <div class="candle-wrap">
+      <span class="candle-icon">🕯️</span>
+    </div>
+
+    <!-- RULE -->
+    <div class="thin-rule"><div class="gem"></div></div>
+
+    <!-- TITLE -->
+    <div class="title-block">
+      <div class="eyebrow-label">A note to every soul who finds this page</div>
+      <h1>Before You Enter</h1>
+      <div class="subtitle-label">The memory palace is waiting</div>
+    </div>
+
+    <!-- SCROLL CARD -->
+    <div class="scroll-card" style="margin-top:32px;">
+
+      <p class="body-text">
+        Whether you're one of us — a student of <em>G-11 Emerson</em> — or a curious stranger who somehow stumbled upon this little corner of the internet, you are welcome here. This website was built with nothing but love, late nights, and a whole lot of trial and error.
+      </p>
+
+      <div class="quote-block">
+        <div class="quote-text">
+          "We were never just a section. We were a chapter —<br/>
+          the kind you re-read just to feel something again."
+        </div>
+      </div>
+
+      <p class="body-text">
+        What you're about to see is a collection of <em>real moments</em> — the kind that don't make it to formal records but live permanently in the hearts of the people who were there. The chaos of a classroom that somehow became a home.
+      </p>
+
+      <p class="body-text">
+        This isn't a perfect website. It was made by someone who had never written a single line of code before this. But maybe that's exactly what makes it special — it was built by someone who cared enough to try.
+      </p>
+
+      <div class="inner-rule"><div class="inner-gem"></div></div>
+
+      <div class="rules-box">
+        <div class="rules-title">This is Emerson Exclusive Only</div>
+        <ul class="rules-list">
+          <li>This is a safe space. Be kind, be respectful, and honour the memories shared here.</li>
+          <li>The Freedom Wall and Dump Wall are for Emerson students — please keep it wholesome and fun.</li>
+          <li>These photos, memories, and moments belong to real people. Treat them with care.</li>
+          <li>If you're an outsider looking in — we hope this gives you a glimpse of something genuine.</li>
+        </ul>
+      </div>
+
+      <p class="closing-line">Now go ahead. The memory palace is waiting for you. ✦</p>
+
+      <div class="credits">
+        <div class="credits-label">Website created by</div>
+        <div class="credits-name">Errald Joshua Buenaflor</div>
+      </div>
+
+    </div>
+    <!-- /scroll-card -->
+
+  </div>
+  <!-- /main -->
+
+  <!-- ENTER -->
+  <div class="enter-section">
     <a href="welcome.html" class="enter-btn">
-      Enter the Memory Palace ✦
+      Enter the Memory Palace
+      <span class="btn-icon">✦</span>
     </a>
     <div class="enter-note">tap to continue</div>
   </div>
 
 </div>
+<!-- /page -->
 
+<!-- STAR + PARTICLE CANVAS -->
 <script>
 (function(){
-  const c = document.getElementById('starsContainer');
-  for(let i=0;i<80;i++){
-    const s = document.createElement('div'); s.className='star';
-    const sz = Math.random()*2+.3;
-    s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;`
-      +`--d:${2+Math.random()*5}s;--delay:${Math.random()*6}s;`
-      +`--min:${.05+Math.random()*.15};--max:${.4+Math.random()*.6};`;
-    c.appendChild(s);
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, stars = [], particles = [];
+
+  function resize(){
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
   }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Stars
+  for(let i=0;i<120;i++){
+    stars.push({
+      x: Math.random()*W, y: Math.random()*H,
+      r: Math.random()*1.2+.2,
+      alpha: Math.random()*.7+.1,
+      speed: Math.random()*2+1.5,
+      phase: Math.random()*Math.PI*2
+    });
+  }
+
+  // Gold dust particles
+  for(let i=0;i<35;i++){
+    particles.push({
+      x: Math.random()*W, y: Math.random()*H,
+      r: Math.random()*.9+.2,
+      vy: -(Math.random()*.3+.1),
+      vx: (Math.random()-.5)*.15,
+      alpha: Math.random()*.5+.1,
+      life: Math.random()*200+100,
+      age: Math.random()*200
+    });
+  }
+
+  let t = 0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+
+    // Stars
+    stars.forEach(s=>{
+      const a = s.alpha * (.5 + .5*Math.sin(t/s.speed + s.phase));
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${a})`;
+      ctx.fill();
+    });
+
+    // Gold dust
+    particles.forEach(p=>{
+      p.age++;
+      p.x += p.vx; p.y += p.vy;
+      if(p.age > p.life){
+        p.age=0; p.x=Math.random()*W; p.y=H+5;
+        p.vy=-(Math.random()*.3+.1);
+        p.vx=(Math.random()-.5)*.15;
+      }
+      const progress = p.age/p.life;
+      const fade = progress<.15 ? progress/.15 : progress>.75 ? (1-progress)/.25 : 1;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(232,184,75,${p.alpha*fade})`;
+      ctx.fill();
+    });
+
+    t += .018;
+    requestAnimationFrame(draw);
+  }
+  draw();
 })();
 </script>
+
 </body>
 </html>
