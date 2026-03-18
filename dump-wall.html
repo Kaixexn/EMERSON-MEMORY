@@ -576,7 +576,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     return new Promise((resolve, reject) => {
       const form = new FormData();
       form.append("file", file);
-      form.append("upload_preset", "images_memories"); // fixed: was "images memories" (space breaks upload)
+      form.append("upload_preset", "images memories");
 
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "https://api.cloudinary.com/v1_1/dbtoadpgi/image/upload");
