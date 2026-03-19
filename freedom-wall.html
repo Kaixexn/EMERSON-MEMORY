@@ -28,7 +28,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 
 .page{position:relative;z-index:1;min-height:100vh;padding:50px 20px 80px;}
 
-/* HEADER */
 .fw-header{text-align:center;padding:20px 0 36px;animation:rise .8s ease both;position:relative;}
 .back-link{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:0.82rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;margin-bottom:32px;opacity:.8;transition:opacity .2s;}
 .back-link:hover{opacity:1;}
@@ -36,7 +35,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .fw-header h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,6vw,3.4rem);font-weight:900;background:linear-gradient(135deg,var(--goldP) 0%,var(--gold) 50%,var(--goldD) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.5px;line-height:1.1;}
 .fw-header p{margin-top:10px;color:var(--silver);font-size:0.9rem;font-style:italic;letter-spacing:.04em;}
 
-/* NEW POST COUNTER BADGE */
 .new-posts-banner{
   display:none;position:sticky;top:12px;z-index:50;
   margin:0 auto 16px;max-width:320px;
@@ -50,7 +48,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 }
 .new-posts-banner.visible{display:block;}
 
-/* TOOLBAR */
 .fw-toolbar{
   max-width:700px;margin:0 auto 14px;
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;
@@ -65,12 +62,10 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .sort-btn:hover:not(.active){border-color:rgba(201,151,58,.4);color:var(--goldP);}
 .post-count-label{font-size:0.75rem;color:var(--silver);opacity:.5;margin-left:auto;}
 
-/* DIVIDER */
 .divider{display:flex;align-items:center;gap:14px;margin:0 auto 32px;max-width:500px;}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--goldD),transparent);}
 .gem{width:8px;height:8px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;box-shadow:0 0 8px var(--gold);}
 
-/* FORM CARD */
 .fw-form-card{max-width:700px;margin:0 auto 32px;background:rgba(10,24,48,.7);border:1px solid rgba(201,151,58,.25);border-radius:16px;padding:24px;backdrop-filter:blur(12px);box-shadow:0 8px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(201,151,58,.1);animation:rise .9s .1s ease both;}
 .fw-form-top{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;}
 .avatar-picker{flex-shrink:0;}
@@ -94,7 +89,6 @@ textarea#postContent{resize:vertical;min-height:88px;font-size:0.92rem;line-heig
 .btn-post:active{transform:scale(0.97);}
 .btn-post:disabled{opacity:.4;cursor:not-allowed;}
 
-/* MUSIC SECTION */
 .music-attach{margin-top:14px;border-top:1px solid rgba(201,151,58,.12);padding-top:14px;}
 .music-attach-label{font-size:0.75rem;color:var(--silver);opacity:.7;margin-bottom:10px;letter-spacing:.04em;text-transform:uppercase;}
 .music-tabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
@@ -139,7 +133,6 @@ textarea#postContent{resize:vertical;min-height:88px;font-size:0.92rem;line-heig
 .btn-remove-music{background:transparent;border:none;color:rgba(255,100,100,.5);font-size:1rem;cursor:pointer;padding:2px 6px;transition:color .2s;flex-shrink:0;}
 .btn-remove-music:hover{color:#ff6060;}
 
-/* POSTS FEED */
 .fw-posts{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
 .fw-post{background:rgba(10,24,48,.65);border:1px solid rgba(201,151,58,.18);border-radius:14px;padding:18px 20px;backdrop-filter:blur(10px);box-shadow:0 4px 24px rgba(0,0,0,.3);animation:rise .35s ease both;transition:border-color .2s;}
 .fw-post:hover{border-color:rgba(201,151,58,.32);}
@@ -156,7 +149,6 @@ textarea#postContent{resize:vertical;min-height:88px;font-size:0.92rem;line-heig
 
 .post-body{font-size:0.92rem;line-height:1.65;color:var(--cream);word-break:break-word;white-space:pre-wrap;}
 
-/* MUSIC PLAYER ON POST */
 .post-music-player{margin:12px 0 4px;background:rgba(5,13,31,.6);border:1px solid rgba(201,151,58,.22);border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px;position:relative;overflow:hidden;}
 .post-music-player::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,151,58,.04) 0%,transparent 60%);pointer-events:none;}
 .player-art{width:40px;height:40px;border-radius:6px;background:rgba(201,151,58,.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;overflow:hidden;flex-shrink:0;}
@@ -174,7 +166,6 @@ textarea#postContent{resize:vertical;min-height:88px;font-size:0.92rem;line-heig
 .player-play-btn:active{transform:scale(0.95);}
 .player-source-badge{position:absolute;top:5px;right:7px;font-size:0.56rem;color:var(--silver);opacity:.4;letter-spacing:.05em;text-transform:uppercase;}
 
-/* FOOTER */
 .post-footer{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;align-items:center;}
 .react-btn{background:rgba(255,255,255,.04);border:1px solid rgba(201,151,58,.2);border-radius:20px;color:var(--silver);padding:5px 11px;font-size:0.78rem;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:4px;transition:background .15s,border-color .15s,transform .1s;}
 .react-btn:hover{background:rgba(201,151,58,.1);border-color:var(--gold);color:var(--goldP);}
@@ -189,7 +180,6 @@ textarea#postContent{resize:vertical;min-height:88px;font-size:0.92rem;line-heig
 .btn-pin:hover{background:rgba(201,151,58,.1);color:var(--goldP);}
 .btn-pin.hidden{display:none !important;}
 
-/* REPLIES */
 .replies-section{margin-top:14px;border-top:1px solid rgba(201,151,58,.1);padding-top:12px;display:none;}
 .replies-section.open{display:block;}
 .replies-list{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;}
@@ -203,7 +193,7 @@ textarea#postContent{resize:vertical;min-height:88px;font-size:0.92rem;line-heig
 .reply-delete{background:transparent;border:none;color:rgba(255,100,100,.4);font-size:0.7rem;cursor:pointer;font-family:'DM Sans',sans-serif;padding:2px 6px;transition:color .2s;}
 .reply-delete:hover{color:#ff6060;}
 .reply-delete.hidden{display:none;}
-/* Reply form */
+
 .reply-form{display:flex;gap:8px;align-items:flex-end;}
 .reply-form input[type="text"]{flex:1;min-width:0;background:rgba(255,255,255,.04);border:1px solid rgba(201,151,58,.2);border-radius:8px;color:var(--cream);padding:8px 12px;font-size:0.83rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
 .reply-form input[type="text"]:focus{border-color:var(--gold);}
@@ -216,22 +206,18 @@ textarea#postContent{resize:vertical;min-height:88px;font-size:0.92rem;line-heig
 .btn-send-reply:hover{opacity:.85;}
 .btn-send-reply:disabled{opacity:.4;cursor:not-allowed;}
 
-/* LOAD MORE */
 .load-more-wrap{max-width:700px;margin:20px auto 0;text-align:center;}
 .btn-load-more{background:rgba(201,151,58,.08);border:1px solid rgba(201,151,58,.3);border-radius:30px;color:var(--goldP);padding:11px 32px;font-size:0.86rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;letter-spacing:.04em;}
 .btn-load-more:hover{background:rgba(201,151,58,.18);border-color:var(--gold);}
 
-/* EMPTY / LOADING */
 .fw-empty{text-align:center;padding:60px 20px;color:var(--silver);}
 .fw-empty .big-icon{font-size:2.8rem;margin-bottom:14px;opacity:.6;}
 .fw-empty p{font-size:0.9rem;font-style:italic;opacity:.6;}
 .fw-loading{text-align:center;padding:40px;color:var(--silver);opacity:.5;font-size:0.88rem;font-style:italic;}
 
-/* TOAST */
 #fw-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(10,24,48,.95);border:1px solid rgba(201,151,58,.4);color:var(--goldP);padding:10px 22px;border-radius:30px;font-size:0.84rem;letter-spacing:.03em;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:999;backdrop-filter:blur(10px);white-space:nowrap;}
 #fw-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* MOBILE */
 @media(max-width:500px){
   .page{padding:36px 14px 70px;}
   .fw-form-card{padding:16px;}
@@ -276,12 +262,12 @@ textarea#postContent{resize:vertical;min-height:88px;font-size:0.92rem;line-heig
     <button id="adminToggleBtn" onclick="toggleAdmin()" style="background:transparent;border:1px solid rgba(201,151,58,.2);border-radius:20px;color:var(--silver);padding:5px 16px;font-size:0.78rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;letter-spacing:.04em;">🔑 Admin</button>
   </div>
 
-  <!-- NEW POSTS BANNER -->
+  
   <div class="new-posts-banner" id="newPostsBanner" onclick="scrollToTop()"></div>
 
   <div class="divider"><div class="gem"></div></div>
 
-  <!-- FORM -->
+  
   <div class="fw-form-card">
     <div class="fw-form-top">
       <div class="avatar-picker">
@@ -331,14 +317,14 @@ textarea#postContent{resize:vertical;min-height:88px;font-size:0.92rem;line-heig
     </div>
   </div>
 
-  <!-- TOOLBAR -->
+  
   <div class="fw-toolbar">
     <button class="sort-btn active" id="sortNew" onclick="setSort('new')">🕐 Newest</button>
     <button class="sort-btn" id="sortTop" onclick="setSort('top')">🔥 Top</button>
     <span class="post-count-label" id="postCountLabel"></span>
   </div>
 
-  <!-- FEED -->
+  
   <div class="fw-posts" id="postsFeed">
     <div class="fw-loading">Loading the wall...</div>
   </div>
@@ -373,13 +359,11 @@ let avatarDataURL = null;
 const CLOUDINARY_CLOUD  = 'dbtoadpgi';
 const CLOUDINARY_PRESET = 'images memories';
 
-// Music state
 let selectedMusic = null;
 let previewAudio = null;
 let activePostAudio = null;
 let activePostId = null;
 
-// ── SORT ──
 window.setSort = function(mode) {
   sortMode = mode;
   visibleCount = PAGE_SIZE;
@@ -388,20 +372,17 @@ window.setSort = function(mode) {
   renderFeed();
 };
 
-// ── LOAD MORE ──
 window.loadMore = function() {
   visibleCount += PAGE_SIZE;
   renderFeed();
 };
 
-// ── SCROLL TO TOP (new posts banner) ──
 window.scrollToTop = function() {
   window.scrollTo({top:0,behavior:'smooth'});
   document.getElementById('newPostsBanner').classList.remove('visible');
   lastKnownCount = allPosts.length;
 };
 
-// ── MUSIC TABS ──
 window.switchMusicTab = function(tab) {
   document.getElementById('tabSearch').classList.toggle('active', tab==='search');
   document.getElementById('tabUpload').classList.toggle('active', tab==='upload');
@@ -411,7 +392,6 @@ window.switchMusicTab = function(tab) {
   if(tab==='none') removeMusic();
 };
 
-// ── ITUNES SEARCH ──
 window.searchMusic = async function() {
   const q = document.getElementById('musicSearchInput').value.trim();
   if(!q) return;
@@ -483,7 +463,6 @@ async function uploadAudioToCloudinary(file){
   }catch(e){ return null; }
 }
 
-// ── ADMIN ──
 window.toggleAdmin = function(){
   if(isAdmin){ isAdmin=false; showToast('Admin mode off'); renderAdminBtn(); document.querySelectorAll('.btn-delete,.btn-pin').forEach(b=>b.classList.add('hidden')); return; }
   const pw=prompt('Enter admin password:');
@@ -499,7 +478,6 @@ window.updateCharCount = function(){ document.getElementById('charCount').textCo
 async function uploadAvatarToCloudinary(dataURL){ try{ const form=new FormData(); form.append('file',dataURL); form.append('upload_preset',CLOUDINARY_PRESET); const r=await fetch('https://api.cloudinary.com/v1_1/'+CLOUDINARY_CLOUD+'/image/upload',{method:'POST',body:form}); if(!r.ok) throw new Error(); const json=await r.json(); return json.secure_url||null; }catch(e){ return null; } }
 function compressAvatar(dataURL){ return new Promise(resolve=>{ const img=new Image(); img.onload=function(){ const MAX=300,scale=Math.min(MAX/Math.max(img.width,img.height),1),W=Math.round(img.width*scale),H=Math.round(img.height*scale),canvas=document.createElement('canvas'); canvas.width=W; canvas.height=H; canvas.getContext('2d').drawImage(img,0,0,W,H); resolve(canvas.toDataURL('image/jpeg',0.75)); }; img.onerror=()=>resolve(dataURL); img.src=dataURL; }); }
 
-// ── SUBMIT POST ──
 window.submitPost = async function(){
   const content=document.getElementById('postContent').value.trim();
   const nickname=document.getElementById('nicknameInput').value.trim()||'Anonymous';
@@ -522,18 +500,14 @@ window.submitPost = async function(){
   finally{ btn.disabled=false; btn.textContent='Post it →'; }
 };
 
-// ── REACTIONS ──
 function getReacted(id){ try{ return JSON.parse(localStorage.getItem('fw_reacted_'+id)||'[]'); }catch{ return []; } }
 function markReacted(id,e){ const l=getReacted(id); if(!l.includes(e)){ l.push(e); localStorage.setItem('fw_reacted_'+id,JSON.stringify(l)); } }
 window.reactToPost=function(id,e){ const r=getReacted(id); if(r.includes(e)){ showToast('You already reacted with '+e); return; } runTransaction(ref(db,'freedomWall/'+id+'/reactions/'+e),c=>(c||0)+1); markReacted(id,e); };
 
-// ── PIN ──
 window.togglePin=function(id,currentPin){ if(!isAdmin) return; update(ref(db,'freedomWall/'+id),{pinned:!currentPin}).then(()=>showToast(currentPin?'Unpinned ✦':'Pinned ✦')).catch(()=>showToast('Failed.')); };
 
-// ── DELETE ──
 window.deletePost=function(id){ if(!isAdmin) return; if(!confirm('Delete this post?')) return; remove(ref(db,'freedomWall/'+id)).then(()=>showToast('Post deleted ✦')).catch(()=>showToast('Failed to delete.')); };
 
-// ── REPLIES ──
 window.toggleReplies=function(postId){
   const section=document.getElementById('replies_'+postId);
   if(!section) return;
@@ -559,7 +533,6 @@ window.submitReply=async function(postId){
 
 window.deleteReply=function(postId,replyId){ if(!isAdmin) return; if(!confirm('Delete reply?')) return; remove(ref(db,'freedomWall/'+postId+'/replies/'+replyId)).then(()=>showToast('Reply deleted ✦')); };
 
-// ── MUSIC PLAYER ──
 window.togglePostMusic=function(postId,audioUrl){
   const playBtn=document.getElementById('play_'+postId),artEl=document.getElementById('art_'+postId),fillEl=document.getElementById('fill_'+postId),timeEl=document.getElementById('time_'+postId);
   if(activePostId===postId&&activePostAudio){ activePostAudio.pause(); activePostAudio=null; activePostId=null; if(playBtn) playBtn.textContent='▶'; if(artEl) artEl.classList.remove('spinning'); return; }
@@ -572,7 +545,6 @@ window.togglePostMusic=function(postId,audioUrl){
 };
 function fmt(s){ return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
 
-// ── RENDER FEED ──
 function getSortedPosts(){
   const pinned=allPosts.filter(p=>p.pinned);
   const rest=allPosts.filter(p=>!p.pinned);
@@ -603,7 +575,7 @@ function renderFeed(){
     const replyList=Object.entries(repliesData).map(([rid,r])=>r?'<div class="reply-item"><div class="reply-avatar">'+getInitialEmoji(r.nickname)+'</div><div class="reply-bubble"><div class="reply-name">'+esc(r.nickname||'Anonymous')+'</div><div class="reply-body">'+esc(r.content||'')+'</div><div class="reply-time" style="display:flex;align-items:center;gap:8px;">'+timeAgo(r.timestamp||0)+(isAdmin?'<button class="reply-delete'+(isAdmin?'':' hidden')+'" onclick="deleteReply(\''+post.id+'\',\''+rid+'\')">🗑</button>':'')+'</div></div></div>':'').filter(Boolean).join('');
     const replyCount=Object.keys(repliesData).length;
 
-    // Music
+    
     let musicHTML='';
     if(post.music&&post.music.url){ const m=post.music,safeUrl=m.url.replace(/'/g,"%27"),artHTML=m.art?'<div class="player-art" id="art_'+post.id+'"><img src="'+esc(m.art)+'" alt=""/></div>':'<div class="player-art" id="art_'+post.id+'">🎵</div>',badge=m.type==='itunes'?'🍎 iTunes':'🎵 Upload'; musicHTML='<div class="post-music-player"><div class="player-source-badge">'+badge+'</div><div class="player-art-wrap">'+artHTML+'</div><div class="player-info"><div class="player-title">'+esc(m.title||'Unknown')+'</div><div class="player-artist">'+esc(m.artist||'')+'</div><div class="player-progress"><div class="player-progress-bar"><div class="player-progress-fill" id="fill_'+post.id+'"></div></div><div class="player-time" id="time_'+post.id+'">0:00 / 0:30</div></div></div><button class="player-play-btn" id="play_'+post.id+'" onclick="togglePostMusic(\''+post.id+'\',\''+safeUrl+'\')">▶</button></div>'; }
 
@@ -632,12 +604,11 @@ function renderFeed(){
   }).join('');
 }
 
-// ── FIREBASE LISTENER ──
 onValue(wallRef, snapshot=>{
   const data=snapshot.val();
   if(!data){ allPosts=[]; renderFeed(); isFirstLoad=false; return; }
   allPosts=Object.entries(data).map(([id,v])=>({id,...v}));
-  // New posts banner
+  
   if(!isFirstLoad && allPosts.length > lastKnownCount && lastKnownCount >= 0){
     const newCount=allPosts.length-lastKnownCount;
     const banner=document.getElementById('newPostsBanner');
