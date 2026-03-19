@@ -15,12 +15,10 @@
 }
 html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
 
-/* STARS */
 .stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 .star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) var(--delay,0s) infinite ease-in-out;}
 @keyframes twinkle{0%,100%{opacity:var(--min,.2);}50%{opacity:var(--max,.8);}}
 
-/* SHOOTING STAR */
 .shooting-star{
   position:absolute;top:0;left:0;width:2px;height:2px;
   background:linear-gradient(90deg,rgba(255,255,255,0),#fff,var(--goldP));
@@ -40,7 +38,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     radial-gradient(ellipse 35% 28% at 20% 100%,rgba(201,151,58,.1) 0%,transparent 60%),
     radial-gradient(ellipse 35% 28% at 80% 100%,rgba(201,151,58,.08) 0%,transparent 60%);}
 
-/* ANIMATIONS */
 @keyframes rise{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
 @keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(200%);}}
 @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
@@ -50,10 +47,8 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 @keyframes newBadgePulse{0%,100%{box-shadow:0 0 0 0 rgba(201,151,58,.4);}50%{box-shadow:0 0 0 6px rgba(201,151,58,0);}}
 @keyframes progressSlide{from{width:0%;}to{width:var(--progress-w,0%);}}
 
-/* PAGE */
 .page{position:relative;z-index:1;min-height:100vh;padding:50px 20px 80px;}
 
-/* HEADER */
 .dw-header{text-align:center;padding:20px 0 40px;animation:rise .8s ease both;}
 .back-link{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:0.82rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;margin-bottom:32px;opacity:.8;transition:opacity .2s;}
 .back-link:hover{opacity:1;}
@@ -61,7 +56,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .dw-header h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,6vw,3.4rem);font-weight:900;background:linear-gradient(135deg,var(--goldP) 0%,var(--gold) 50%,var(--goldD) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.5px;line-height:1.1;}
 .dw-header p{margin-top:10px;color:var(--silver);font-size:0.9rem;font-style:italic;letter-spacing:.04em;}
 
-/* PHOTO COUNT BADGE */
 .photo-count-wrap{display:flex;justify-content:center;margin-top:14px;}
 .photo-count-badge{
   display:inline-flex;align-items:center;gap:7px;
@@ -71,12 +65,10 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 }
 .photo-count-badge .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);box-shadow:0 0 6px var(--gold);animation:twinkle 1.5s infinite ease-in-out;}
 
-/* DIVIDER */
 .divider{display:flex;align-items:center;gap:14px;margin:0 auto 40px;max-width:500px;}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--goldD),transparent);}
 .gem{width:8px;height:8px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;box-shadow:0 0 8px var(--gold);}
 
-/* UPLOAD CARD */
 .dw-upload-card{
   max-width:700px;margin:0 auto 40px;
   background:rgba(10,24,48,.7);
@@ -88,14 +80,12 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 }
 @media(max-width:768px){.dw-upload-card{margin:0 10px 30px;padding:20px;}}
 
-/* LIMIT BADGE */
 .limit-badge{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
 .limit-text{font-size:0.78rem;color:var(--silver);opacity:.7;}
 .limit-count{font-size:0.78rem;color:var(--goldP);font-weight:600;letter-spacing:.04em;}
 .limit-bar{height:3px;background:rgba(255,255,255,.08);border-radius:10px;margin-bottom:20px;overflow:hidden;}
 .limit-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--goldB));border-radius:10px;transition:width .4s ease;}
 
-/* NAME INPUT */
 .name-input{
   width:100%;background:rgba(255,255,255,.04);
   border:1px solid rgba(201,151,58,.2);border-radius:8px;
@@ -106,7 +96,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .name-input:focus{border-color:var(--gold);}
 .name-input::placeholder{color:rgba(184,204,224,.35);}
 
-/* DROP ZONE */
 .drop-zone{
   border:2px dashed rgba(201,151,58,.3);border-radius:10px;padding:32px 20px;
   text-align:center;cursor:pointer;transition:all .25s;margin-bottom:14px;
@@ -119,13 +108,11 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .drop-zone .dz-sub{font-size:0.75rem;color:var(--silver);opacity:.5;margin-top:4px;}
 #photoFileInput{display:none;}
 
-/* PREVIEW */
 #imgPreviewWrap{display:none;margin-bottom:14px;text-align:center;}
 #imgPreview{max-width:100%;max-height:260px;border-radius:10px;border:1px solid rgba(201,151,58,.3);object-fit:contain;}
 .remove-preview{background:transparent;border:1px solid rgba(255,80,80,.3);border-radius:20px;color:#ff9090;font-size:0.75rem;padding:4px 12px;cursor:pointer;margin-top:8px;font-family:'DM Sans',sans-serif;transition:all .2s;}
 .remove-preview:hover{background:rgba(255,60,60,.15);}
 
-/* CAPTION INPUT */
 .caption-input{
   width:100%;background:rgba(255,255,255,.04);
   border:1px solid rgba(201,151,58,.2);border-radius:8px;
@@ -136,7 +123,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .caption-input:focus{border-color:var(--gold);}
 .caption-input::placeholder{color:rgba(184,204,224,.35);}
 
-/* UPLOAD PROGRESS */
 .upload-progress-wrap{display:none;margin-bottom:14px;}
 .upload-progress-label{display:flex;justify-content:space-between;font-size:0.75rem;color:var(--silver);opacity:.7;margin-bottom:6px;}
 .upload-progress-bar{height:4px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden;}
@@ -147,7 +133,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   transition:width .3s ease;
 }
 
-/* SUBMIT BTN */
 .btn-dump{
   position:relative;overflow:hidden;width:100%;
   background:linear-gradient(135deg,var(--gold),var(--goldD));
@@ -162,18 +147,15 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .btn-dump:active{transform:scale(0.98);}
 .btn-dump:disabled{opacity:.4;cursor:not-allowed;}
 
-/* LOCKED STATE */
 .locked-msg{
   text-align:center;padding:20px;
   background:rgba(201,151,58,.06);border:1px solid rgba(201,151,58,.2);
   border-radius:10px;color:var(--goldP);font-size:0.88rem;font-style:italic;
 }
 
-/* ─── MASONRY GRID ─── */
 .dw-grid{position:relative;max-width:1100px;margin:0 auto;padding:0 16px;}
 .dw-grid-inner{position:relative;width:100%;}
 
-/* ─── PHOTO CARD ─── */
 .dw-card{
   position:absolute;top:0;left:0;
   width:200px;
@@ -195,7 +177,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   transition:border-color .2s,box-shadow .2s,transform .28s cubic-bezier(.25,.46,.45,.94),opacity .32s ease;
 }
 
-/* NEW BADGE */
 .new-badge{
   position:absolute;top:8px;left:8px;z-index:5;
   background:linear-gradient(135deg,var(--gold),var(--goldB));
@@ -205,7 +186,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   animation:newBadgePulse 2s infinite;
 }
 
-/* ─── IMAGE WRAPPER ─── */
 .dw-card-img-wrap{
   position:relative;overflow:hidden;
   aspect-ratio:4/3;
@@ -218,7 +198,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 }
 .dw-card-img-wrap.img-loaded::after{display:none;}
 
-/* HOVER OVERLAY */
 .dw-card-img-overlay{
   position:absolute;inset:0;
   background:linear-gradient(to bottom,transparent 50%,rgba(5,13,31,.7) 100%);
@@ -229,11 +208,9 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 }
 .dw-card:hover .dw-card-img-overlay{opacity:1;}
 
-/* ─── LAZY IMAGE ─── */
 .lazy-img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .4s ease;}
 .lazy-img.img-loaded{opacity:1;}
 
-/* ─── CARD FOOTER ─── */
 .dw-card-footer{padding:8px 10px 4px;}
 
 .dw-card-uploader{
@@ -247,7 +224,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .dw-card-caption{font-size:0.78rem;color:var(--silver);font-style:italic;line-height:1.4;margin-bottom:4px;}
 .dw-card-time{font-size:0.65rem;color:var(--silver);opacity:.4;margin-bottom:6px;}
 
-/* REACTIONS */
 .dw-card-reactions{
   display:flex;align-items:center;gap:6px;
   padding:0 10px 10px;
@@ -269,14 +245,12 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .reaction-btn .r-emoji{font-size:.85rem;}
 .reaction-btn .r-count{font-weight:600;}
 
-/* ─── SKELETON CARDS ─── */
 .dw-card.skeleton{pointer-events:none;}
 .skeleton-slab{position:relative;overflow:hidden;background:rgba(255,255,255,.05);}
 .skeleton-slab::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.07) 50%,transparent 100%);animation:shimmer 1.8s linear infinite;}
 .skeleton-line{height:10px;border-radius:4px;margin:9px 12px;background:rgba(255,255,255,.05);position:relative;overflow:hidden;}
 .skeleton-line::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);animation:shimmer 1.8s linear infinite .15s;}
 
-/* ADMIN DELETE */
 .dw-del-btn{
   position:absolute;top:8px;right:8px;
   background:rgba(200,40,40,.85);border:none;border-radius:50%;
@@ -287,7 +261,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 .dw-del-btn:hover{background:rgb(230,40,40);}
 .admin-on .dw-card .dw-del-btn{display:flex;}
 
-/* ADMIN BTN */
 #adminBtn{
   position:fixed;bottom:30px;right:24px;z-index:500;
   background:rgba(10,24,48,.92);border:1px solid rgba(201,151,58,.25);
@@ -297,12 +270,10 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 }
 #adminBtn:hover{border-color:var(--gold);color:var(--goldP);}
 
-/* EMPTY */
 .dw-empty{text-align:center;padding:60px 20px;color:var(--silver);}
 .dw-empty .big-icon{font-size:2.8rem;margin-bottom:14px;opacity:.5;}
 .dw-empty p{font-size:0.9rem;font-style:italic;opacity:.5;}
 
-/* TOAST */
 #dw-toast{
   position:fixed;bottom:30px;left:50%;
   transform:translateX(-50%) translateY(20px);
@@ -315,7 +286,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 }
 #dw-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* ─── LIGHTBOX ─── */
 .lightbox{
   position:fixed;inset:0;z-index:2000;
   background:rgba(5,13,31,.92);
@@ -355,7 +325,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 }
 .lightbox-close:hover{border-color:var(--gold);color:var(--goldP);transform:rotate(90deg);}
 
-/* ─── CONFETTI ─── */
 .confetti-piece{
   position:fixed;pointer-events:none;z-index:3000;
   width:8px;height:8px;border-radius:2px;
@@ -370,7 +339,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 
 <div class="page">
 
-  <!-- HEADER -->
+  
   <div class="dw-header">
     <a href="index.html" class="back-link">← Back to Memory Palace</a>
     <span class="crown">📸</span>
@@ -386,7 +355,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 
   <div class="divider"><div class="gem"></div></div>
 
-  <!-- UPLOAD CARD -->
+  
   <div class="dw-upload-card" id="uploadCard">
 
     <div class="limit-badge">
@@ -425,7 +394,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     <button class="btn-dump" id="submitBtn">Drop it 📸</button>
   </div>
 
-  <!-- FEED -->
+  
   <div class="dw-grid" id="dumpGrid">
     <div class="dw-grid-inner" id="dumpGridInner"></div>
   </div>
@@ -435,7 +404,6 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 <button id="adminBtn">🔑 Admin</button>
 <div id="dw-toast"></div>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <div class="lightbox-inner">
     <button class="lightbox-close" id="lightboxClose">✕</button>
@@ -452,14 +420,14 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 
   const firebaseConfig = { databaseURL: "https://emerson-11-memories-default-rtdb.firebaseio.com" };
 
-  // Admin password is hashed — never store plaintext secrets in client JS
-  // SHA-256 of "BNSHI2026"
+  
+  
   const ADMIN_HASH   = "779541a0509c805f82b31025e9be90667d1810ec68236cc3a9ecf087f457bf67";
   const MAX_PHOTOS   = 10;
   const STORAGE_KEY  = "dumpwall_uploaded";
   const TIME_KEY     = "dumpwall_reset_time";
   const RESET_MS     = 24 * 60 * 60 * 1000;
-  const NEW_THRESHOLD_MS = 30 * 60 * 1000; // posts under 30min show "NEW"
+  const NEW_THRESHOLD_MS = 30 * 60 * 1000; 
 
   const app     = initializeApp(firebaseConfig);
   const db      = getDatabase(app);
@@ -469,17 +437,17 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
   let selectedFile   = null;
   let latestSnapshot = null;
 
-  // Track which posts the current session has already reacted to
+  
   const reactedPosts = new Set(JSON.parse(localStorage.getItem("dumpwall_reacted") || "[]"));
 
-  // ── HASH HELPER ──
+  
   async function sha256(message) {
     const msgBuffer = new TextEncoder().encode(message);
     const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
     return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2,"0")).join("");
   }
 
-  // ── LIMIT TRACKING ──
+  
   function checkReset() {
     try {
       const lastReset = parseInt(localStorage.getItem(TIME_KEY) || "0");
@@ -536,7 +504,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     }
   }
 
-  // ── DROP ZONE ──
+  
   const dropZone = document.getElementById("dropZone");
   const fileInput = document.getElementById("photoFileInput");
 
@@ -571,7 +539,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     reader.readAsDataURL(file);
   }
 
-  // ── CLOUDINARY UPLOAD with real progress ──
+  
   async function uploadToCloudinary(file) {
     return new Promise((resolve, reject) => {
       const form = new FormData();
@@ -583,7 +551,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
 
       xhr.upload.addEventListener("progress", e => {
         if (!e.lengthComputable) return;
-        const pct = Math.round((e.loaded / e.total) * 90); // cap at 90 — last 10% is server processing
+        const pct = Math.round((e.loaded / e.total) * 90); 
         setUploadProgress(pct);
       });
 
@@ -618,7 +586,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     if (fill) fill.style.width = "0%";
   }
 
-  // ── SUBMIT ──
+  
   document.getElementById("submitBtn").addEventListener("click", async () => {
     if (getUploaded() >= MAX_PHOTOS) { showToast("You've hit your 10 photo limit 🔒"); return; }
     if (!selectedFile) { showToast("Pick a photo first! 🖼️"); return; }
@@ -637,7 +605,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
         src: url,
         caption: caption || null,
         uploader: nameVal || "Anonymous",
-        timestamp: Date.now(), // use client timestamp so sorting works instantly
+        timestamp: Date.now(), 
         hearts: 0,
       });
 
@@ -662,7 +630,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     }
   });
 
-  // ── REACTIONS ──
+  
   async function toggleReaction(postId, currentCount) {
     const alreadyReacted = reactedPosts.has(postId);
     const newCount = alreadyReacted
@@ -679,7 +647,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     await update(ref(db, `dumpWall/${postId}`), { hearts: newCount });
   }
 
-  // ── ADMIN ──
+  
   document.getElementById("adminBtn").addEventListener("click", async () => {
     if (isAdmin) {
       isAdmin = false;
@@ -704,7 +672,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     }
   });
 
-  // ── DELETE ──
+  
   document.getElementById("dumpGridInner").addEventListener("click", e => {
     const delBtn = e.target.closest(".dw-del-btn");
     if (delBtn && isAdmin) {
@@ -715,7 +683,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
         .catch(() => showToast("Failed to delete."));
     }
 
-    // Reaction click
+    
     const reactionBtn = e.target.closest(".reaction-btn");
     if (reactionBtn) {
       e.stopPropagation();
@@ -725,12 +693,12 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
       return;
     }
 
-    // Card click → lightbox (but not the delete btn)
+    
     const card = e.target.closest(".dw-card");
     if (card && !delBtn) openLightbox(card);
   });
 
-  // ── LIGHTBOX ──
+  
   function openLightbox(card) {
     const img     = card.querySelector(".lazy-img");
     const caption = card.querySelector(".dw-card-caption");
@@ -759,14 +727,14 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     if (e.key === "Escape") closeLightbox();
   });
 
-  // ── CLOUDINARY URL HELPER ──
+  
   function getCloudinaryUrl(src, width) {
     if (!src || !src.includes("res.cloudinary.com")) return src;
     if (src.includes("/image/upload/w_")) return src;
     return src.replace("/image/upload/", `/image/upload/w_${width},c_limit,q_auto,f_auto/`);
   }
 
-  // ── MASONRY ──
+  
   function getColCount() {
     const w = window.innerWidth;
     if (w >= 1000) return 4;
@@ -827,7 +795,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     resizeTimer = setTimeout(scheduleMasonry, 150);
   });
 
-  // ── LAZY LOAD ──
+  
   let lazyObserver = null;
 
   function setupLazyLoad() {
@@ -872,7 +840,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     });
   }
 
-  // ── SKELETONS ──
+  
   function showSkeletons() {
     const inner = document.getElementById("dumpGridInner");
     if (!inner) return;
@@ -887,14 +855,14 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     scheduleMasonry();
   }
 
-  // ── RENDER GRID ──
+  
   function renderGrid() {
     const inner = document.getElementById("dumpGridInner");
     if (!inner || !latestSnapshot) return;
 
     const data = latestSnapshot.val();
 
-    // Update total count badge
+    
     const countBadge = document.getElementById("totalPhotoCount");
     if (countBadge) {
       const total = data ? Object.keys(data).length : 0;
@@ -963,7 +931,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     renderGrid();
   });
 
-  // ── CONFETTI ──
+  
   function launchConfetti() {
     const colors = [
       "#c9973a","#e8b84b","#f0d080","#7a5a1e",
@@ -992,7 +960,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     });
   }
 
-  // ── HELPERS ──
+  
   function escapeHTML(str) {
     return String(str)
       .replace(/&/g,"&amp;").replace(/</g,"&lt;")
@@ -1012,18 +980,17 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     setTimeout(() => t.classList.remove("show"), 2800);
   }
 
-  // ── INIT ──
+  
   checkReset();
   updateLimitUI();
   showSkeletons();
 </script>
 
-<!-- STARS + SHOOTING STARS -->
 <script>
 (function(){
   const c = document.getElementById("starsContainer");
 
-  // Static stars
+  
   for (let i = 0; i < 65; i++) {
     const s = document.createElement("div");
     s.className = "star";
@@ -1035,13 +1002,13 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     c.appendChild(s);
   }
 
-  // Periodic shooting stars
+  
   function spawnShootingStar() {
     const el = document.createElement("div");
     el.className = "shooting-star";
     const startX = Math.random() * window.innerWidth * 0.7;
     const startY = Math.random() * window.innerHeight * 0.4;
-    const angle  = 30 + Math.random() * 20; // degrees, mostly right-down
+    const angle  = 30 + Math.random() * 20; 
     const dist   = 200 + Math.random() * 300;
     const rad    = angle * Math.PI / 180;
     el.style.cssText =
@@ -1052,7 +1019,7 @@ html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-s
     setTimeout(() => el.remove(), 1600);
   }
 
-  // Fire a few on load, then randomly after
+  
   setTimeout(spawnShootingStar, 800);
   setTimeout(spawnShootingStar, 2200);
   setInterval(() => {
