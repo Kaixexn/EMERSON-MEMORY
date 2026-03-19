@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-/* ─── VARIABLES ─────────────────────────────────────── */
+
 :root{
   --navy:#091628;
   --navy2:#0d1f35;
@@ -20,7 +20,6 @@
   --shadow:0 8px 32px rgba(0,0,0,.5);
 }
 
-/* ─── RESET ─────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
@@ -31,7 +30,6 @@ body{
   overflow-x:hidden;
 }
 
-/* ─── STAR BACKGROUND ───────────────────────────────── */
 body::before{
   content:'';
   position:fixed;inset:0;
@@ -47,7 +45,6 @@ body::before{
 }
 @keyframes twinkle{0%,100%{opacity:.15;transform:scale(1)}50%{opacity:.9;transform:scale(1.4)}}
 
-/* ─── NAVBAR ─────────────────────────────────────────── */
 .navbar{
   position:relative;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
@@ -71,7 +68,6 @@ body::before{
 .navbar-links a:hover{color:var(--gold)}
 .navbar-links a.active{color:var(--gold)}
 
-/* ─── HERO ───────────────────────────────────────────── */
 .hero{
   position:relative;z-index:1;
   text-align:center;
@@ -110,7 +106,6 @@ body::before{
   border-radius:999px;transition:width .5s ease;
 }
 
-/* ─── COUNTDOWN ──────────────────────────────────────── */
 .countdown-wrap{
   text-align:center;margin-bottom:32px;
 }
@@ -142,7 +137,6 @@ body::before{
   color:var(--silver);margin-top:4px;display:block;
 }
 
-/* ─── TOOLBAR ────────────────────────────────────────── */
 .toolbar{
   position:relative;z-index:10;
   display:flex;align-items:center;gap:12px;flex-wrap:wrap;
@@ -173,7 +167,6 @@ body::before{
   background:rgba(201,151,58,.2);border-color:var(--goldB);color:var(--goldB);
 }
 
-/* ─── MASONRY GRID ───────────────────────────────────── */
 .masonry-wrap{
   position:relative;z-index:1;
   padding:0 40px 80px;
@@ -188,7 +181,6 @@ body::before{
 @media(max-width:480px){.masonry-wrap{padding:0 12px 80px;}}
 @media(max-width:480px){.photo-card{margin-bottom:10px;}}
 
-/* ─── PHOTO CARD ─────────────────────────────────────── */
 .photo-card{
   break-inside:avoid;
   margin-bottom:18px;
@@ -205,7 +197,6 @@ body::before{
   box-shadow:0 16px 48px rgba(0,0,0,.6),0 0 0 1px rgba(201,151,58,.2);
 }
 
-/* image fills naturally — portrait stays portrait, landscape stays landscape */
 .photo-card img{
   display:block;width:100%;height:auto;
   object-fit:contain;
@@ -221,7 +212,6 @@ body::before{
   font-style:italic;
 }
 
-/* edit controls overlay */
 .card-controls{
   position:absolute;top:8px;right:8px;
   display:none;gap:6px;
@@ -240,12 +230,10 @@ body::before{
 .ctrl-del{background:rgba(180,40,40,.85);color:#fff}
 .ctrl-del:hover{background:#e53e3e}
 
-/* drag reorder */
 .edit-mode .photo-card{cursor:grab}
 .edit-mode .photo-card:active{cursor:grabbing}
 .photo-card.drag-over{outline:2px dashed var(--gold);outline-offset:3px}
 
-/* add-photo slot (edit mode only) */
 .add-card{
   break-inside:avoid;
   margin-bottom:18px;
@@ -266,14 +254,12 @@ body::before{
 .add-card p{font-size:.78rem;color:var(--silver);letter-spacing:.06em;text-transform:uppercase}
 .edit-mode .add-card{display:flex}
 
-/* ─── DIVIDER ────────────────────────────────────────── */
 .gold-divider{
   position:relative;z-index:1;
   text-align:center;padding:0 0 24px;
   color:rgba(201,151,58,.3);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;
 }
 
-/* ─── OVERLAYS ───────────────────────────────────────── */
 .overlay{
   position:fixed;inset:0;
   background:rgba(0,0,0,.88);z-index:1000;
@@ -315,7 +301,6 @@ body::before{
 .pw-error{font-size:.78rem;color:#e57373;margin-top:-8px;margin-bottom:10px;display:none}
 .pw-error.show{display:block}
 
-/* filter select in edit modal */
 .filter-select{
   width:100%;padding:10px 14px;border-radius:8px;
   border:1px solid rgba(201,151,58,.3);
@@ -325,7 +310,6 @@ body::before{
 }
 .filter-select:focus{border-color:var(--gold)}
 
-/* ─── LOADING OVERLAY ────────────────────────────────── */
 #loadingOverlay{
   position:fixed;inset:0;z-index:2000;
   background:rgba(9,22,40,.82);
@@ -352,7 +336,6 @@ body::before{
   transition:width .3s ease;width:0%;
 }
 
-/* ─── TOAST ──────────────────────────────────────────── */
 #toast{
   position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
   background:rgba(15,34,54,.97);border:1px solid rgba(201,151,58,.35);
@@ -362,7 +345,6 @@ body::before{
 }
 #toast.show{opacity:1}
 
-/* ─── CONFETTI ───────────────────────────────────────── */
 .confetti-piece{
   position:fixed;top:-10px;border-radius:2px;
   animation:confettiFall linear forwards;
@@ -372,11 +354,9 @@ body::before{
   to{transform:translateY(110vh) rotate(720deg);opacity:0}
 }
 
-/* ─── DELETE CONFIRM ─────────────────────────────────── */
 #delOverlay .modal{text-align:center}
 #delOverlay .modal .icon{font-size:2.5rem;margin-bottom:10px}
 
-/* ─── FOOTER ─────────────────────────────────────────── */
 footer{
   position:relative;z-index:1;
   text-align:center;padding:24px;
@@ -387,10 +367,8 @@ footer{
 </head>
 <body>
 
-<!-- STARS -->
 <div id="stars"></div>
 
-<!-- NAVBAR -->
 <nav class="navbar">
   <a class="navbar-brand" href="index.html">G-11 <span>Emerson</span></a>
   <ul class="navbar-links">
@@ -400,7 +378,6 @@ footer{
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <p class="hero-eyebrow">Class of 2026 · SY 2025–2026</p>
   <h1 class="hero-title">Our <em>Memories</em></h1>
@@ -411,7 +388,6 @@ footer{
   </div>
 </section>
 
-<!-- COUNTDOWN -->
 <section class="hero" style="padding:0 24px 40px">
   <div class="countdown-wrap">
     <div class="countdown-title">⏳ G-11 Emerson Closing Ceremony</div>
@@ -424,7 +400,6 @@ footer{
     </div>
   </div>
 
-<!-- TOOLBAR -->
 <div class="toolbar">
   <button class="filter-btn active" data-filter="normal" onclick="applyFilter('normal',this)">Original</button>
   <button class="filter-btn" data-filter="warm"   onclick="applyFilter('warm',this)">Warm</button>
@@ -437,10 +412,9 @@ footer{
 
 <div class="gold-divider">✦ ✦ ✦</div>
 
-<!-- MASONRY GRID -->
 <div class="masonry-wrap">
   <div class="masonry" id="masonryGrid">
-    <!-- Add card always at the end in edit mode -->
+    
     <div class="add-card" id="addCard" onclick="openUpload()">
       <span>＋</span>
       <p>Add Memory</p>
@@ -450,7 +424,6 @@ footer{
 
 <footer>G-11 Emerson · Made with 💛 · 2026</footer>
 
-<!-- ── PASSWORD OVERLAY ── -->
 <div class="overlay" id="pwOverlay">
   <div class="modal">
     <h3>🔐 Edit Mode</h3>
@@ -464,7 +437,6 @@ footer{
   </div>
 </div>
 
-<!-- ── UPLOAD / CAPTION OVERLAY ── -->
 <div class="overlay" id="uploadOverlay">
   <div class="modal">
     <h3>📸 Add Memory</h3>
@@ -478,62 +450,7 @@ footer{
       <option value="fade">Fade</option>
       <option value="vivid">Vivid</option>
     </select>
-    <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFile(event)"/>
-    <div class="modal-row">
-      <button class="btn btn-gold" onclick="document.getElementById('fileInput').click()">Choose Photo</button>
-      <button class="btn btn-ghost" onclick="closeUpload()">Cancel</button>
-    </div>
-  </div>
-</div>
-
-<!-- ── EDIT CAPTION OVERLAY ── -->
-<div class="overlay" id="editOverlay">
-  <div class="modal">
-    <h3>✏️ Edit Caption</h3>
-    <p>Update the caption for this photo.</p>
-    <input class="modal-input" id="editCapInput" type="text" placeholder="Caption" maxlength="120"/>
-    <select class="filter-select" id="editFilterSelect">
-      <option value="normal">No Filter</option>
-      <option value="warm">Warm</option>
-      <option value="cool">Cool</option>
-      <option value="mono">Black & White</option>
-      <option value="fade">Fade</option>
-      <option value="vivid">Vivid</option>
-    </select>
-    <div class="modal-row">
-      <button class="btn btn-gold" onclick="saveEdit()">Save</button>
-      <button class="btn btn-ghost" onclick="closeEdit()">Cancel</button>
-    </div>
-  </div>
-</div>
-
-<!-- ── DELETE CONFIRM OVERLAY ── -->
-<div class="overlay" id="delOverlay">
-  <div class="modal">
-    <div class="icon">🗑️</div>
-    <h3>Remove Photo?</h3>
-    <p>This will permanently delete this memory. This can't be undone.</p>
-    <div class="modal-row">
-      <button class="btn btn-red" onclick="confirmDelete()">Remove</button>
-      <button class="btn btn-ghost" onclick="closeDelete()">Keep It</button>
-    </div>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div id="toast"></div>
-
-<!-- LOADING -->
-<div id="loadingOverlay">
-  <div class="spinner"></div>
-  <div class="loading-label" id="loadingLabel">Uploading…</div>
-  <div class="loading-bar-wrap"><div class="loading-bar-fill" id="loadingBar"></div></div>
-</div>
-
-<script>
-/* ═══════════════════════════════════════════════════
-   CONFIG
-═══════════════════════════════════════════════════ */
+    <input type="file" id="fileInput" accept="image
 const EDIT_PW           = 'BNSHI2026';
 const FB_URL            = 'https://emerson-11-memories-default-rtdb.firebaseio.com';
 const FB_PATH           = `${FB_URL}/emerson11.json`;
@@ -554,20 +471,14 @@ const FILTERS = {
   vivid  : 'saturate(1.7) contrast(1.1)',
 };
 
-/* ═══════════════════════════════════════════════════
-   STATE
-═══════════════════════════════════════════════════ */
-let photos      = [];   // [{url, caption, filter}]
+let photos      = [];   
 let editMode    = false;
 let activeFilter= 'normal';
-let pendingDel  = null;  // index of photo pending deletion
-let editIdx     = null;  // index of photo being edited
-let dragSrc     = null;  // index of drag source
-let isUploading = false; // prevents double-submit
+let pendingDel  = null;  
+let editIdx     = null;  
+let dragSrc     = null;  
+let isUploading = false; 
 
-/* ═══════════════════════════════════════════════════
-   STARS
-═══════════════════════════════════════════════════ */
 (function(){
   const c = document.getElementById('stars');
   for(let i=0;i<90;i++){
@@ -580,19 +491,16 @@ let isUploading = false; // prevents double-submit
   }
 })();
 
-/* ═══════════════════════════════════════════════════
-   FIREBASE
-═══════════════════════════════════════════════════ */
 async function loadFromFirebase(){
   try{
     const r = await fetch(FB_PATH);
     if(!r.ok) throw new Error(`HTTP ${r.status}`);
     const d = await r.json();
     if(d && Array.isArray(d.photos)){
-      // New format: {photos: [...]}
+      
       photos = d.photos;
     } else if(d && d.slots && typeof d.slots === 'object'){
-      // Old format: {slots: {id: {src, caption, filter}}}
+      
       photos = Object.values(d.slots)
         .filter(s => s && s.src)
         .map(s => ({ src: s.src, caption: s.caption || '', filter: s.filter || 'original' }));
@@ -615,27 +523,24 @@ async function saveToFirebase(retries=2){
         body:JSON.stringify({photos})
       });
       if(!r.ok) throw new Error(`Firebase HTTP ${r.status}`);
-      return; // success
+      return; 
     }catch(e){
       if(attempt === retries){
         toast('⚠ Save failed — check your connection', true);
         console.error('Firebase save error:', e);
       } else {
-        await new Promise(r=>setTimeout(r, 800)); // wait before retry
+        await new Promise(r=>setTimeout(r, 800)); 
       }
     }
   }
 }
 
-/* ═══════════════════════════════════════════════════
-   RENDER — DOM diffing: only add/remove/update changed cards
-═══════════════════════════════════════════════════ */
 function renderGrid(){
   const grid    = document.getElementById('masonryGrid');
   const addCard = document.getElementById('addCard');
   const existing= [...grid.querySelectorAll('.photo-card')];
 
-  // Update or create cards for each photo
+  
   photos.forEach((p, i) => {
     const filterCSS = FILTERS[p.filter||'normal']||'';
     const globalCSS = FILTERS[activeFilter]||'';
@@ -647,7 +552,7 @@ function renderGrid(){
     let card = existing[i];
 
     if(!card){
-      // CREATE new card
+      
       card = document.createElement('div');
       card.className = 'photo-card';
       card.innerHTML = `
@@ -658,11 +563,11 @@ function renderGrid(){
         <img alt="${p.caption||'Memory'}" loading="lazy"/>
         <div class="card-caption"><p></p></div>`;
 
-      // bind edit/delete once
+      
       card.querySelector('.ctrl-edit').addEventListener('click', ()=>openEdit(i));
       card.querySelector('.ctrl-del').addEventListener('click',  ()=>openDelete(i));
 
-      // desktop drag
+      
       card.addEventListener('dragstart', e => {
         dragSrc = i;
         card.style.opacity = '.5';
@@ -676,13 +581,13 @@ function renderGrid(){
       card.addEventListener('dragleave', ()  => card.classList.remove('drag-over'));
       card.addEventListener('drop',      e  => { e.preventDefault(); card.classList.remove('drag-over'); handleDrop(i); });
 
-      // mobile touch drag
+      
       attachTouchDrag(card, i);
 
       grid.insertBefore(card, addCard);
     }
 
-    // UPDATE card data (always sync regardless of new/existing)
+    
     card.dataset.idx  = i;
     card.draggable    = editMode;
 
@@ -693,12 +598,12 @@ function renderGrid(){
 
     card.querySelector('.card-caption p').innerHTML = capHTML;
 
-    // rebind edit/del buttons to current index (needed after reorder)
+    
     card.querySelector('.ctrl-edit').onclick = () => openEdit(i);
     card.querySelector('.ctrl-del').onclick  = () => openDelete(i);
   });
 
-  // Remove extra cards if photos were deleted
+  
   for(let i = photos.length; i < existing.length; i++){
     existing[i].remove();
   }
@@ -706,9 +611,6 @@ function renderGrid(){
   updateCounter();
 }
 
-/* ═══════════════════════════════════════════════════
-   MOBILE TOUCH DRAG
-═══════════════════════════════════════════════════ */
 function attachTouchDrag(card, idx){
   let touchStartX=0, touchStartY=0, clone=null;
 
@@ -719,7 +621,7 @@ function attachTouchDrag(card, idx){
     touchStartY = t.clientY;
     dragSrc = idx;
 
-    // create ghost clone
+    
     clone = card.cloneNode(true);
     clone.style.cssText = `
       position:fixed;z-index:9998;opacity:.75;pointer-events:none;
@@ -733,12 +635,12 @@ function attachTouchDrag(card, idx){
 
   card.addEventListener('touchmove', e => {
     if(!clone) return;
-    e.preventDefault(); // needs non-passive to prevent scroll
+    e.preventDefault(); 
     const t = e.touches[0];
     clone.style.left = (t.clientX - clone.offsetWidth/2) + 'px';
     clone.style.top  = (t.clientY - clone.offsetHeight/2) + 'px';
 
-    // highlight card under finger
+    
     clone.style.display='none';
     const el = document.elementFromPoint(t.clientX, t.clientY);
     clone.style.display='';
@@ -777,14 +679,11 @@ function updateCounter(){
   if(n>=TOTAL_SLOTS) launchConfetti();
 }
 
-/* ═══════════════════════════════════════════════════
-   FILTERS
-═══════════════════════════════════════════════════ */
 function applyFilter(f, btn){
   activeFilter=f;
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  // update all img filters
+  
   document.querySelectorAll('.photo-card').forEach((card,i)=>{
     const img=card.querySelector('img');
     if(!img||!photos[i]) return;
@@ -794,9 +693,6 @@ function applyFilter(f, btn){
   });
 }
 
-/* ═══════════════════════════════════════════════════
-   EDIT MODE
-═══════════════════════════════════════════════════ */
 function toggleEdit(){
   if(!editMode){
     document.getElementById('pwOverlay').classList.add('open');
@@ -833,9 +729,6 @@ function closePw(){
 }
 document.getElementById('pwInput').addEventListener('keydown',e=>{ if(e.key==='Enter') checkPw(); });
 
-/* ═══════════════════════════════════════════════════
-   LOADING STATE HELPERS
-═══════════════════════════════════════════════════ */
 function showLoading(label='Uploading…', pct=0){
   document.getElementById('loadingLabel').textContent = label;
   document.getElementById('loadingBar').style.width   = pct + '%';
@@ -850,9 +743,6 @@ function hideLoading(){
   document.getElementById('loadingBar').style.width = '0%';
 }
 
-/* ═══════════════════════════════════════════════════
-   UPLOAD
-═══════════════════════════════════════════════════ */
 function openUpload(){
   if(isUploading) return;
   document.getElementById('captionInput').value='';
@@ -877,20 +767,20 @@ async function handleFile(e){
   showLoading('Compressing image…', 10);
 
   try{
-    // Step 1: compress
+    
     const compressed = await compressImage(file, pct => {
       setLoadingProgress('Compressing image…', 10 + pct * 0.3);
     });
     setLoadingProgress('Uploading to cloud…', 40);
 
-    // Step 2: upload to Cloudinary via XHR for progress tracking
+    
     const url = await uploadWithProgress(compressed, pct => {
       setLoadingProgress('Uploading… ' + pct + '%', 40 + pct * 0.5);
     });
 
     setLoadingProgress('Saving…', 95);
 
-    // Step 3: save metadata to Firebase
+    
     photos.push({ url, caption, filter });
     await saveToFirebase();
 
@@ -919,7 +809,6 @@ function friendlyUploadError(err){
   return 'Upload failed. Please try again.';
 }
 
-/* XHR upload with real progress */
 function uploadWithProgress(file, onProgress){
   return new Promise((resolve, reject) => {
     const form = new FormData();
@@ -946,12 +835,11 @@ function uploadWithProgress(file, onProgress){
     };
     xhr.onerror   = () => reject(new Error('NetworkError'));
     xhr.ontimeout = () => reject(new Error('Upload timed out'));
-    xhr.timeout   = 60000; // 60s timeout
+    xhr.timeout   = 60000; 
     xhr.send(form);
   });
 }
 
-/* compress before upload — onProgress(0-1) callback */
 async function compressImage(file, onProgress){
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -988,9 +876,6 @@ async function compressImage(file, onProgress){
   });
 }
 
-/* ═══════════════════════════════════════════════════
-   EDIT CAPTION
-═══════════════════════════════════════════════════ */
 function openEdit(i){
   editIdx=i;
   document.getElementById('editCapInput').value=photos[i].caption||'';
@@ -1012,9 +897,6 @@ async function saveEdit(){
   toast('✅ Caption saved');
 }
 
-/* ═══════════════════════════════════════════════════
-   DELETE
-═══════════════════════════════════════════════════ */
 function openDelete(i){ pendingDel=i; document.getElementById('delOverlay').classList.add('open'); }
 function closeDelete(){ document.getElementById('delOverlay').classList.remove('open'); pendingDel=null; }
 async function confirmDelete(){
@@ -1026,9 +908,6 @@ async function confirmDelete(){
   toast('🗑️ Photo removed');
 }
 
-/* ═══════════════════════════════════════════════════
-   DRAG REORDER
-═══════════════════════════════════════════════════ */
 function handleDrop(targetIdx){
   if(dragSrc===null||dragSrc===targetIdx) return;
   const moved=photos.splice(dragSrc,1)[0];
@@ -1038,9 +917,6 @@ function handleDrop(targetIdx){
   renderGrid();
 }
 
-/* ═══════════════════════════════════════════════════
-   TOAST
-═══════════════════════════════════════════════════ */
 let toastTimer;
 function toast(msg,err=false){
   const el=document.getElementById('toast');
@@ -1051,9 +927,6 @@ function toast(msg,err=false){
   toastTimer=setTimeout(()=>el.classList.remove('show'),2800);
 }
 
-/* ═══════════════════════════════════════════════════
-   CONFETTI
-═══════════════════════════════════════════════════ */
 let confettiFired=false;
 function launchConfetti(){
   if(confettiFired) return;
@@ -1077,28 +950,22 @@ function launchConfetti(){
   toast('🎉 All memories filled!');
 }
 
-/* ═══════════════════════════════════════════════════
-   CLOSE OVERLAYS ON BG CLICK
-═══════════════════════════════════════════════════ */
 document.querySelectorAll('.overlay').forEach(o=>{
   o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); });
 });
 
-/* ═══════════════════════════════════════════════════
-   COUNTDOWN — March 31 2026, 8:00 AM
-═══════════════════════════════════════════════════ */
 (function tickCountdown(){
   const TARGET = new Date('2026-03-31T08:00:00');
   function update(){
     const now  = new Date();
     const diff = TARGET - now;
     if(diff <= 0){
-      // Clock hit zero — placeholder for the surprise reveal 🎉
+      
       document.getElementById('cdD').textContent = '00';
       document.getElementById('cdH').textContent = '00';
       document.getElementById('cdM').textContent = '00';
       document.getElementById('cdS').textContent = '00';
-      return; // stop ticking
+      return; 
     }
     const d = Math.floor(diff / 86400000);
     const h = Math.floor((diff % 86400000) / 3600000);
@@ -1113,9 +980,6 @@ document.querySelectorAll('.overlay').forEach(o=>{
   update();
 })();
 
-/* ═══════════════════════════════════════════════════
-   INIT
-═══════════════════════════════════════════════════ */
 loadFromFirebase();
 </script>
 </body>
