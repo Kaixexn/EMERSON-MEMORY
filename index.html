@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Before You Enter — G-11 Emerson</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+<link href="https:
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -18,11 +18,7 @@ html,body{
   font-family:'DM Sans',sans-serif;
   min-height:100vh;overflow-x:hidden;
 }
-
-/* ── CANVAS BG ── */
 #bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
-
-/* ── GLOW LAYERS ── */
 .glow-top{
   position:fixed;top:0;left:50%;transform:translateX(-50%);
   width:900px;height:500px;pointer-events:none;z-index:0;
@@ -30,8 +26,6 @@ html,body{
 }
 .glow-gold-l{position:fixed;bottom:0;left:0;width:400px;height:300px;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 0% 100%,rgba(201,151,58,.12) 0%,transparent 65%);}
 .glow-gold-r{position:fixed;bottom:0;right:0;width:400px;height:300px;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 100% 100%,rgba(201,151,58,.09) 0%,transparent 65%);}
-
-/* ── CURTAIN ── */
 .curtain{
   position:fixed;inset:0;z-index:100;
   background:var(--navy3);
@@ -43,8 +37,6 @@ html,body{
   0%{transform:scaleY(1);}
   100%{transform:scaleY(0);}
 }
-
-/* ── PAGE ── */
 .page{
   position:relative;z-index:1;
   min-height:100vh;
@@ -54,8 +46,6 @@ html,body{
   align-items:center;
   padding:0 24px;
 }
-
-/* ── TOP BADGE ── */
 .top-badge{
   text-align:center;
   padding:32px 0 0;
@@ -70,16 +60,12 @@ html,body{
   border-radius:30px;padding:5px 18px;
   background:rgba(201,151,58,.04);
 }
-
-/* ── MAIN CONTENT ── */
 .main{
   display:flex;flex-direction:column;
   align-items:center;
   padding:40px 0 20px;
   max-width:700px;margin:0 auto;width:100%;
 }
-
-/* ── CANDLE ── */
 .candle-wrap{
   position:relative;margin-bottom:32px;
   opacity:0;
@@ -95,8 +81,6 @@ html,body{
   33%{filter:drop-shadow(0 0 28px rgba(232,184,75,.8)) drop-shadow(0 0 80px rgba(201,151,58,.45));transform:scale(1.03) rotate(.5deg);}
   66%{filter:drop-shadow(0 0 16px rgba(232,184,75,.5)) drop-shadow(0 0 50px rgba(201,151,58,.25));transform:scale(.98) rotate(-.3deg);}
 }
-
-/* ── RULE ── */
 .thin-rule{
   display:flex;align-items:center;gap:12px;
   width:100%;max-width:400px;margin:0 auto 28px;
@@ -104,8 +88,6 @@ html,body{
 }
 .thin-rule::before,.thin-rule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,151,58,.45),transparent);}
 .gem{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);box-shadow:0 0 8px var(--gold);flex-shrink:0;}
-
-/* ── TITLE ── */
 .title-block{text-align:center;margin-bottom:10px;opacity:0;animation:riseIn 1s ease 2.4s both;}
 .eyebrow-label{
   font-size:0.65rem;letter-spacing:.45em;text-transform:uppercase;
@@ -132,8 +114,6 @@ h1{
   font-size:1rem;font-style:italic;font-weight:300;
   color:var(--silver);opacity:.65;letter-spacing:.04em;
 }
-
-/* ── SCROLL CONTAINER ── */
 .scroll-card{
   width:100%;
   background:rgba(8,18,42,.55);
@@ -151,7 +131,6 @@ h1{
   content:'';position:absolute;top:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,rgba(201,151,58,.3),rgba(240,208,128,.5),rgba(201,151,58,.3),transparent);
 }
-
 .body-text{
   font-family:'Cormorant Garamond',serif;
   font-size:1.08rem;line-height:1.9;
@@ -160,8 +139,6 @@ h1{
 }
 .body-text:last-of-type{margin-bottom:0;}
 em,.highlight{color:var(--goldP);font-style:italic;}
-
-/* ── QUOTE ── */
 .quote-block{
   margin:28px 0;
   padding:24px 32px;
@@ -182,13 +159,9 @@ em,.highlight{color:var(--goldP);font-style:italic;}
   font-size:1.05rem;font-style:italic;font-weight:400;
   color:var(--goldP);line-height:1.75;
 }
-
-/* ── INNER DIVIDER ── */
 .inner-rule{display:flex;align-items:center;gap:10px;margin:26px 0;}
 .inner-rule::before,.inner-rule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,151,58,.18),transparent);}
 .inner-gem{width:4px;height:4px;background:rgba(201,151,58,.5);transform:rotate(45deg);flex-shrink:0;}
-
-/* ── RULES BOX ── */
 .rules-box{
   background:rgba(201,151,58,.04);
   border:1px solid rgba(201,151,58,.14);
@@ -205,16 +178,12 @@ em,.highlight{color:var(--goldP);font-style:italic;}
   font-size:1rem;line-height:1.6;color:var(--silver);font-weight:300;
 }
 .rules-list li::before{content:'✦';color:var(--gold);font-size:.6rem;flex-shrink:0;margin-top:5px;}
-
-/* ── CLOSING ── */
 .closing-line{
   text-align:center;margin-top:24px;
   font-family:'Cormorant Garamond',serif;
   font-size:1rem;font-style:italic;font-weight:300;
   color:var(--creamDim);opacity:.65;
 }
-
-/* ── CREDITS ── */
 .credits{
   margin-top:28px;padding-top:22px;
   border-top:1px solid rgba(201,151,58,.1);
@@ -226,14 +195,11 @@ em,.highlight{color:var(--goldP);font-style:italic;}
   font-size:1.1rem;font-style:italic;
   color:var(--goldP);opacity:.75;
 }
-
-/* ── ENTER SECTION ── */
 .enter-section{
   padding:36px 0 52px;
   text-align:center;
   opacity:0;animation:riseIn .9s ease 3.2s both;
 }
-
 .enter-btn{
   position:relative;overflow:hidden;
   display:inline-flex;align-items:center;gap:12px;
@@ -260,24 +226,18 @@ em,.highlight{color:var(--goldP);font-style:italic;}
 .enter-btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 16px 48px rgba(201,151,58,.5),0 4px 16px rgba(0,0,0,.4);}
 .enter-btn:hover::before{transform:translateX(200%);transition:transform .55s ease;}
 .enter-btn:active{transform:scale(.97);}
-
 .btn-icon{font-size:1rem;transition:transform .3s ease;}
 .enter-btn:hover .btn-icon{transform:translateX(4px);}
-
 .enter-note{
   margin-top:14px;
   font-size:0.65rem;letter-spacing:.2em;text-transform:uppercase;
   color:var(--silver);opacity:.3;
 }
-
-/* ── ANIMATIONS ── */
 @keyframes riseIn{
   from{opacity:0;transform:translateY(24px);}
   to{opacity:1;transform:translateY(0);}
 }
 @keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(200%);}}
-
-/* ── MOBILE ── */
 @media(max-width:600px){
   .page{padding:0 16px;}
   .top-badge{padding:24px 0 0;}
@@ -297,69 +257,45 @@ em,.highlight{color:var(--goldP);font-style:italic;}
   h1{font-size:1.9rem;}
 }
 </style>
+<base target="_blank">
 </head>
 <body>
-
-<!-- CURTAIN -->
 <div class="curtain"></div>
-
-<!-- CANVAS -->
 <canvas id="bgCanvas"></canvas>
-
-<!-- GLOWS -->
 <div class="glow-top"></div>
 <div class="glow-gold-l"></div>
 <div class="glow-gold-r"></div>
-
 <div class="page">
-
-  <!-- TOP BADGE -->
   <div class="top-badge">
     <span>G-11 Emerson &nbsp;·&nbsp; 2025–2026</span>
   </div>
-
-  <!-- MAIN -->
   <div class="main">
-
-    <!-- CANDLE -->
     <div class="candle-wrap">
       <span class="candle-icon">🕯️</span>
     </div>
-
-    <!-- RULE -->
     <div class="thin-rule"><div class="gem"></div></div>
-
-    <!-- TITLE -->
     <div class="title-block">
       <div class="eyebrow-label">A note to every soul who finds this page</div>
       <h1>Before You Enter</h1>
       <div class="subtitle-label">The memory palace is waiting</div>
     </div>
-
-    <!-- SCROLL CARD -->
     <div class="scroll-card" style="margin-top:32px;">
-
       <p class="body-text">
         Whether you're one of us — a student of <em>G-11 Emerson</em> — or a curious stranger who somehow stumbled upon this little corner of the internet, you are welcome here. This website was built with nothing but love, late nights, and a whole lot of trial and error.
       </p>
-
       <div class="quote-block">
         <div class="quote-text">
           "We were never just a section. We were a chapter —<br/>
           the kind you re-read just to feel something again."
         </div>
       </div>
-
       <p class="body-text">
         What you're about to see is a collection of <em>real moments</em> — the kind that don't make it to formal records but live permanently in the hearts of the people who were there. The chaos of a classroom that somehow became a home.
       </p>
-
       <p class="body-text">
         This isn't a perfect website. It was made by someone who had never written a single line of code before this. But maybe that's exactly what makes it special — it was built by someone who cared enough to try.
       </p>
-
       <div class="inner-rule"><div class="inner-gem"></div></div>
-
       <div class="rules-box">
         <div class="rules-title">This is Emerson Exclusive Only</div>
         <ul class="rules-list">
@@ -369,21 +305,13 @@ em,.highlight{color:var(--goldP);font-style:italic;}
           <li>If you're an outsider looking in — we hope this gives you a glimpse of something genuine.</li>
         </ul>
       </div>
-
       <p class="closing-line">Now go ahead. The memory palace is waiting for you. ✦</p>
-
       <div class="credits">
         <div class="credits-label">Website created by</div>
         <div class="credits-name">Errald Joshua Buenaflor</div>
       </div>
-
     </div>
-    <!-- /scroll-card -->
-
   </div>
-  <!-- /main -->
-
-  <!-- ENTER -->
   <div class="enter-section">
     <a href="welcome.html" class="enter-btn">
       Enter the Memory Palace
@@ -391,25 +319,18 @@ em,.highlight{color:var(--goldP);font-style:italic;}
     </a>
     <div class="enter-note">tap to continue</div>
   </div>
-
 </div>
-<!-- /page -->
-
-<!-- STAR + PARTICLE CANVAS -->
 <script>
 (function(){
   const canvas = document.getElementById('bgCanvas');
   const ctx = canvas.getContext('2d');
   let W, H, stars = [], particles = [];
-
   function resize(){
     W = canvas.width  = window.innerWidth;
     H = canvas.height = window.innerHeight;
   }
   resize();
   window.addEventListener('resize', resize);
-
-  // Stars
   for(let i=0;i<120;i++){
     stars.push({
       x: Math.random()*W, y: Math.random()*H,
@@ -419,8 +340,6 @@ em,.highlight{color:var(--goldP);font-style:italic;}
       phase: Math.random()*Math.PI*2
     });
   }
-
-  // Gold dust particles
   for(let i=0;i<35;i++){
     particles.push({
       x: Math.random()*W, y: Math.random()*H,
@@ -432,12 +351,9 @@ em,.highlight{color:var(--goldP);font-style:italic;}
       age: Math.random()*200
     });
   }
-
   let t = 0;
   function draw(){
     ctx.clearRect(0,0,W,H);
-
-    // Stars
     stars.forEach(s=>{
       const a = s.alpha * (.5 + .5*Math.sin(t/s.speed + s.phase));
       ctx.beginPath();
@@ -445,8 +361,6 @@ em,.highlight{color:var(--goldP);font-style:italic;}
       ctx.fillStyle = `rgba(255,255,255,${a})`;
       ctx.fill();
     });
-
-    // Gold dust
     particles.forEach(p=>{
       p.age++;
       p.x += p.vx; p.y += p.vy;
@@ -462,13 +376,11 @@ em,.highlight{color:var(--goldP);font-style:italic;}
       ctx.fillStyle = `rgba(232,184,75,${p.alpha*fade})`;
       ctx.fill();
     });
-
     t += .018;
     requestAnimationFrame(draw);
   }
   draw();
 })();
 </script>
-
 </body>
 </html>
