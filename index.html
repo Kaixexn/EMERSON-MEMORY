@@ -1,1 +1,284 @@
-EMERSON PAGE DISCONNECTED FOR A MEAN TIME
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>G-11 Emerson — Memory Palace</title>
+<link href="https:
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#050d1f;--navy2:#0a1830;--navy3:#071225;
+  --gold:#c9973a;--goldB:#e8b84b;--goldP:#f0d080;--goldD:#7a5a1e;--goldDim:#4a3610;
+  --white:#fff;--cream:#f0e6cc;--creamDim:#c8b898;--silver:#b8cce0;
+}
+html{scroll-behavior:smooth;}
+html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
+#bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.glow-top{position:fixed;top:0;left:50%;transform:translateX(-50%);width:900px;height:500px;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 50% 0%,rgba(20,55,120,.65) 0%,transparent 70%);}
+.glow-gold-l{position:fixed;bottom:0;left:0;width:400px;height:300px;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 0% 100%,rgba(201,151,58,.12) 0%,transparent 65%);}
+.glow-gold-r{position:fixed;bottom:0;right:0;width:400px;height:300px;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 100% 100%,rgba(201,151,58,.09) 0%,transparent 65%);}
+@keyframes riseIn{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(200%);}}
+@keyframes portraitGlow{0%,100%{box-shadow:0 0 40px rgba(201,151,58,.25),0 0 80px rgba(201,151,58,.08);}50%{box-shadow:0 0 60px rgba(201,151,58,.5),0 0 120px rgba(201,151,58,.15);}}
+@keyframes logoFloat{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-8px) rotate(2deg);}}
+@keyframes vinyl-spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.page{position:relative;z-index:1;min-height:100vh;padding:0 24px 60px;}
+.top-strip{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 0 0;
+  opacity:0;animation:riseIn .7s ease .3s both;
+}
+.top-badge span{font-size:0.62rem;letter-spacing:.55em;text-transform:uppercase;color:var(--gold);opacity:.7;border:1px solid rgba(201,151,58,.2);border-radius:30px;padding:5px 16px;background:rgba(201,151,58,.04);}
+.spread{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  max-width:1100px;
+  margin:40px auto 0;
+  align-items:center;
+}
+.portrait-side{
+  display:flex;flex-direction:column;align-items:center;
+  opacity:0;animation:riseIn .9s ease .6s both;
+}
+.portrait-frame-outer{
+  position:relative;
+  width:min(280px,38vw);
+}
+.portrait-corner{
+  position:absolute;width:20px;height:20px;
+  border-color:rgba(201,151,58,.5);border-style:solid;
+}
+.portrait-corner.tl{top:-4px;left:-4px;border-width:2px 0 0 2px;}
+.portrait-corner.tr{top:-4px;right:-4px;border-width:2px 2px 0 0;}
+.portrait-corner.bl{bottom:-4px;left:-4px;border-width:0 0 2px 2px;}
+.portrait-corner.br{bottom:-4px;right:-4px;border-width:0 2px 2px 0;}
+.portrait-frame{
+  width:100%;
+  aspect-ratio:3/4;
+  border-radius:3px;
+  overflow:hidden;
+  border:1px solid rgba(201,151,58,.4);
+  animation:portraitGlow 5s ease-in-out infinite;
+  position:relative;
+}
+.portrait-frame img{width:100%;height:100%;object-fit:cover;display:block;filter:sepia(.25) contrast(1.05);}
+.portrait-frame::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 55%,rgba(5,13,31,.65) 100%);
+  pointer-events:none;
+}
+.portrait-shimmer{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.portrait-shimmer::after{content:'';position:absolute;top:0;left:0;width:50%;height:100%;background:linear-gradient(105deg,transparent 40%,rgba(255,220,100,.06) 50%,transparent 60%);animation:shimmer 5s 1.5s infinite linear;}
+.portrait-label{margin-top:14px;text-align:center;}
+.portrait-name{font-family:'Playfair Display',serif;font-style:italic;font-size:0.85rem;color:var(--goldP);letter-spacing:.05em;}
+.portrait-years{font-size:0.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--goldD);margin-top:3px;opacity:.8;}
+.content-side{
+  display:flex;flex-direction:column;
+  opacity:0;animation:riseIn .9s ease .8s both;
+}
+.eyebrow-row{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.eyebrow-text{font-size:0.62rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);opacity:.8;}
+.eyebrow-line{flex:1;height:1px;background:linear-gradient(to right,rgba(201,151,58,.4),transparent);}
+.logo-wrap{
+  display:flex;align-items:center;gap:14px;margin-bottom:22px;
+  animation:logoFloat 5s ease-in-out infinite;
+}
+.school-logo{width:64px;height:64px;border-radius:50%;border:2px solid rgba(201,151,58,.4);box-shadow:0 0 20px rgba(201,151,58,.25);display:block;object-fit:cover;}
+.logo-text{display:flex;flex-direction:column;}
+.logo-section{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:var(--goldP);}
+.logo-year{font-size:0.65rem;letter-spacing:.35em;text-transform:uppercase;color:var(--silver);opacity:.6;margin-top:2px;}
+.main-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,5vw,3.6rem);
+  font-weight:900;line-height:1.08;letter-spacing:-.02em;
+  background:linear-gradient(160deg,var(--goldP) 0%,var(--goldB) 35%,var(--gold) 65%,#9a6818 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:8px;
+}
+.sub-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.95rem;font-style:italic;font-weight:300;
+  color:var(--silver);opacity:.65;letter-spacing:.06em;
+  margin-bottom:22px;
+}
+.thin-rule{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.thin-rule::before,.thin-rule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,151,58,.3),transparent);}
+.gem-sm{width:5px;height:5px;background:rgba(201,151,58,.6);transform:rotate(45deg);flex-shrink:0;}
+.quote-block{
+  padding:16px 20px;
+  border-left:2px solid rgba(201,151,58,.35);
+  background:rgba(201,151,58,.04);
+  border-radius:0 8px 8px 0;
+  margin-bottom:22px;
+}
+.quote-text{
+  font-family:'Playfair Display',serif;
+  font-size:0.95rem;font-style:italic;font-weight:400;
+  color:var(--goldP);line-height:1.7;
+}
+.nav-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.nav-btn{
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(201,151,58,.06);
+  border:1px solid rgba(201,151,58,.22);
+  border-radius:10px;
+  padding:14px 18px;
+  text-decoration:none;
+  transition:all .25s cubic-bezier(.34,1.56,.64,1);
+}
+.nav-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,151,58,.12),rgba(201,151,58,.04));opacity:0;transition:opacity .25s;}
+.nav-btn:hover{transform:translateY(-2px) scale(1.02);border-color:rgba(201,151,58,.5);box-shadow:0 8px 24px rgba(0,0,0,.3);}
+.nav-btn:hover::before{opacity:1;}
+.nav-btn:active{transform:scale(.98);}
+.nav-btn-inner{display:flex;flex-direction:column;gap:3px;}
+.nav-btn-label{font-size:0.65rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);opacity:.7;}
+.nav-btn-title{font-family:'Playfair Display',serif;font-size:0.92rem;font-style:italic;color:var(--cream);}
+.nav-btn-arrow{font-size:1rem;color:var(--goldP);opacity:.6;transition:transform .25s,opacity .25s;flex-shrink:0;}
+.nav-btn:hover .nav-btn-arrow{transform:translateX(4px);opacity:1;}
+.nav-btn-hero{
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(135deg,var(--goldB),var(--gold),var(--goldD));
+  border:none;border-radius:10px;
+  padding:16px 22px;
+  text-decoration:none;
+  box-shadow:0 6px 28px rgba(201,151,58,.3);
+  transition:all .25s cubic-bezier(.34,1.56,.64,1);
+}
+.nav-btn-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:translateX(-100%);transition:transform 0s;}
+.nav-btn-hero:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 12px 40px rgba(201,151,58,.45);}
+.nav-btn-hero:hover::before{transform:translateX(200%);transition:transform .5s ease;}
+.nav-btn-hero:active{transform:scale(.98);}
+.nav-btn-hero .nav-btn-label{color:rgba(5,13,31,.65);}
+.nav-btn-hero .nav-btn-title{color:var(--navy);font-size:1rem;font-weight:900;}
+.nav-btn-hero .nav-btn-arrow{color:var(--navy);opacity:.7;}
+.bottom-rule{display:flex;align-items:center;gap:10px;margin-top:24px;opacity:.35;}
+.bottom-rule::before,.bottom-rule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--goldD),transparent);}
+.gem-tiny{width:4px;height:4px;background:var(--goldD);transform:rotate(45deg);flex-shrink:0;}
+@media(max-width:720px){
+  .page{padding:0 16px 50px;}
+  .spread{grid-template-columns:1fr;gap:28px;margin-top:28px;}
+  .portrait-side{order:1;}
+  .portrait-frame-outer{width:min(200px,55vw);}
+  .content-side{order:2;}
+  .eyebrow-line{display:none;}
+  .main-title{font-size:clamp(1.9rem,9vw,2.8rem);}
+  .nav-grid{grid-template-columns:1fr;}
+}
+@media(max-width:400px){
+  .portrait-frame-outer{width:min(170px,60vw);}
+  .main-title{font-size:1.8rem;}
+  .nav-btn{padding:12px 14px;}
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+<div class="glow-top"></div>
+<div class="glow-gold-l"></div>
+<div class="glow-gold-r"></div>
+<div class="page">
+  <div class="top-strip">
+    <div class="top-badge"><span>G-11 Emerson &nbsp;·&nbsp; 2025–2026</span></div>
+  </div>
+  <div class="spread">
+    <div class="portrait-side">
+      <div class="portrait-frame-outer">
+        <div class="portrait-corner tl"></div>
+        <div class="portrait-corner tr"></div>
+        <div class="portrait-corner bl"></div>
+        <div class="portrait-corner br"></div>
+        <div class="portrait-frame">
+          <img src="data:image/jpeg;base64,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
+          <div class="portrait-shimmer"></div>
+        </div>
+      </div>
+      <div class="portrait-label">
+        <div class="portrait-name">Ralph Waldo Emerson</div>
+        <div class="portrait-years">1803 — 1882</div>
+      </div>
+    </div>
+    <div class="content-side">
+      <div class="eyebrow-row">
+        <span class="eyebrow-text">Memory Palace</span>
+        <div class="eyebrow-line"></div>
+      </div>
+      <div class="logo-wrap">
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIbGNtcwIQAABtbnRyUkdCIFhZWiAH4gADABQACQAOAB1hY3NwTVNGVAAAAABzYXdzY3RybAAAAAAAAAAAAAAAAAAA9tYAAQAAAADTLWhhbmSdkQA9QICwPUB0LIGepSKOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAABxjcHJ0AAABDAAAAAx3dHB0AAABGAAAABRyWFlaAAABLAAAABRnWFlaAAABQAAAABRiWFlaAAABVAAAABRyVFJDAAABaAAAAGBnVFJDAAABaAAAAGBiVFJDAAABaAAAAGBkZXNjAAAAAAAAAAV1UkdCAAAAAAAAAAAAAAAAdGV4dAAAAABDQzAAWFlaIAAAAAAAAPNUAAEAAAABFslYWVogAAAAAAAAb6AAADjyAAADj1hZWiAAAAAAAABilgAAt4kAABjaWFlaIAAAAAAAACSgAAAPhQAAtsRjdXJ2AAAAAAAAACoAAAB8APgBnAJ1A4MEyQZOCBIKGAxiDvQRzxT2GGocLiBDJKwpai5+M+s5sz/WRldNNlR2XBdkHWyGdVZ+jYgskjacq6eMstu+mcrH12Xkd/H5
+        <div class="logo-text">
+          <span class="logo-section">G-11 Emerson</span>
+          <span class="logo-year">Senior High · 2025–2026</span>
+        </div>
+      </div>
+      <h1 class="main-title">Welcome to<br/>Our Memory Palace</h1>
+      <div class="sub-title">Where every moment lives forever</div>
+      <div class="thin-rule"><div class="gem-sm"></div></div>
+      <div class="quote-block">
+        <div class="quote-text">"Not all classrooms have walls —<br/>some are built from shared laughter,<br/>late nights, and moments like these."</div>
+      </div>
+      <a href="collage.html" class="nav-btn-hero" style="margin-bottom:10px;">
+        <div class="nav-btn-inner">
+          <span class="nav-btn-label">✦ Enter</span>
+          <span class="nav-btn-title">The Memory Palace</span>
+        </div>
+        <span class="nav-btn-arrow">→</span>
+      </a>
+      <div class="nav-grid">
+        <a href="officers.html" class="nav-btn">
+          <div class="nav-btn-inner">
+            <span class="nav-btn-label">🎓 Officers</span>
+            <span class="nav-btn-title">Class Officers</span>
+          </div>
+          <span class="nav-btn-arrow">→</span>
+        </a>
+        <a href="freedom-wall.html" class="nav-btn">
+          <div class="nav-btn-inner">
+            <span class="nav-btn-label">✦ Speak</span>
+            <span class="nav-btn-title">Freedom Wall</span>
+          </div>
+          <span class="nav-btn-arrow">✦</span>
+        </a>
+        <a href="dump-wall.html" class="nav-btn" style="grid-column:1/-1;">
+          <div class="nav-btn-inner">
+            <span class="nav-btn-label">📸 Gallery</span>
+            <span class="nav-btn-title">Dump Wall</span>
+          </div>
+          <span class="nav-btn-arrow">→</span>
+        </a>
+      </div>
+      <div class="bottom-rule"><div class="gem-tiny"></div></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, stars = [], particles = [];
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  for(let i=0;i<110;i++) stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+.2,alpha:Math.random()*.7+.1,speed:Math.random()*2+1.5,phase:Math.random()*Math.PI*2});
+  for(let i=0;i<30;i++) particles.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*.8+.2,vy:-(Math.random()*.25+.08),vx:(Math.random()-.5)*.1,alpha:Math.random()*.45+.1,life:Math.random()*200+100,age:Math.random()*200});
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{ const a=s.alpha*(.5+.5*Math.sin(t/s.speed+s.phase)); ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fillStyle='rgba(255,255,255,'+a+')'; ctx.fill(); });
+    particles.forEach(p=>{
+      p.age++; p.x+=p.vx; p.y+=p.vy;
+      if(p.age>p.life){p.age=0;p.x=Math.random()*W;p.y=H+5;p.vy=-(Math.random()*.25+.08);p.vx=(Math.random()-.5)*.1;}
+      const prog=p.age/p.life,fade=prog<.15?prog/.15:prog>.75?(1-prog)/.25:1;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(232,184,75,'+(p.alpha*fade)+')'; ctx.fill();
+    });
+    t+=.016; requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
