@@ -424,6 +424,8 @@ footer{
 
 <footer>G-11 Emerson · Made with 💛 · 2026</footer>
 
+
+
 <div class="overlay" id="pwOverlay">
   <div class="modal">
     <h3>🔐 Edit Mode</h3>
@@ -450,7 +452,56 @@ footer{
       <option value="fade">Fade</option>
       <option value="vivid">Vivid</option>
     </select>
-    <input type="file" id="fileInput" accept="image/*" style="display:none"/>
+    <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFile(event)"/>
+    <div class="modal-row">
+      <button class="btn btn-gold" onclick="document.getElementById('fileInput').click()">Choose Photo</button>
+      <button class="btn btn-ghost" onclick="closeUpload()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="editOverlay">
+  <div class="modal">
+    <h3>✏️ Edit Memory</h3>
+    <input class="modal-input" id="editCapInput" type="text" placeholder="Caption (optional)" maxlength="120"/>
+    <select class="filter-select" id="editFilterSelect">
+      <option value="normal">No Filter</option>
+      <option value="warm">Warm</option>
+      <option value="cool">Cool</option>
+      <option value="mono">Black & White</option>
+      <option value="fade">Fade</option>
+      <option value="vivid">Vivid</option>
+    </select>
+    <div class="modal-row">
+      <button class="btn btn-gold" onclick="saveEdit()">Save</button>
+      <button class="btn btn-ghost" onclick="closeEdit()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="delOverlay">
+  <div class="modal">
+    <div class="icon">🗑️</div>
+    <h3>Delete this memory?</h3>
+    <p>This can't be undone.</p>
+    <div class="modal-row">
+      <button class="btn btn-red" onclick="confirmDelete()">Delete</button>
+      <button class="btn btn-ghost" onclick="closeDelete()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-label" id="loadingLabel">Uploading…</div>
+  <div class="loading-bar-wrap"><div class="loading-bar-fill" id="loadingBar"></div></div>
+</div>
+
+<div id="toast"></div>
+
+</section>
+
+<script>
 const EDIT_PW           = 'BNSHI2026';
 const FB_URL            = 'https://emerson-11-memories-default-rtdb.firebaseio.com';
 const FB_PATH           = `${FB_URL}/emerson11.json`;
