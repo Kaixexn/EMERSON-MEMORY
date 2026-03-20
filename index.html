@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Before You Enter — G-11 Emerson</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#050d1f;--navy2:#0a1830;--navy3:#071225;
+  --gold:#c9973a;--goldB:#e8b84b;--goldP:#f0d080;--goldD:#7a5a1e;--goldDim:#4a3610;
+  --white:#fff;--cream:#f0e6cc;--creamDim:#c8b898;--silver:#b8cce0;
+}
+html{scroll-behavior:smooth;}
+html,body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
+#bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.glow-top{position:fixed;top:0;left:50%;transform:translateX(-50%);width:900px;height:500px;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 50% 0%,rgba(20,55,120,.65) 0%,transparent 70%);}
+.glow-gold-l{position:fixed;bottom:0;left:0;width:400px;height:300px;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 0% 100%,rgba(201,151,58,.12) 0%,transparent 65%);}
+.glow-gold-r{position:fixed;bottom:0;right:0;width:400px;height:300px;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 100% 100%,rgba(201,151,58,.09) 0%,transparent 65%);}
+.curtain{position:fixed;inset:0;z-index:100;background:var(--navy3);pointer-events:none;transform-origin:top;animation:curtainLift 1.8s cubic-bezier(.76,0,.24,1) .2s both;}
+@keyframes curtainLift{0%{transform:scaleY(1);}100%{transform:scaleY(0);}}
+.page{position:relative;z-index:1;min-height:100vh;display:grid;grid-template-columns:1fr;grid-template-rows:auto 1fr auto;align-items:center;padding:0 24px;}
+.top-badge{text-align:center;padding:32px 0 0;opacity:0;animation:riseIn .8s ease 1.8s both;}
+.top-badge span{display:inline-block;font-size:0.65rem;letter-spacing:.55em;text-transform:uppercase;color:var(--gold);opacity:.75;border:1px solid rgba(201,151,58,.2);border-radius:30px;padding:5px 18px;background:rgba(201,151,58,.04);}
+.main{display:flex;flex-direction:column;align-items:center;padding:40px 0 20px;max-width:700px;margin:0 auto;width:100%;}
+.candle-wrap{position:relative;margin-bottom:32px;opacity:0;animation:riseIn .9s ease 2s both;}
+.candle-icon{font-size:4rem;display:block;filter:drop-shadow(0 0 20px rgba(232,184,75,.6)) drop-shadow(0 0 60px rgba(201,151,58,.3));animation:candleFlicker 3s ease-in-out 2.9s infinite;}
+@keyframes candleFlicker{0%,100%{filter:drop-shadow(0 0 20px rgba(232,184,75,.6)) drop-shadow(0 0 60px rgba(201,151,58,.3));transform:scale(1);}33%{filter:drop-shadow(0 0 28px rgba(232,184,75,.8)) drop-shadow(0 0 80px rgba(201,151,58,.45));transform:scale(1.03) rotate(.5deg);}66%{filter:drop-shadow(0 0 16px rgba(232,184,75,.5)) drop-shadow(0 0 50px rgba(201,151,58,.25));transform:scale(.98) rotate(-.3deg);}}
+.thin-rule{display:flex;align-items:center;gap:12px;width:100%;max-width:400px;margin:0 auto 28px;opacity:0;animation:riseIn .7s ease 2.2s both;}
+.thin-rule::before,.thin-rule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,151,58,.45),transparent);}
+.gem{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);box-shadow:0 0 8px var(--gold);flex-shrink:0;}
+.title-block{text-align:center;margin-bottom:10px;opacity:0;animation:riseIn 1s ease 2.4s both;}
+.eyebrow-label{font-size:0.65rem;letter-spacing:.45em;text-transform:uppercase;color:var(--creamDim);opacity:.55;margin-bottom:14px;font-family:'DM Sans',sans-serif;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,7vw,4.2rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;background:linear-gradient(160deg,var(--goldP) 0%,var(--goldB) 35%,var(--gold) 65%,#9a6818 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:goldGlow 5s ease-in-out 3.4s infinite;}
+@keyframes goldGlow{0%,100%{filter:drop-shadow(0 0 0px transparent);}50%{filter:drop-shadow(0 2px 30px rgba(201,151,58,.25));}}
+.subtitle-label{margin-top:10px;font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;font-weight:300;color:var(--silver);opacity:.65;letter-spacing:.04em;}
+.scroll-card{width:100%;background:rgba(8,18,42,.55);border:1px solid rgba(201,151,58,.15);border-radius:20px;padding:40px 44px;backdrop-filter:blur(20px);box-shadow:0 24px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(201,151,58,.07),inset 0 -1px 0 rgba(201,151,58,.04);opacity:0;animation:riseIn 1s ease 2.8s both;position:relative;overflow:hidden;}
+.scroll-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,151,58,.3),rgba(240,208,128,.5),rgba(201,151,58,.3),transparent);}
+.body-text{font-family:'Cormorant Garamond',serif;font-size:1.08rem;line-height:1.9;color:var(--cream);opacity:.88;margin-bottom:20px;font-weight:300;}
+.body-text:last-of-type{margin-bottom:0;}
+em,.highlight{color:var(--goldP);font-style:italic;}
+.quote-block{margin:28px 0;padding:24px 32px;border-left:2px solid rgba(201,151,58,.4);background:rgba(201,151,58,.04);border-radius:0 10px 10px 0;position:relative;}
+.quote-block::before{content:'\201C';position:absolute;top:-10px;left:20px;font-family:'Playfair Display',serif;font-size:4rem;color:var(--goldD);opacity:.4;line-height:1;}
+.quote-text{font-family:'Playfair Display',serif;font-size:1.05rem;font-style:italic;font-weight:400;color:var(--goldP);line-height:1.75;}
+.inner-rule{display:flex;align-items:center;gap:10px;margin:26px 0;}
+.inner-rule::before,.inner-rule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,151,58,.18),transparent);}
+.inner-gem{width:4px;height:4px;background:rgba(201,151,58,.5);transform:rotate(45deg);flex-shrink:0;}
+.rules-box{background:rgba(201,151,58,.04);border:1px solid rgba(201,151,58,.14);border-radius:12px;padding:22px 26px;margin:22px 0;}
+.rules-title{font-size:0.62rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;opacity:.85;}
+.rules-list{display:flex;flex-direction:column;gap:11px;}
+.rules-list li{display:flex;align-items:flex-start;gap:12px;font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.6;color:var(--silver);font-weight:300;}
+.rules-list li::before{content:'✦';color:var(--gold);font-size:.6rem;flex-shrink:0;margin-top:5px;}
+.closing-line{text-align:center;margin-top:24px;font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;font-weight:300;color:var(--creamDim);opacity:.65;}
+.credits{margin-top:28px;padding-top:22px;border-top:1px solid rgba(201,151,58,.1);text-align:center;}
+.credits-label{font-size:0.6rem;letter-spacing:.38em;text-transform:uppercase;color:var(--silver);opacity:.38;margin-bottom:6px;}
+.credits-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;color:var(--goldP);opacity:.75;}
+.enter-section{padding:36px 0 52px;text-align:center;opacity:0;animation:riseIn .9s ease 3.2s both;}
+.enter-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,var(--goldB) 0%,var(--gold) 50%,var(--goldD) 100%);color:var(--navy);border:none;border-radius:50px;padding:16px 48px;font-size:0.82rem;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease,opacity .2s;box-shadow:0 8px 32px rgba(201,151,58,.35),0 2px 8px rgba(0,0,0,.3);animation:btnPulse 3s ease-in-out 4s infinite;}
+@keyframes btnPulse{0%,100%{box-shadow:0 8px 32px rgba(201,151,58,.35),0 2px 8px rgba(0,0,0,.3);}50%{box-shadow:0 12px 48px rgba(201,151,58,.55),0 4px 16px rgba(0,0,0,.4),0 0 0 6px rgba(201,151,58,.08);}}
+.enter-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.25) 50%,transparent 100%);transform:translateX(-100%);transition:transform 0s;}
+.enter-btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 16px 48px rgba(201,151,58,.5),0 4px 16px rgba(0,0,0,.4);}
+.enter-btn:hover::before{transform:translateX(200%);transition:transform .55s ease;}
+.enter-btn:active{transform:scale(.97);}
+.btn-icon{font-size:1rem;transition:transform .3s ease;}
+.enter-btn:hover .btn-icon{transform:translateX(4px);}
+.enter-note{margin-top:14px;font-size:0.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--silver);opacity:.3;}
+@keyframes riseIn{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@media(max-width:600px){
+  .page{padding:0 16px;}
+  .top-badge{padding:24px 0 0;}
+  .main{padding:28px 0 16px;}
+  .candle-icon{font-size:3rem;}
+  h1{font-size:clamp(2rem,10vw,3rem);}
+  .scroll-card{padding:26px 20px;}
+  .quote-block{padding:18px 20px;}
+  .rules-box{padding:16px 18px;}
+  .enter-btn{padding:14px 36px;font-size:0.78rem;letter-spacing:.12em;}
+  .enter-section{padding:28px 0 40px;}
+  .body-text{font-size:1rem;}
+  .quote-text{font-size:0.97rem;}
+}
+@media(max-width:380px){
+  .scroll-card{padding:20px 16px;}
+  h1{font-size:1.9rem;}
+}
+</style>
+</head>
+<body>
+<div class="curtain"></div>
+<canvas id="bgCanvas"></canvas>
+<div class="glow-top"></div>
+<div class="glow-gold-l"></div>
+<div class="glow-gold-r"></div>
+<div class="page">
+  <div class="top-badge">
+    <span>G-11 Emerson &nbsp;·&nbsp; 2025–2026</span>
+  </div>
+  <div class="main">
+    <div class="candle-wrap">
+      <span class="candle-icon">🕯️</span>
+    </div>
+    <div class="thin-rule"><div class="gem"></div></div>
+    <div class="title-block">
+      <div class="eyebrow-label">A note to every soul who finds this page</div>
+      <h1>Before You Enter</h1>
+      <div class="subtitle-label">The memory palace is waiting</div>
+    </div>
+    <div class="scroll-card" style="margin-top:32px;">
+      <p class="body-text">
+        Whether you're one of us — a student of <em>G-11 Emerson</em> — or a curious stranger who somehow stumbled upon this little corner of the internet, you are welcome here. This website was built with nothing but love, late nights, and a whole lot of trial and error.
+      </p>
+      <div class="quote-block">
+        <div class="quote-text">
+          "We were never just a section. We were a chapter —<br/>
+          the kind you re-read just to feel something again."
+        </div>
+      </div>
+      <p class="body-text">
+        What you're about to see is a collection of <em>real moments</em> — the kind that don't make it to formal records but live permanently in the hearts of the people who were there. The chaos of a classroom that somehow became a home.
+      </p>
+      <p class="body-text">
+        This isn't a perfect website. It was made by someone who had never written a single line of code before this. But maybe that's exactly what makes it special — it was built by someone who cared enough to try.
+      </p>
+      <div class="inner-rule"><div class="inner-gem"></div></div>
+      <div class="rules-box">
+        <div class="rules-title">This is Emerson Exclusive Only</div>
+        <ul class="rules-list">
+          <li>This is a safe space. Be kind, be respectful, and honour the memories shared here.</li>
+          <li>The Freedom Wall and Dump Wall are for Emerson students — please keep it wholesome and fun.</li>
+          <li>These photos, memories, and moments belong to real people. Treat them with care.</li>
+          <li>If you're an outsider looking in — we hope this gives you a glimpse of something genuine.</li>
+        </ul>
+      </div>
+      <p class="closing-line">Now go ahead. The memory palace is waiting for you. ✦</p>
+      <div class="credits">
+        <div class="credits-label">Website created by</div>
+        <div class="credits-name">Errald Joshua Buenaflor</div>
+      </div>
+    </div>
+  </div>
+  <div class="enter-section">
+    <a href="welcome.html" class="enter-btn" target="_self">
+      Enter the Memory Palace
+      <span class="btn-icon">✦</span>
+    </a>
+    <div class="enter-note">tap to continue</div>
+  </div>
+</div>
+<script>
+(function(){
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, stars = [], particles = [];
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  for(let i=0;i<120;i++){
+    stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.2,alpha:Math.random()*.7+.1,speed:Math.random()*2+1.5,phase:Math.random()*Math.PI*2});
+  }
+  for(let i=0;i<35;i++){
+    particles.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*.9+.2,vy:-(Math.random()*.3+.1),vx:(Math.random()-.5)*.15,alpha:Math.random()*.5+.1,life:Math.random()*200+100,age:Math.random()*200});
+  }
+  let t = 0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{
+      const a = s.alpha*(.5+.5*Math.sin(t/s.speed+s.phase));
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${a})`;ctx.fill();
+    });
+    particles.forEach(p=>{
+      p.age++;p.x+=p.vx;p.y+=p.vy;
+      if(p.age>p.life){p.age=0;p.x=Math.random()*W;p.y=H+5;p.vy=-(Math.random()*.3+.1);p.vx=(Math.random()-.5)*.15;}
+      const progress=p.age/p.life;
+      const fade=progress<.15?progress/.15:progress>.75?(1-progress)/.25:1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(232,184,75,${p.alpha*fade})`;ctx.fill();
+    });
+    t+=.018;requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
