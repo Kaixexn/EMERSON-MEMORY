@@ -164,13 +164,27 @@ textarea.review-text::placeholder{color:rgba(184,204,224,.4);}
 #adminBtn{position:fixed;bottom:24px;right:24px;z-index:500;background:rgba(10,24,48,.92);border:1px solid rgba(201,151,58,.25);border-radius:20px;color:var(--silver);padding:7px 16px;font-size:0.78rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;letter-spacing:.04em;backdrop-filter:blur(8px);}
 #adminBtn:hover{border-color:var(--gold);color:var(--goldP);}
 
-@media(max-width:500px){
-  .page{padding:36px 14px 70px;}
-  .review-form-card{padding:18px 16px;}
-  .review-card{padding:14px 16px;}
-  .user-bar{flex-wrap:wrap;gap:8px;}
-  .btn-signout{margin-left:0;}
-  .stats-bar{gap:10px;}
+@media(max-width:600px){
+  .page{padding:32px 12px 80px;}
+  .fw-header h1{font-size:clamp(1.6rem,8vw,2.6rem);}
+  .review-form-card{padding:16px 14px;}
+  .review-card{padding:14px 14px;}
+  .review-header{flex-wrap:wrap;gap:8px;}
+  .review-meta{min-width:0;}
+  .review-name{font-size:0.85rem;word-break:break-word;}
+  .review-email{font-size:0.68rem;}
+  .btn-delete-review{margin-left:0;align-self:flex-start;}
+  .form-bottom{flex-wrap:wrap;gap:10px;}
+  .btn-submit{width:100%;text-align:center;}
+  .char-count{order:-1;}
+  .star-row{flex-wrap:wrap;gap:6px;}
+  .star-btn{font-size:1.4rem;}
+  .user-bar{flex-wrap:wrap;gap:8px;padding:10px 14px;}
+  .btn-signout{margin-left:0;width:100%;}
+  .stats-bar{gap:8px;}
+  .avg-rating{flex-wrap:wrap;gap:4px;}
+  #forum-toast{white-space:normal;text-align:center;max-width:calc(100vw - 32px);font-size:0.8rem;padding:10px 16px;}
+  #adminBtn{bottom:16px;right:12px;font-size:0.72rem;padding:6px 12px;}
 }
 </style>
 </head>
