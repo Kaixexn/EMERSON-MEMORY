@@ -363,6 +363,110 @@ footer{
   border-top:1px solid rgba(201,151,58,.1);
   color:rgba(168,184,204,.4);font-size:.75rem;letter-spacing:.1em;
 }
+
+/* ── Farewell Surprise Overlay ── */
+#farewellOverlay{
+  position:fixed;inset:0;z-index:3000;
+  background:rgba(9,22,40,.97);
+  display:none;align-items:center;justify-content:center;
+  padding:24px;
+  animation:fadeInBg .8s ease;
+}
+#farewellOverlay.open{display:flex}
+@keyframes fadeInBg{from{opacity:0}to{opacity:1}}
+
+.farewell-box{
+  text-align:center;
+  max-width:480px;width:100%;
+  animation:riseUp .9s cubic-bezier(.22,1,.36,1);
+}
+@keyframes riseUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+.farewell-emoji{font-size:3.5rem;display:block;margin-bottom:18px;animation:popBounce 1s ease .3s both}
+@keyframes popBounce{0%{transform:scale(0)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+.farewell-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,5vw,2.8rem);
+  font-weight:700;color:var(--gold);
+  line-height:1.1;margin-bottom:8px;
+}
+.farewell-title em{color:var(--white);font-style:italic}
+
+.farewell-divider{
+  width:60px;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:18px auto;
+}
+
+.farewell-msg{
+  font-size:1rem;color:var(--silver);
+  line-height:1.8;margin-bottom:28px;
+}
+.farewell-msg strong{color:var(--white)}
+
+.farewell-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+.btn-farewell-primary{
+  padding:12px 28px;border-radius:999px;
+  background:var(--gold);color:#000;
+  border:none;font-size:.9rem;font-weight:700;
+  letter-spacing:.06em;cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+  transition:background .2s,transform .15s;
+}
+.btn-farewell-primary:hover{background:var(--goldB);transform:scale(1.04)}
+
+.btn-farewell-ghost{
+  padding:12px 28px;border-radius:999px;
+  background:transparent;color:var(--silver);
+  border:1px solid rgba(168,184,204,.3);
+  font-size:.9rem;font-weight:500;
+  cursor:pointer;font-family:'DM Sans',sans-serif;
+  transition:all .2s;
+}
+.btn-farewell-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── Slideshow ── */
+#slideshowOverlay{
+  position:fixed;inset:0;z-index:4000;
+  background:#000;
+  display:none;align-items:center;justify-content:center;
+  flex-direction:column;
+}
+#slideshowOverlay.open{display:flex}
+#slideshowImg{
+  max-width:90vw;max-height:80vh;
+  object-fit:contain;border-radius:10px;
+  box-shadow:0 0 60px rgba(201,151,58,.2);
+  animation:ssIn .5s ease;
+}
+@keyframes ssIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+#slideshowCaption{
+  font-size:.9rem;color:var(--silver);font-style:italic;
+  margin-top:14px;letter-spacing:.04em;min-height:1.4em;
+}
+#slideshowCounter{
+  font-size:.75rem;color:rgba(168,184,204,.5);
+  margin-top:6px;letter-spacing:.12em;
+}
+.ss-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;border-radius:50%;border:none;
+  background:rgba(201,151,58,.2);color:var(--gold);
+  font-size:1.3rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.ss-nav:hover{background:rgba(201,151,58,.4)}
+#ssPrev{left:16px}#ssNext{right:16px}
+#ssClose{
+  position:absolute;top:16px;right:16px;
+  background:rgba(255,255,255,.1);border:none;color:#fff;
+  width:38px;height:38px;border-radius:50%;font-size:1.1rem;
+  cursor:pointer;transition:background .2s;
+}
+#ssClose:hover{background:rgba(255,255,255,.2)}
 </style>
 </head>
 <body>
@@ -498,6 +602,33 @@ footer{
 </div>
 
 <div id="toast"></div>
+
+<!-- ── Farewell Surprise ── -->
+<div id="farewellOverlay">
+  <div class="farewell-box">
+    <span class="farewell-emoji">🎓</span>
+    <div class="farewell-title">That's a wrap,<br><em>G-11 Emerson.</em></div>
+    <div class="farewell-divider"></div>
+    <p class="farewell-msg">
+      Thank you for every laugh, every late night, and every memory we made together.<br><br>
+      <strong>This year was ours — and nothing can take that away. 💛</strong>
+    </p>
+    <div class="farewell-btns">
+      <button class="btn-farewell-primary" onclick="openSlideshow()">▶ Relive the Memories</button>
+      <button class="btn-farewell-ghost" onclick="closeFarewell()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Slideshow ── -->
+<div id="slideshowOverlay">
+  <button class="ss-nav" id="ssPrev" onclick="ssMove(-1)">‹</button>
+  <img id="slideshowImg" src="" alt="Memory"/>
+  <div id="slideshowCaption"></div>
+  <div id="slideshowCounter"></div>
+  <button class="ss-nav" id="ssNext" onclick="ssMove(1)">›</button>
+  <button id="ssClose" onclick="closeSlideshow()">✕</button>
+</div>
 
 </section>
 
@@ -1011,12 +1142,12 @@ document.querySelectorAll('.overlay').forEach(o=>{
     const now  = new Date();
     const diff = TARGET - now;
     if(diff <= 0){
-      
       document.getElementById('cdD').textContent = '00';
       document.getElementById('cdH').textContent = '00';
       document.getElementById('cdM').textContent = '00';
       document.getElementById('cdS').textContent = '00';
-      return; 
+      triggerFarewellSurprise();
+      return;
     }
     const d = Math.floor(diff / 86400000);
     const h = Math.floor((diff % 86400000) / 3600000);
@@ -1030,6 +1161,91 @@ document.querySelectorAll('.overlay').forEach(o=>{
   }
   update();
 })();
+
+/* ── Farewell Surprise ── */
+let farewellFired = false;
+function triggerFarewellSurprise(){
+  if(farewellFired) return;
+  farewellFired = true;
+  launchBigConfetti();
+  setTimeout(() => {
+    document.getElementById('farewellOverlay').classList.add('open');
+  }, 1200);
+}
+
+function launchBigConfetti(){
+  const colors = ['#C9973A','#e8b84b','#f5f0e8','#a8b8cc','#fff','#ffd700'];
+  for(let i = 0; i < 200; i++){
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    const size = Math.random() * 10 + 5;
+    el.style.cssText = `
+      left:${Math.random()*100}vw;
+      width:${size}px;height:${size*0.55}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration:${2.5+Math.random()*2.5}s;
+      animation-delay:${Math.random()*1.2}s;
+      border-radius:${Math.random()>0.5?'50%':'2px'};
+      transform:rotate(${Math.random()*360}deg);
+    `;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 6000);
+  }
+}
+
+function closeFarewell(){
+  document.getElementById('farewellOverlay').classList.remove('open');
+}
+
+/* ── Slideshow ── */
+let ssIndex = 0;
+let ssTimer = null;
+
+function openSlideshow(){
+  if(!photos.length){ toast('No memories yet!', true); return; }
+  closeFarewell();
+  ssIndex = 0;
+  renderSlide();
+  document.getElementById('slideshowOverlay').classList.add('open');
+  startAutoSlide();
+}
+
+function closeSlideshow(){
+  document.getElementById('slideshowOverlay').classList.remove('open');
+  clearInterval(ssTimer);
+}
+
+function renderSlide(){
+  const p = photos[ssIndex];
+  const img = document.getElementById('slideshowImg');
+  img.style.animation = 'none';
+  void img.offsetWidth;
+  img.style.animation = '';
+  img.src = p.url;
+  const filterCSS = FILTERS[p.filter||'normal']||'';
+  img.style.filter = filterCSS;
+  document.getElementById('slideshowCaption').textContent = p.caption || '';
+  document.getElementById('slideshowCounter').textContent = `${ssIndex+1} / ${photos.length}`;
+}
+
+function ssMove(dir){
+  clearInterval(ssTimer);
+  ssIndex = (ssIndex + dir + photos.length) % photos.length;
+  renderSlide();
+  startAutoSlide();
+}
+
+function startAutoSlide(){
+  clearInterval(ssTimer);
+  ssTimer = setInterval(() => {
+    ssIndex = (ssIndex + 1) % photos.length;
+    renderSlide();
+  }, 4000);
+}
+
+document.getElementById('slideshowOverlay').addEventListener('click', e => {
+  if(e.target === document.getElementById('slideshowOverlay')) closeSlideshow();
+});
 
 loadFromFirebase();
 </script>
